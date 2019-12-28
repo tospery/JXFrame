@@ -10,6 +10,8 @@
 #endif
 #endif
 
+#import "TBBaseVC.h"
+#import "JXType.h"
 
 FOUNDATION_EXPORT double JXFrameVersionNumber;
 FOUNDATION_EXPORT const unsigned char JXFrameVersionString[];
