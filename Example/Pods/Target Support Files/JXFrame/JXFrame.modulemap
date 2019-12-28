@@ -1,0 +1,6 @@
+framework module JXFrame {
+  umbrella header "JXFrame-umbrella.h"
+
+  export *
+  module * { export * }
+}
