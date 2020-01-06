@@ -1,0 +1,38 @@
+//
+//  JXTabBarViewController.m
+//  Pods
+//
+//  Created by 杨建祥 on 2019/12/31.
+//
+
+#import "JXTabBarViewController.h"
+
+@interface JXTabBarViewController ()
+@property (nonatomic, strong, readwrite) QMUITabBarViewController *innerTabBarController;
+
+@end
+
+@implementation JXTabBarViewController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.innerTabBarController = [[QMUITabBarViewController alloc] init];
+    self.innerTabBarController.delegate = self;
+    [self addChildViewController:self.innerTabBarController];
+    [self.view addSubview:self.innerTabBarController.view];
+    [self.innerTabBarController didMoveToParentViewController:self];
+}
+
+- (BOOL)shouldAutorotate {
+    return self.innerTabBarController.selectedViewController.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.innerTabBarController.selectedViewController.supportedInterfaceOrientations;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.innerTabBarController.selectedViewController.preferredStatusBarStyle;
+}
+
+@end

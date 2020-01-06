@@ -57,6 +57,11 @@ typedef NS_ENUM(NSInteger, JXRequestMode) {
     JXRequestModeHUD
 };
 
+typedef NS_ENUM(NSInteger, JXReturnType){
+    JXReturnTypeBack,
+    JXReturnTypeClose
+};
+
 typedef NS_ENUM(NSInteger, JXErrorCode){
     JXErrorCodeNone = 200,
     JXErrorCodeSysOK = JXErrorCodeNone, // 2xx的状态码表示请求成功

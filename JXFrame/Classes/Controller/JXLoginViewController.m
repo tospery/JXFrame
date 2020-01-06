@@ -1,17 +1,20 @@
 //
-//  BaseViewController.m
-//  JXFrame
+//  JXLoginViewController.m
+//  Pods
 //
-//  Created by 杨建祥 on 2019/12/29.
+//  Created by 杨建祥 on 2020/1/3.
 //
 
-#import "BaseViewController.h"
+#import "JXLoginViewController.h"
+#import "JXLoginViewModel.h"
 
-@interface BaseViewController ()
+@interface JXLoginViewController ()
+@property (nonatomic, strong) JXLoginViewModel *viewModel;
 
 @end
 
-@implementation BaseViewController
+@implementation JXLoginViewController
+@dynamic viewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
