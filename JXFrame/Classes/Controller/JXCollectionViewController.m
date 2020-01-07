@@ -7,6 +7,7 @@
 
 #import "JXCollectionViewController.h"
 #import "JXConst.h"
+#import "JXFunction.h"
 #import "JXCollectionCell.h"
 #import "JXSupplementaryView.h"
 
@@ -35,15 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // - (UICollectionViewLayout *)collectionViewLayout; YJX_TODO
-    
-    UICollectionView *collectionView = (UICollectionView *)self.scrollView;
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom) collectionViewLayout:[self collectionViewLayout]];
     collectionView.dataSource = self.viewModel;
     collectionView.delegate = self;
+    collectionView.emptyDataSetSource = self.viewModel;
+    collectionView.emptyDataSetDelegate = self;
+    collectionView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+    if (@available(iOS 11.0, *)) {
+        collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     
     [self.collectionView registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:kJXIdentifierCollectionCell];
-    [self.collectionView registerClass:JXCollectionCell.class forCellWithReuseIdentifier:JXCollectionCell.identifier];
+    [self.collectionView registerClass:JXCollectionCell.class forCellWithReuseIdentifier:[JXCollectionCell identifier]];
     [self.collectionView registerClass:UICollectionReusableView.class forSupplementaryViewOfKind:UICollectionElementKindSectionHeader  withReuseIdentifier:kJXIdentifierCollectionHeader];
     [self.collectionView registerClass:UICollectionReusableView.class forSupplementaryViewOfKind:UICollectionElementKindSectionFooter  withReuseIdentifier:kJXIdentifierCollectionFooter];
     
@@ -107,6 +113,15 @@
             }
         }
     }
+}
+
+#pragma mark - Method
+- (UICollectionViewLayout *)collectionViewLayout {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 0.0f;
+    layout.minimumInteritemSpacing = 0.0f;
+    return layout;
 }
 
 #pragma mark - Delegate

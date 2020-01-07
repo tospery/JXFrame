@@ -16,7 +16,7 @@
 #import <AdSupport/ASIdentifierManager.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <FCUUID/FCUUID.h>
-#import "JXFunc.h"
+#import "JXFunction.h"
 #import "UIApplication+JXFrame.h"
 
 @implementation UIDevice (JXFrame)

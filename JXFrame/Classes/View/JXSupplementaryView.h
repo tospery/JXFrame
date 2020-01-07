@@ -6,8 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JXReactiveView.h"
 
-@interface JXSupplementaryView : UICollectionReusableView
+@interface JXSupplementaryView : UICollectionReusableView <JXReactiveView>
+
+- (void)didInitialize;
 
 + (NSString *)identifier;
 + (CGSize)sizeForSection:(NSInteger)section;

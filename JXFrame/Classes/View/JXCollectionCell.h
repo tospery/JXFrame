@@ -13,6 +13,8 @@
 @property (nonatomic, strong) JXCollectionItem *item;
 @property (nonatomic, strong, readonly) QMUILabel *titleLabel;
 
+- (void)didInitialize;
+
 + (NSString *)identifier;
 
 @end

@@ -12,8 +12,8 @@
 #pragma mark - Defines
 #import "JXConst.h"
 #import "JXType.h"
-#import "JXFunc.h"
-#import "JXStrs.h"
+#import "JXFunction.h"
+#import "JXString.h"
 
 #pragma mark - Model
 #import "JXBaseModel.h"
@@ -51,6 +51,7 @@
 #import "JXSupplementaryView.h"
 
 #pragma mark - Category
+#import "NSObject+JXFrame.h"
 #import "NSString+JXFrame.h"
 #import "NSNumber+JXFrame.h"
 #import "NSArray+JXFrame.h"
@@ -78,6 +79,7 @@
 #import <OvercoatObjC/OvercoatObjC.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <FCUUID/FCUUID.h>
+#import <SDWebImage/SDWebImage.h>
 
 @interface JXFrame : NSObject
 

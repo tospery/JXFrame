@@ -7,7 +7,7 @@
 
 #import "JXFrameManager.h"
 #import <QMUIKit/QMUIKit.h>
-#import "JXFunc.h"
+#import "JXFunction.h"
 
 @interface JXFrameManager ()
 

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JXReactiveView.h"
 
-@interface JXBaseView : UIView
+@interface JXBaseView : UIView <JXReactiveView>
+
+- (void)didInitialize;
 
 @end
 

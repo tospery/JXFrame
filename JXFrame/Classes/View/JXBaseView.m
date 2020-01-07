@@ -7,15 +7,23 @@
 //
 
 #import "JXBaseView.h"
+#import <QMUIKit/QMUIKit.h>
+#import "JXFunction.h"
 
 @implementation JXBaseView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self didInitialize];
+    }
+    return self;
 }
-*/
+
+- (void)didInitialize {
+    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+}
+
+- (void)bindViewModel:(id)viewModel {
+    
+}
 
 @end

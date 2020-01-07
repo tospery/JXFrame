@@ -6,8 +6,7 @@
 //
 
 #import "JXCollectionItem.h"
-#import "JXFunc.h"
-#import <QMUIKit/QMUIKit.h>
+#import "JXFunction.h"
 
 @interface JXCollectionItem ()
 
@@ -16,7 +15,7 @@
 @implementation JXCollectionItem
 - (instancetype)initWithModel:(JXBaseModel *)model {
     if (self = [super initWithModel:model]) {
-        self.cellSize = CGSizeMake(JXScreenWidth, flat(44));
+        self.cellSize = CGSizeMake(JXScreenWidth, JXMetric(44));
     }
     return self;
 }

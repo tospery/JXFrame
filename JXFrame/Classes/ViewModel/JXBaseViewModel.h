@@ -23,12 +23,12 @@
 @interface JXBaseViewModel : NSObject
 @property (nonatomic, assign) BOOL hidesNavigationBar;
 @property (nonatomic, assign) BOOL hidesNavBottomLine;
-@property (nonatomic, assign) BOOL shouldFetchLocalDataOnViewModelInitialize;
-@property (nonatomic, assign) BOOL shouldRequestRemoteDataOnViewDidLoad;
+@property (nonatomic, assign) BOOL shouldFetchLocalData;
+@property (nonatomic, assign) BOOL shouldRequestRemoteData;
 //@property (nonatomic, assign) TBTitleViewType titleViewType;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
-@property (nonatomic, strong) UIColor *backgroundColor;
+//@property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, copy, readonly) NSDictionary *params;
 //@property (nonatomic, assign) TBRequestMode requestMode;
 @property (nonatomic, strong) NSError *error;
@@ -48,7 +48,7 @@
 - (instancetype)initWithParams:(NSDictionary *)params;
 
 - (void)didInitialize;
-- (id)data2Source:(id)data;
+- (NSArray *)data2Source:(id)data;
 - (id)fetchLocalData;
 - (RACSignal *)requestRemoteDataSignalWithPage:(NSInteger)page;
 - (BOOL (^)(NSError *error))requestRemoteDataErrorsFilter;

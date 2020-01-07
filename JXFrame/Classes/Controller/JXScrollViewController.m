@@ -7,7 +7,7 @@
 
 #import "JXScrollViewController.h"
 #import <MJRefresh/MJRefresh.h>
-#import "JXFunc.h"
+#import "JXFunction.h"
 #import "JXTableViewController.h"
 #import "JXCollectionViewController.h"
 #import "UIScrollView+JXFrame.h"
@@ -24,29 +24,22 @@
 #pragma mark - View
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    CGRect frame = CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom);
-    if ([self isKindOfClass:JXTableViewController.class]) {
-        self.scrollView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    }else if ([self isKindOfClass:JXCollectionViewController.class]) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.minimumLineSpacing = 0;
-        layout.minimumInteritemSpacing = 0;
-        self.scrollView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
-    }else {
-        self.scrollView = [[UIScrollView alloc] initWithFrame:frame];
-        self.scrollView.jx_contentView = [[UIView alloc] init];
-        self.scrollView.jx_contentView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
-        self.scrollView.contentSize = CGSizeMake(frame.size.width, frame.size.height + PixelOne);
+    if (![self isKindOfClass:JXTableViewController.class] &&
+        ![self isKindOfClass:JXCollectionViewController.class]) {
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom)];
+        scrollView.jx_contentView = [[UIView alloc] init];
+        scrollView.jx_contentView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+        scrollView.contentSize = CGSizeMake(scrollView.qmui_width, scrollView.qmui_height + PixelOne);
+        scrollView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+        scrollView.delegate = self;
+        scrollView.emptyDataSetSource = self.viewModel;
+        scrollView.emptyDataSetDelegate = self;
+        if (@available(iOS 11.0, *)) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        [self.view addSubview:scrollView];
+        self.scrollView = scrollView;
     }
-    self.scrollView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
-    self.scrollView.emptyDataSetSource = self.viewModel;
-    self.scrollView.emptyDataSetDelegate = self;
-    if (@available(iOS 11.0, *)) {
-        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    [self.view addSubview:self.scrollView];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -167,7 +160,7 @@
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetDelegate
 //- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
-//    return (self.viewModel.shouldRequestRemoteDataOnViewDidLoad
+//    return (self.viewModel.shouldRequestRemoteData
 //            && self.viewModel.dataSource == nil);
 //}
 //

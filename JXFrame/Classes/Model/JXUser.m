@@ -7,7 +7,7 @@
 
 #import "JXUser.h"
 #import "JXConst.h"
-#import "JXFunc.h"
+#import "JXFunction.h"
 
 //JXUser *gUser;
 

@@ -6,7 +6,7 @@
 //
 
 #import "JXCollectionCell.h"
-#import "JXFunc.h"
+#import "JXFunction.h"
 
 @interface JXCollectionCell ()
 @property (nonatomic, strong, readwrite) QMUILabel *titleLabel;
@@ -16,9 +16,17 @@
 @implementation JXCollectionCell
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self.contentView addSubview:self.titleLabel];
+        [self didInitialize];
     }
     return self;
+}
+
+- (void)didInitialize {
+    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+    [self.contentView addSubview:self.titleLabel];
+    self.qmui_borderWidth = PixelOne;
+    self.qmui_borderColor = UIColorSeparator;
+    self.qmui_borderPosition = QMUIViewBorderPositionBottom;
 }
 
 - (void)layoutSubviews {
@@ -38,10 +46,6 @@
 
 - (void)setItem:(JXCollectionItem *)item {
     _item = item;
-    
-    self.titleLabel.attributedText = item.title;
-    [self.titleLabel sizeToFit];
-    
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

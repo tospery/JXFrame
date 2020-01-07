@@ -7,7 +7,7 @@
 
 #import "JXBaseViewController.h"
 #import "JXType.h"
-#import "JXFunc.h"
+#import "JXFunction.h"
 
 @interface JXBaseViewController ()
 @property (nonatomic, assign, readwrite) CGFloat contentTop;
@@ -27,7 +27,7 @@
 //        @weakify(self)
 //        [[self rac_signalForSelector:@selector(bindViewModel)] subscribeNext:^(id x) {
 //            @strongify(self)
-//            if (viewModel.shouldRequestRemoteDataOnViewDidLoad) {
+//            if (viewModel.shouldRequestRemoteData) {
 //                viewModel.dataSource ? [self triggerUpdate] : [self triggerLoad];
 //            }else {
 //                // [self triggerLoad]; // YJX_TODO
@@ -49,7 +49,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     if (self.navigationController.viewControllers.count > 1) {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem qmui_backItemWithTarget:self action:@selector(backBarItemPressed:)];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem qmui_itemWithImage:NavBarBackIndicatorImage target:self action:@selector(backBarItemPressed:)];
+        // [UIBarButtonItem qmui_backItemWithTarget:self action:@selector(backBarItemPressed:)];
     } else {
         if (self.presentingViewController) {
             self.navigationItem.leftBarButtonItem = [UIBarButtonItem qmui_closeItemWithTarget:self action:@selector(closeBarItemPressed:)];

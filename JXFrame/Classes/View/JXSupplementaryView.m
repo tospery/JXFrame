@@ -6,9 +6,24 @@
 //
 
 #import "JXSupplementaryView.h"
-#import "JXFunc.h"
+#import <QMUIKit/QMUIKit.h>
+#import "JXFunction.h"
 
 @implementation JXSupplementaryView
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self didInitialize];
+    }
+    return self;
+}
+
+- (void)didInitialize {
+    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+}
+
+- (void)bindViewModel:(id)viewModel {
+    
+}
 
 + (NSString *)identifier {
     return JXStrWithFmt(@"%@Identifier", NSStringFromClass(self));

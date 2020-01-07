@@ -8,7 +8,7 @@
 
 #import "JXBaseModel.h"
 #import <PINCache/PINCache.h>
-#import "JXFunc.h"
+#import "JXFunction.h"
 #import "NSString+JXFrame.h"
 #import "NSNumber+JXFrame.h"
 

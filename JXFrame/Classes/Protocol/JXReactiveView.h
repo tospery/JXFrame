@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol JXReactiveView <NSObject>
+- (void)bindViewModel:(id)viewModel;
 
 @end
 

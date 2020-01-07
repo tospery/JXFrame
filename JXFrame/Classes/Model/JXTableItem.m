@@ -6,7 +6,7 @@
 //
 
 #import "JXTableItem.h"
-#import <QMUIKit/QMUIKit.h>
+#import "JXFunction.h"
 
 @interface JXTableItem ()
 
@@ -15,7 +15,7 @@
 @implementation JXTableItem
 - (instancetype)initWithModel:(JXBaseModel *)model {
     if (self = [super initWithModel:model]) {
-        self.cellHeight = flat(44);
+        self.cellHeight = JXMetric(44);
     }
     return self;
 }

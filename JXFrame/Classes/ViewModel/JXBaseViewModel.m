@@ -8,7 +8,7 @@
 
 #import "JXBaseViewModel.h"
 #import "JXConst.h"
-#import "JXFunc.h"
+#import "JXFunction.h"
 #import "JXPrompt.h"
 
 @interface JXBaseViewModel ()
@@ -28,15 +28,9 @@
 #pragma mark - Init
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super init]) {
-//        self.hidesNavigationBar = TBBoolMemberWithKeyAndDefault(params, kTBParamHideNavBar, NO);
-//        self.hidesNavBottomLine = TBBoolMemberWithKeyAndDefault(params, kTBParamHideNavBottomLine, NO);
-//        self.shouldFetchLocalDataOnViewModelInitialize = TBBoolMemberWithKeyAndDefault(params, kTBParamFetchLocal, NO);
-//        self.shouldRequestRemoteDataOnViewDidLoad = TBBoolMemberWithKeyAndDefault(params, kTBParamRequestRemote, NO);
-//        self.title = TBStrMemberWithKeyAndDefault(params, kTBParamTitle, nil);
-//        self.backgroundColor = TBColorMemberWithKeyAndDefaultForString(params, kTBParamBackgroundColor, UIColorForBackground);
+        self.shouldFetchLocalData = YES;
+        self.shouldRequestRemoteData = NO;
         self.params = params;
-        self.shouldFetchLocalDataOnViewModelInitialize = YES;
-        self.shouldRequestRemoteDataOnViewDidLoad = NO;
     }
     return self;
 }
@@ -112,7 +106,6 @@
             [JXPrompt showToastLoading:nil];
         }
     }];
-    
     [self.errors subscribeNext:^(NSError *error) {
         [JXPrompt showToastMessage:error.localizedDescription];
     }];
@@ -131,25 +124,25 @@
 //
     RACSignal *fetchLocalDataSignal = [RACSignal return:[self fetchLocalData]];
     RACSignal *requestRemoteDataSignal = self.requestRemoteDataCommand.executionSignals.switchToLatest;
-    if (self.shouldFetchLocalDataOnViewModelInitialize && !self.shouldRequestRemoteDataOnViewDidLoad) {
+    if (self.shouldFetchLocalData && !self.shouldRequestRemoteData) {
         RAC(self, dataSource) = [[fetchLocalDataSignal deliverOnMainThread] map:^id(id data) {
             @strongify(self)
             return [self data2Source:data];
         }];
-    }else if (!self.shouldFetchLocalDataOnViewModelInitialize && self.shouldRequestRemoteDataOnViewDidLoad) {
+    }else if (!self.shouldFetchLocalData && self.shouldRequestRemoteData) {
         RAC(self, dataSource) = [[requestRemoteDataSignal deliverOnMainThread] map:^id(id data) {
             @strongify(self)
             return [self data2Source:data];
         }];
-    }else if (self.shouldFetchLocalDataOnViewModelInitialize && self.shouldRequestRemoteDataOnViewDidLoad) {
+    }else if (self.shouldFetchLocalData && self.shouldRequestRemoteData) {
         RAC(self, dataSource) = [[[requestRemoteDataSignal startWith:[self fetchLocalData]] deliverOnMainThread] map:^id(id data) {
             return [self data2Source:data];
         }];
     }
 }
 
-- (id)data2Source:(id)data {
-    return nil;// TBDyadicArray(viewObject);
+- (NSArray *)data2Source:(id)data {
+    return nil;
 }
 
 - (id)fetchLocalData {

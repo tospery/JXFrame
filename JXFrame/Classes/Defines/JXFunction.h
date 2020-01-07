@@ -47,6 +47,27 @@
 #define JXStrWithFmt(fmt, ...)              ([NSString stringWithFormat:(fmt), ##__VA_ARGS__])
 #define JXURLWithStr(x)                     ([NSURL jx_urlWithString:(x)])
 
+//// scale - 高宽比
+//func metric(scale: CGFloat) -> CGFloat {
+//    return flat(UIScreen.main.bounds.size.width * scale)
+//}
+//
+//// value - 375标准
+//func metric(_ value: CGFloat) -> CGFloat {
+//    return flat(value / 375.f * UIScreen.width)
+//}
+
+#pragma mark - 尺寸
+CG_INLINE CGFloat
+JXMetric(CGFloat value) {
+    return flat(value / 375.f * JXScreenWidth);
+}
+
+CG_INLINE CGFloat
+JXScale(CGFloat value) {
+    return flat(value * JXScreenWidth);
+}
+
 #pragma mark - 通知
 CG_INLINE void
 JXAddObserver(NSString *name, id observer, SEL selector, id object) {
