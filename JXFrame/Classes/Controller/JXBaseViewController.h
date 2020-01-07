@@ -8,8 +8,6 @@
 #import <QMUIKit/QMUIKit.h>
 #import "JXBaseViewModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXBaseViewController : QMUICommonViewController <JXBaseViewModelDelegate>
 @property (nonatomic, assign, readonly) CGFloat contentTop;
 @property (nonatomic, assign, readonly) CGFloat contentBottom;
@@ -27,8 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)triggerUpdate;
 - (void)endUpdate;
 
-- (void)backItemPressed:(id)sender;
+//- (void)backItemPressed:(id)sender;
 
 @end
 
-NS_ASSUME_NONNULL_END

@@ -9,8 +9,6 @@
 #import "JXBaseViewModel.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @protocol JXScrollViewModelDelegate <JXBaseViewModelDelegate>
 - (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths;
 - (void)preloadNextPage;
@@ -33,4 +31,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

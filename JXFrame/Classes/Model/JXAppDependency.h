@@ -7,8 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXAppDependency : NSObject
 @property (nonatomic, strong, readonly) UIWindow *window;
 
@@ -29,9 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)applicationWillTerminate:(UIApplication *)application;
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url;
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation;
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options;
 
 @end
 
-NS_ASSUME_NONNULL_END

@@ -60,45 +60,45 @@
     
     // RAC(self.scrollView, backgroundColor) = RACObserve(self.viewModel, backgroundColor);
     
-    @weakify(self)
-    [[[RACObserve(self.viewModel, shouldPullToRefresh) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
-        @strongify(self)
-        [self setupRefresh:should.boolValue];
-    }];
-    
-    [[[RACObserve(self.viewModel, shouldLoadToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
-        @strongify(self)
-        [self setupMore:should.boolValue];
-    }];
+//    @weakify(self)
+//    [[[RACObserve(self.viewModel, shouldPullToRefresh) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
+//        @strongify(self)
+//        [self setupRefresh:should.boolValue];
+//    }];
+//
+//    [[[RACObserve(self.viewModel, shouldLoadToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
+//        @strongify(self)
+//        [self setupMore:should.boolValue];
+//    }];
 }
 
 #pragma mark - Accessor
-- (void)setScrollView:(UIScrollView *)scrollView {
-    _scrollView = scrollView;
-    _scrollView.emptyDataSetSource = self.viewModel;
-    _scrollView.emptyDataSetDelegate = self;
-    if (@available(iOS 11.0, *)) {
-        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-}
+//- (void)setScrollView:(UIScrollView *)scrollView {
+//    _scrollView = scrollView;
+//    _scrollView.emptyDataSetSource = self.viewModel;
+//    _scrollView.emptyDataSetDelegate = self;
+//    if (@available(iOS 11.0, *)) {
+//        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
+//}
 
 #pragma mark - refresh/more
 - (void)setupRefresh:(BOOL)enable {
-    if (enable) {
-        self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(triggerRefresh)];
-    }else {
-        [self.scrollView.mj_header removeFromSuperview];
-        self.scrollView.mj_header = nil;
-    }
+//    if (enable) {
+//        self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(triggerRefresh)];
+//    }else {
+//        [self.scrollView.mj_header removeFromSuperview];
+//        self.scrollView.mj_header = nil;
+//    }
 }
 
 - (void)setupMore:(BOOL)enable {
-    if (enable) {
-        self.scrollView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(triggerMore)];
-    }else {
-        [self.scrollView.mj_footer removeFromSuperview];
-        self.scrollView.mj_footer = nil;
-    }
+//    if (enable) {
+//        self.scrollView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(triggerMore)];
+//    }else {
+//        [self.scrollView.mj_footer removeFromSuperview];
+//        self.scrollView.mj_footer = nil;
+//    }
 }
 
 - (void)beginRefresh {
@@ -166,38 +166,38 @@
 
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetDelegate
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
-    return (self.viewModel.shouldRequestRemoteDataOnViewDidLoad
-            && self.viewModel.dataSource == nil);
-}
+//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+//    return (self.viewModel.shouldRequestRemoteDataOnViewDidLoad
+//            && self.viewModel.dataSource == nil);
+//}
+//
+//- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+//    return YES;
+//}
+//
+//- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+//    return YES;
+//}
+//
+//- (BOOL)emptyDataSetShouldAnimateImageView:(UIScrollView *)scrollView {
+//    return (self.viewModel.error == nil);
+//}
+//
+//- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
+//    //    if (TBErrorCodeAppLoginExpired == self.viewModel.error.code) {
+//    //        [(TBUser *)[TBUser current] openLoginIfNeed:^(BOOL isRelogin) {
+//    //            if (isRelogin) {
+//    //                [self triggerLoad];
+//    //            }
+//    //        } withError:self.viewModel.error];
+//    //    }else {
+//    //        [self triggerLoad];
+//    //    }
+//
+//    //[self triggerLoad];
+//}
 
-- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-    return YES;
-}
-
-- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
-    return YES;
-}
-
-- (BOOL)emptyDataSetShouldAnimateImageView:(UIScrollView *)scrollView {
-    return (self.viewModel.error == nil);
-}
-
-- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
-    //    if (TBErrorCodeAppLoginExpired == self.viewModel.error.code) {
-    //        [(TBUser *)[TBUser current] openLoginIfNeed:^(BOOL isRelogin) {
-    //            if (isRelogin) {
-    //                [self triggerLoad];
-    //            }
-    //        } withError:self.viewModel.error];
-    //    }else {
-    //        [self triggerLoad];
-    //    }
-    
-    //[self triggerLoad];
-}
-
-#pragma mark TBScrollVMDelegate
+#pragma mark JXScrollViewModelDelegate
 - (void)reloadData {
     [self.scrollView reloadEmptyDataSet];
 }

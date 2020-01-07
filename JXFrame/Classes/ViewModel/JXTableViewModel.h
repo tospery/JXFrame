@@ -8,10 +8,7 @@
 
 #import "JXScrollViewModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXTableViewModel : JXScrollViewModel
 
 @end
 
-NS_ASSUME_NONNULL_END

@@ -7,8 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface UIApplication (JXFrame)
 @property (nonatomic, copy, readonly) NSString *jx_version;
 @property (nonatomic, copy, readonly) NSString *jx_urlScheme;
@@ -17,4 +15,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

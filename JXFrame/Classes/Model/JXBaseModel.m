@@ -27,7 +27,7 @@
     [self saveWithKey:self.mid];
 }
 
-- (void)saveWithKey:(nullable NSString *)key {
+- (void)saveWithKey:(NSString *)key {
     [PINCache.sharedCache setObject:self forKey:[self.class objectArchiverKey:key]];
 }
 
@@ -39,9 +39,11 @@
 #pragma mark - Class
 #pragma mark super
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
+    NSDictionary *mapping = [NSDictionary mtl_identityPropertyMapWithModel:self];
+    mapping = [mapping mtl_dictionaryByAddingEntriesFromDictionary:@{
         @"mid": @"id"
-    };
+    }];
+    return mapping;
 }
 
 + (NSValueTransformer *)midJSONTransformer {
@@ -57,7 +59,7 @@
     [object saveWithKey:object.mid];
 }
 
-+ (void)storeObject:(JXBaseModel *)object withKey:(nullable NSString *)key {
++ (void)storeObject:(JXBaseModel *)object withKey:(NSString *)key {
     [object saveWithKey:key];
 }
 
@@ -69,7 +71,7 @@
     return [self cachedObjectWithKey:nil];
 }
 
-+ (JXBaseModel *)cachedObjectWithKey:(nullable NSString *)key {
++ (JXBaseModel *)cachedObjectWithKey:(NSString *)key {
     NSString *archiverKey = [self objectArchiverKey:key];
     JXBaseModel *object = [PINCache.sharedCache objectForKey:archiverKey];
     if (!object) {
@@ -106,7 +108,7 @@
 }
 
 #pragma mark private
-+ (NSString *)objectArchiverKey:(nullable NSString *)key {
++ (NSString *)objectArchiverKey:(NSString *)key {
     NSString *name = NSStringFromClass(self.class);
     if (key.length == 0) {
         return JXStrWithFmt(@"%@#object", name);

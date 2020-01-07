@@ -7,11 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface UIScrollView (JXFrame)
-@property(nonatomic, strong, nullable) UIView *jx_contentView;
+@property(nonatomic, strong) UIView *jx_contentView;
 
 @end
 
-NS_ASSUME_NONNULL_END

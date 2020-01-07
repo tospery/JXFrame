@@ -9,22 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <Mantle/Mantle.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXBaseModel : MTLModel <MTLJSONSerializing>
-@property (nonatomic, copy, nullable) NSString *mid;
+@property (nonatomic, copy) NSString *mid;
 
 - (void)save;
-- (void)saveWithKey:(nullable NSString *)key;
+- (void)saveWithKey:(NSString *)key;
 
 + (void)storeObject:(JXBaseModel *)object;
-+ (void)storeObject:(JXBaseModel *)object withKey:(nullable NSString *)key;
++ (void)storeObject:(JXBaseModel *)object withKey:(NSString *)key;
 + (void)storeArray:(NSArray *)array;
 
 + (JXBaseModel *)cachedObject;
-+ (JXBaseModel *)cachedObjectWithKey:(nullable NSString *)key;
++ (JXBaseModel *)cachedObjectWithKey:(NSString *)key;
 + (NSArray *)cachedArray;
 
 @end
 
-NS_ASSUME_NONNULL_END

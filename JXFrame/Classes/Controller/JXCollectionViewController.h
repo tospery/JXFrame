@@ -6,11 +6,12 @@
 //
 
 #import "JXScrollViewController.h"
+#import "JXCollectionViewModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@interface JXCollectionViewController : JXScrollViewController <JXCollectionViewModelDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@property (nonatomic, strong, readonly) UICollectionView *collectionView;
 
-@interface JXCollectionViewController : JXScrollViewController
+- (UICollectionViewLayout *)collectionViewLayout;
 
 @end
 
-NS_ASSUME_NONNULL_END

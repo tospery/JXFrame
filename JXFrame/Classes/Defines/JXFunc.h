@@ -117,4 +117,14 @@ JXArrWithDft(NSArray *value, NSArray *dft) {
     return value;
 }
 
+#pragma mark - 其他
+CG_INLINE NSArray *
+TBDataSource(NSArray *arr) {
+    if (!arr ||
+        ![arr isKindOfClass:NSArray.class]) {
+        return nil;
+    }
+    return @[arr];
+}
+
 #endif /* JXFunc_h */

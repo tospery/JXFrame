@@ -8,8 +8,6 @@
 #import "JXBaseViewController.h"
 #import "JXScrollViewModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXScrollViewController : JXBaseViewController <JXScrollViewModelDelegate, DZNEmptyDataSetDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong, readonly) UIScrollView *scrollView;
 
@@ -26,4 +24,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

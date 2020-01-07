@@ -35,6 +35,8 @@
 //        self.title = TBStrMemberWithKeyAndDefault(params, kTBParamTitle, nil);
 //        self.backgroundColor = TBColorMemberWithKeyAndDefaultForString(params, kTBParamBackgroundColor, UIColorForBackground);
         self.params = params;
+        self.shouldFetchLocalDataOnViewModelInitialize = YES;
+        self.shouldRequestRemoteDataOnViewDidLoad = NO;
     }
     return self;
 }
@@ -79,43 +81,21 @@
     return _provider;
 }
 
-- (NSArray *)items {
-    if (!_items) {
-        if ([self.dataSource isKindOfClass:[NSArray class]]) {
-            _items = self.dataSource.firstObject;
-            if (![_items isKindOfClass:[NSArray class]]) {
-                _items = nil;
-            }
-        }
-    }
-    return _items;
-}
+//- (NSArray *)items {
+//    if (!_items) {
+//        if ([self.dataSource isKindOfClass:[NSArray class]]) {
+//            _items = self.dataSource.firstObject;
+//            if (![_items isKindOfClass:[NSArray class]]) {
+//                _items = nil;
+//            }
+//        }
+//    }
+//    return _items;
+//}
 
 #pragma mark - Public
 - (void)didInitialize {
     @weakify(self)
-    
-    [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
-        if (executing.boolValue) {
-            [JXPrompt showToastLoading:nil];
-        }
-    }];
-    
-    [self.errors subscribeNext:^(NSError *error) {
-        [JXPrompt showToastMessage:error.localizedDescription];
-    }];
-    
-    [[[RACObserve(self, dataSource) skip:1] deliverOnMainThread] subscribeNext:^(id x) {
-        @strongify(self)
-        self.items = nil;
-    }];
-    
-    self.requestRemoteDataCommand = [[RACCommand alloc] initWithSignalBlock:^(NSNumber *page) {
-        @strongify(self)
-        return [[self requestRemoteDataSignalWithPage:page.integerValue] takeUntil:self.rac_willDeallocSignal];
-    }];
-    
-    [[self.requestRemoteDataCommand.errors filter:[self requestRemoteDataErrorsFilter]] subscribe:self.errors];
     
     self.backCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(NSNumber * _Nullable isBack) {
         @strongify(self)
@@ -127,26 +107,48 @@
         return RACSignal.empty;
     }];
     
+    [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
+        if (executing.boolValue) {
+            [JXPrompt showToastLoading:nil];
+        }
+    }];
+    
+    [self.errors subscribeNext:^(NSError *error) {
+        [JXPrompt showToastMessage:error.localizedDescription];
+    }];
+    
+//    [[[RACObserve(self, dataSource) skip:1] deliverOnMainThread] subscribeNext:^(id x) {
+//        @strongify(self)
+//        self.items = nil;
+//    }];
+//
+//    self.requestRemoteDataCommand = [[RACCommand alloc] initWithSignalBlock:^(NSNumber *page) {
+//        @strongify(self)
+//        return [[self requestRemoteDataSignalWithPage:page.integerValue] takeUntil:self.rac_willDeallocSignal];
+//    }];
+//
+//    [[self.requestRemoteDataCommand.errors filter:[self requestRemoteDataErrorsFilter]] subscribe:self.errors];
+//
     RACSignal *fetchLocalDataSignal = [RACSignal return:[self fetchLocalData]];
     RACSignal *requestRemoteDataSignal = self.requestRemoteDataCommand.executionSignals.switchToLatest;
     if (self.shouldFetchLocalDataOnViewModelInitialize && !self.shouldRequestRemoteDataOnViewDidLoad) {
-        RAC(self, dataSource) = [[fetchLocalDataSignal deliverOnMainThread] map:^id(id viewObject) {
+        RAC(self, dataSource) = [[fetchLocalDataSignal deliverOnMainThread] map:^id(id data) {
             @strongify(self)
-            return [self viewObject2DataSource:viewObject];
+            return [self data2Source:data];
         }];
     }else if (!self.shouldFetchLocalDataOnViewModelInitialize && self.shouldRequestRemoteDataOnViewDidLoad) {
-        RAC(self, dataSource) = [[requestRemoteDataSignal deliverOnMainThread] map:^id(id viewObject) {
+        RAC(self, dataSource) = [[requestRemoteDataSignal deliverOnMainThread] map:^id(id data) {
             @strongify(self)
-            return [self viewObject2DataSource:viewObject];
+            return [self data2Source:data];
         }];
     }else if (self.shouldFetchLocalDataOnViewModelInitialize && self.shouldRequestRemoteDataOnViewDidLoad) {
-        RAC(self, dataSource) = [[[requestRemoteDataSignal startWith:[self fetchLocalData]] deliverOnMainThread] map:^id(id viewObject) {
-            return [self viewObject2DataSource:viewObject];
+        RAC(self, dataSource) = [[[requestRemoteDataSignal startWith:[self fetchLocalData]] deliverOnMainThread] map:^id(id data) {
+            return [self data2Source:data];
         }];
     }
 }
 
-- (id)viewObject2DataSource:(id)viewObject {
+- (id)data2Source:(id)data {
     return nil;// TBDyadicArray(viewObject);
 }
 

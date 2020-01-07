@@ -7,8 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface UIDevice (JXFrame)
 @property (nonatomic, assign, readonly) BOOL jx_isJailBreaked;
 @property (nonatomic, assign, readonly) CGFloat jx_ppi;
@@ -19,4 +17,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

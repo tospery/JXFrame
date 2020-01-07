@@ -17,7 +17,7 @@
 @implementation JXPrompt
 
 #pragma mark - Method
-- (void)showToastLoading:(nullable NSString *)title {
+- (void)showToastLoading:(NSString *)title {
     [QMUITips showLoading:title inView:UIApplication.sharedApplication.delegate.window];
 }
 
@@ -70,7 +70,7 @@
 }
 
 #pragma mark - Class
-+ (void)showToastLoading:(nullable NSString *)title {
++ (void)showToastLoading:(NSString *)title {
     JXPrompt *prompt = [[JXPrompt alloc] init];
     [prompt showToastLoading:title];
 }

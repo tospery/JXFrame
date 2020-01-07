@@ -7,10 +7,7 @@
 
 #import <QMUIKit/QMUIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXNavigationController : QMUINavigationController
 
 @end
 
-NS_ASSUME_NONNULL_END

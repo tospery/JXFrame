@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "JXType.h"
+#import "JXBaseModel.h"
 #import "JXNavigator.h"
 #import "JXProvider.h"
-
-NS_ASSUME_NONNULL_BEGIN
 
 @class JXBaseViewController;
 
@@ -46,14 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) JXBaseViewController *viewController;
 @property (nonatomic, weak) id<JXBaseViewModelDelegate> delegate;
 
-- (instancetype)initWithParams:(nullable NSDictionary *)params;
+- (instancetype)initWithParams:(NSDictionary *)params;
 
 - (void)didInitialize;
-- (id)viewObject2DataSource:(id)viewObject;
+- (id)data2Source:(id)data;
 - (id)fetchLocalData;
 - (RACSignal *)requestRemoteDataSignalWithPage:(NSInteger)page;
 - (BOOL (^)(NSError *error))requestRemoteDataErrorsFilter;
 
 @end
 
-NS_ASSUME_NONNULL_END

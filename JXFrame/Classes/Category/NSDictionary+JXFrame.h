@@ -7,24 +7,20 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface NSDictionary (JXFrame)
 - (NSString *)jx_stringForKey:(NSString *)key;
-- (NSString *)jx_stringForKey:(NSString *)key withDefault:(nullable NSString *)dft;
+- (NSString *)jx_stringForKey:(NSString *)key withDefault:(NSString *)dft;
 
 - (NSNumber *)jx_numberForKey:(NSString *)key;
-- (NSNumber *)jx_numberForKey:(NSString *)key withDefault:(nullable NSNumber *)dft;
+- (NSNumber *)jx_numberForKey:(NSString *)key withDefault:(NSNumber *)dft;
 
 - (NSArray *)jx_arrayForKey:(NSString *)key;
-- (NSArray *)jx_arrayForKey:(NSString *)key withDefault:(nullable NSArray *)dft;
+- (NSArray *)jx_arrayForKey:(NSString *)key withDefault:(NSArray *)dft;
 
 - (NSDictionary *)jx_dictionaryForKey:(NSString *)key;
-- (NSDictionary *)jx_dictionaryForKey:(NSString *)key withDefault:(nullable NSDictionary *)dft;
+- (NSDictionary *)jx_dictionaryForKey:(NSString *)key withDefault:(NSDictionary *)dft;
 
 - (id)jx_objectForKey:(NSString *)key;
-- (id)jx_objectForKey:(NSString *)key withDefault:(nullable id)dft;
+- (id)jx_objectForKey:(NSString *)key withDefault:(id)dft;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -8,8 +8,6 @@
 #import <UIKit/UIKit.h>
 #import "JXProvisionProtocol.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXProvider : NSObject <JXProvisionProtocol>
 
 - (void)didInitialize;
@@ -18,4 +16,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

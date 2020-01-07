@@ -12,7 +12,7 @@
     return [self jx_stringForKey:key withDefault:nil];
 }
 
-- (NSString *)jx_stringForKey:(NSString *)key withDefault:(nullable NSString *)dft {
+- (NSString *)jx_stringForKey:(NSString *)key withDefault:(NSString *)dft {
     if (!key) {
         return dft;
     }
@@ -35,7 +35,7 @@
     return [self jx_numberForKey:key withDefault:nil];
 }
 
-- (NSNumber *)jx_numberForKey:(NSString *)key withDefault:(nullable NSNumber *)dft {
+- (NSNumber *)jx_numberForKey:(NSString *)key withDefault:(NSNumber *)dft {
     if (!key) {
         return dft;
     }
@@ -58,7 +58,7 @@
     return [self jx_arrayForKey:key withDefault:nil];
 }
 
-- (NSArray *)jx_arrayForKey:(NSString *)key withDefault:(nullable NSArray *)dft {
+- (NSArray *)jx_arrayForKey:(NSString *)key withDefault:(NSArray *)dft {
     if (!key) {
         return dft;
     }
@@ -75,7 +75,7 @@
     return [self jx_dictionaryForKey:key withDefault:nil];
 }
 
-- (NSDictionary *)jx_dictionaryForKey:(NSString *)key withDefault:(nullable NSDictionary *)dft {
+- (NSDictionary *)jx_dictionaryForKey:(NSString *)key withDefault:(NSDictionary *)dft {
     if (!key) {
         return dft;
     }
@@ -92,7 +92,7 @@
     return [self jx_objectForKey:key withDefault:nil];
 }
 
-- (id)jx_objectForKey:(NSString *)key withDefault:(nullable id)dft {
+- (id)jx_objectForKey:(NSString *)key withDefault:(id)dft {
     if (!key) {
         return dft;
     }

@@ -92,7 +92,7 @@
     [self.topNavigationController popToRootViewControllerAnimated:animated];
 }
 
-- (void)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(nullable JXVoidBlock)completion {
+- (void)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(JXVoidBlock)completion {
     UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
     UINavigationController *presentingViewController = self.topNavigationController;
     if (![viewController isKindOfClass:UINavigationController.class]) {
@@ -102,7 +102,7 @@
     [presentingViewController presentViewController:viewController animated:animated completion:completion];
 }
 
-- (void)dismissViewModelAnimated:(BOOL)animated completion:(nullable JXVoidBlock)completion {
+- (void)dismissViewModelAnimated:(BOOL)animated completion:(JXVoidBlock)completion {
     UINavigationController *dismissingViewController = self.topNavigationController;
     [self popNavigationController];
     [dismissingViewController dismissViewControllerAnimated:animated completion:completion];

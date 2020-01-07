@@ -39,17 +39,15 @@
 #define kJXViewControllerWillBackNotification      (@"kJXViewControllerWillBackNotification")
 #define kJXViewControllerDidBackNotification       (@"kJXViewControllerDidBackNotification")
 
+#pragma mark - 重用标识
+#define kJXIdentifierTableCell                      (@"kJXIdentifierTableCell")
+#define kJXIdentifierTableHeaderFooter              (@"kJXIdentifierTableHeaderFooter")
+#define kJXIdentifierCollectionCell                 (@"kJXIdentifierCollectionCell")
+#define kJXIdentifierCollectionHeader               (@"kJXIdentifierCollectionHeader")
+#define kJXIdentifierCollectionFooter               (@"kJXIdentifierCollectionFooter")
+
 //#pragma mark - 缓存
 //#define kJXCachePrevUserID                          (@"kJXCachePrevUserID")
-//
-//#pragma mark - 重用标识
-//#define kJXIdentifierTableCell                      (@"kJXIdentifierTableCell")
-//#define kJXIdentifierTableHeaderFooter              (@"kJXIdentifierTableHeaderFooter")
-//#define kJXIdentifierCollectionCell                 (@"kJXIdentifierCollectionCell")
-//#define kJXIdentifierCollectionHeader               (@"kJXIdentifierCollectionHeader")
-//#define kJXIdentifierCollectionFooter               (@"kJXIdentifierCollectionFooter")
-//#define kJXIdentifierWaterfallCollectionHeader      (@"kJXIdentifierWaterfallCollectionHeader")
-//#define kJXIdentifierWaterfallCollectionFooter      (@"kJXIdentifierWaterfallCollectionFooter")
 //
 //
 //#pragma mark - Scheme协议

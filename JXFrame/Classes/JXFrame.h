@@ -23,6 +23,9 @@
 #import "JXProvider.h"
 #import "JXUser.h"
 #import "JXPrompt.h"
+#import "JXBaseItem.h"
+#import "JXTableItem.h"
+#import "JXCollectionItem.h"
 
 #pragma mark - ViewModel
 #import "JXBaseViewModel.h"
@@ -43,12 +46,17 @@
 
 #pragma mark - View
 #import "JXBaseView.h"
+#import "JXTableCell.h"
+#import "JXCollectionCell.h"
+#import "JXSupplementaryView.h"
 
 #pragma mark - Category
 #import "NSString+JXFrame.h"
 #import "NSNumber+JXFrame.h"
+#import "NSArray+JXFrame.h"
 #import "NSDictionary+JXFrame.h"
 #import "NSURL+JXFrame.h"
+#import "NSAttributedString+JXFrame.h"
 #import "UIView+JXFrame.h"
 #import "UIScrollView+JXFrame.h"
 #import "UINavigationBar+JXFrame.h"
@@ -71,10 +79,6 @@
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <FCUUID/FCUUID.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface JXFrame : NSObject
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -32,13 +32,13 @@
 }
 
 #pragma mark - Accessor
-- (NSMutableArray *)preloadPages {
-    if (!_preloadPages) {
-        NSMutableArray *mArr = [NSMutableArray array];
-        _preloadPages = mArr;
-    }
-    return _preloadPages;
-}
+//- (NSMutableArray *)preloadPages {
+//    if (!_preloadPages) {
+//        NSMutableArray *mArr = [NSMutableArray array];
+//        _preloadPages = mArr;
+//    }
+//    return _preloadPages;
+//}
 
 #pragma mark - Public
 - (NSUInteger)offsetForPage:(NSUInteger)page {
