@@ -9,7 +9,6 @@
 
 @interface JXCollectionItem : JXBaseItem
 @property (nonatomic, assign) CGSize cellSize;
-@property (nonatomic, strong) NSAttributedString *title;
 
 @end
 

@@ -75,17 +75,15 @@
     return _provider;
 }
 
-//- (NSArray *)items {
-//    if (!_items) {
-//        if ([self.dataSource isKindOfClass:[NSArray class]]) {
-//            _items = self.dataSource.firstObject;
-//            if (![_items isKindOfClass:[NSArray class]]) {
-//                _items = nil;
-//            }
-//        }
-//    }
-//    return _items;
-//}
+- (NSArray *)items {
+    if ([self.dataSource isKindOfClass:NSArray.class]) {
+        NSArray *items = self.dataSource.firstObject;
+        if ([items isKindOfClass:NSArray.class]) {
+            return items;
+        }
+    }
+    return nil;
+}
 
 #pragma mark - Public
 - (void)didInitialize {
@@ -125,17 +123,17 @@
     RACSignal *fetchLocalDataSignal = [RACSignal return:[self fetchLocalData]];
     RACSignal *requestRemoteDataSignal = self.requestRemoteDataCommand.executionSignals.switchToLatest;
     if (self.shouldFetchLocalData && !self.shouldRequestRemoteData) {
-        RAC(self, dataSource) = [[fetchLocalDataSignal deliverOnMainThread] map:^id(id data) {
+        RAC(self, dataSource) = [fetchLocalDataSignal.deliverOnMainThread map:^id(id data) {
             @strongify(self)
             return [self data2Source:data];
         }];
     }else if (!self.shouldFetchLocalData && self.shouldRequestRemoteData) {
-        RAC(self, dataSource) = [[requestRemoteDataSignal deliverOnMainThread] map:^id(id data) {
+        RAC(self, dataSource) = [requestRemoteDataSignal.deliverOnMainThread map:^id(id data) {
             @strongify(self)
             return [self data2Source:data];
         }];
     }else if (self.shouldFetchLocalData && self.shouldRequestRemoteData) {
-        RAC(self, dataSource) = [[[requestRemoteDataSignal startWith:[self fetchLocalData]] deliverOnMainThread] map:^id(id data) {
+        RAC(self, dataSource) = [[requestRemoteDataSignal startWith:[self fetchLocalData]].deliverOnMainThread map:^id(id data) {
             return [self data2Source:data];
         }];
     }

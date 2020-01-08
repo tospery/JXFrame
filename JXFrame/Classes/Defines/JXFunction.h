@@ -140,7 +140,7 @@ JXArrWithDft(NSArray *value, NSArray *dft) {
 
 #pragma mark - 其他
 CG_INLINE NSArray *
-TBDataSource(NSArray *arr) {
+JXDataSource(NSArray *arr) {
     if (!arr ||
         ![arr isKindOfClass:NSArray.class]) {
         return nil;

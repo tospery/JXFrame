@@ -9,7 +9,6 @@
 #import "JXFunction.h"
 
 @interface JXCollectionCell ()
-@property (nonatomic, strong, readwrite) QMUILabel *titleLabel;
 
 @end
 
@@ -23,25 +22,9 @@
 
 - (void)didInitialize {
     self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
-    [self.contentView addSubview:self.titleLabel];
     self.qmui_borderWidth = PixelOne;
     self.qmui_borderColor = UIColorSeparator;
     self.qmui_borderPosition = QMUIViewBorderPositionBottom;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.titleLabel.qmui_left = 20;
-    self.titleLabel.qmui_top = self.titleLabel.qmui_topWhenCenterInSuperview;
-}
-
-- (QMUILabel *)titleLabel {
-    if (!_titleLabel) {
-        QMUILabel *view = [[QMUILabel alloc] init];
-        [view sizeToFit];
-        _titleLabel = view;
-    }
-    return _titleLabel;
 }
 
 - (void)setItem:(JXCollectionItem *)item {

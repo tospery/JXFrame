@@ -22,6 +22,17 @@
 #pragma mark - Property
 #pragma mark - Method
 #pragma mark super
+- (BOOL)isEqual:(id)object {
+    if (!object || ![object isKindOfClass:JXBaseModel.class]) {
+        return NO;
+    }
+    if (self == object) {
+        return NO;
+    }
+    JXBaseModel *model = (JXBaseModel *)object;
+    return [self.mid isEqualToString:model.mid];
+}
+
 #pragma mark public
 - (void)save {
     [self saveWithKey:self.mid];

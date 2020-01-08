@@ -13,5 +13,7 @@
 
 - (instancetype)initWithModel:(JXBaseModel *)model;
 
+- (void)didInitialize;
+
 @end
 

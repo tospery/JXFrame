@@ -116,7 +116,7 @@
     //    }];
     
     @weakify(self)
-    [[[RACObserve(self.viewModel, dataSource) skip:1] deliverOnMainThread] subscribeNext:^(id x) {
+    [[RACObserve(self.viewModel, dataSource) skip:1].deliverOnMainThread subscribeNext:^(id x) {
         @strongify(self)
         [self reloadData];
     }];

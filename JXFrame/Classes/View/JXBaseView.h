@@ -10,6 +10,7 @@
 #import "JXReactiveView.h"
 
 @interface JXBaseView : UIView <JXReactiveView>
+@property (nonatomic, strong, readonly) id viewModel;
 
 - (void)didInitialize;
 

@@ -10,6 +10,11 @@
 #import <QMUIKit/QMUIKit.h>
 #import "JXFunction.h"
 
+@interface JXBaseView ()
+@property (nonatomic, strong, readwrite) id viewModel;
+
+@end
+
 @implementation JXBaseView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -23,7 +28,7 @@
 }
 
 - (void)bindViewModel:(id)viewModel {
-    
+    self.viewModel = viewModel;
 }
 
 @end

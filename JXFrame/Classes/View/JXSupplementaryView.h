@@ -9,6 +9,7 @@
 #import "JXReactiveView.h"
 
 @interface JXSupplementaryView : UICollectionReusableView <JXReactiveView>
+@property (nonatomic, strong, readonly) id viewModel;
 
 - (void)didInitialize;
 

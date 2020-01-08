@@ -11,7 +11,6 @@
 
 @interface JXCollectionCell : UICollectionViewCell
 @property (nonatomic, strong) JXCollectionItem *item;
-@property (nonatomic, strong, readonly) QMUILabel *titleLabel;
 
 - (void)didInitialize;
 
