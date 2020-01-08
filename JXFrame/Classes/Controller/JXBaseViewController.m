@@ -78,11 +78,21 @@
 
 #pragma mark - Property
 - (CGFloat)contentTop {
-    return self.navigationController.navigationBar.isHidden ? 0 : JXNavContentTopConstant;
+    CGFloat value = 0;
+    if (self.navigationController.navigationBar != nil &&
+        self.navigationController.navigationBar.isHidden != YES) {
+        value += JXNavContentTopConstant;
+    }
+    return value;
 }
 
 - (CGFloat)contentBottom {
-    return ((self.tabBarController.tabBar.isHidden ? JXTabBarHeight : 0) + JXSafeBottom);
+    CGFloat value = JXSafeBottom;
+    if (self.tabBarController.tabBar != nil &&
+        self.tabBarController.tabBar.isHidden != YES) {
+        value += JXTabBarHeight;
+    }
+    return value;
 }
 
 #pragma mark - Private

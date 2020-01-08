@@ -11,20 +11,20 @@
 @interface JXPrompt : NSObject
 
 - (void)showToastLoading:(NSString *)title;
-- (void)showToastMessage:(NSString *)message;
+- (id)showToastMessage:(NSString *)message;
 - (void)hideToast;
 
 - (void)showPopup:(NSString *)message;
 
-- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(JXVoidBlock_string)handler;
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelText:(NSString *)cancelText submitText:(NSString *)submitText handler:(JXVoidBlock_string)handler;
 
 + (void)showToastLoading:(NSString *)title;
-+ (void)showToastMessage:(NSString *)message;
++ (id)showToastMessage:(NSString *)message;
 + (void)hideToast;
 
 + (void)showPopup:(NSString *)message;
 
-+ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(JXVoidBlock_string)handler;
++ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelText:(NSString *)cancelText submitText:(NSString *)submitText handler:(JXVoidBlock_string)handler;
 
 @end
 

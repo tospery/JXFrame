@@ -7,10 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import <QMUIKit/QMUIKit.h>
+#import "JXReactiveView.h"
 #import "JXCollectionItem.h"
 
-@interface JXCollectionCell : UICollectionViewCell
-@property (nonatomic, strong) JXCollectionItem *item;
+@interface JXCollectionCell : UICollectionViewCell <JXReactiveView>
+@property (nonatomic, strong, readonly) JXCollectionItem *viewModel;
 
 - (void)didInitialize;
 

@@ -28,6 +28,8 @@
 
 - (void)bindViewModel:(id)viewModel {
     self.viewModel = viewModel;
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 + (NSString *)identifier {

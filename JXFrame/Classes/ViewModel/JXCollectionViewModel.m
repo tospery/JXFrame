@@ -102,7 +102,7 @@
     NSString *identifier = [cls identifier];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     if ([cell isKindOfClass:JXCollectionCell.class]) {
-        [(JXCollectionCell *)cell setItem:item];
+        [(JXCollectionCell *)cell bindViewModel:item];
     }
     [self configureCell:cell atIndexPath:indexPath withItem:item];
     

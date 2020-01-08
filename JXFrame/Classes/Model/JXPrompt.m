@@ -7,6 +7,8 @@
 
 #import "JXPrompt.h"
 #import <QMUIKit/QMUIKit.h>
+#import "JXFunction.h"
+#import "JXBaseView.h"
 
 @interface JXPrompt ()
 @property (nonatomic, copy) JXVoidBlock_int alertHandler;
@@ -21,9 +23,9 @@
     [QMUITips showLoading:title inView:UIApplication.sharedApplication.delegate.window];
 }
 
-- (void)showToastMessage:(NSString *)message {
+- (id)showToastMessage:(NSString *)message {
     [QMUITips hideAllTips];
-    [QMUITips showWithText:message];
+    return [QMUITips showWithText:message];
 }
 
 - (void)hideToast {
@@ -37,36 +39,38 @@
 //    // TBHUDInfo(message, YES);
 }
 
-- (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-    destructiveButtonTitle:(NSString *)destructiveButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                   handler:(JXVoidBlock_string)handler {
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-//    if (cancelButtonTitle.length != 0) {
-//        [alert addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//            if (handler) {
-//                handler(action.title);
-//            }
-//        }]];
-//    }
-//    if (destructiveButtonTitle.length != 0) {
-//        [alert addAction:[UIAlertAction actionWithTitle:destructiveButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-//            if (handler) {
-//                handler(action.title);
-//            }
-//        }]];
-//    }
-//    for (NSString *other in otherButtonTitles) {
-//        [alert addAction:[UIAlertAction actionWithTitle:other style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            if (handler) {
-//                handler(action.title);
-//            }
-//        }]];
-//    }
-//
-//    [[TBForwardManager sharedInstance].topNavigationController presentViewController:alert animated:YES completion:nil];
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelText:(NSString *)cancelText submitText:(NSString *)submitText handler:(JXVoidBlock_string)handler {
+    QMUIDialogViewController *alert = [[QMUIDialogViewController alloc] init];
+    alert.title = title;
+    if (title.length == 0) {
+        alert.headerViewHeight = 0;
+    }
+    JXBaseView *contentView = [[JXBaseView alloc] qmui_initWithSize:CGSizeMake(JXMetric(240), JXMetric(60))];
+    contentView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+    QMUILabel *label = [[QMUILabel alloc] qmui_initWithFont:JXFont(15) textColor:UIColorBlack];
+    label.numberOfLines = 0;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = message;
+    [label sizeToFit];
+    [contentView addSubview:label];
+    label.frame = contentView.bounds;
+    alert.contentView = contentView;
+    if (cancelText.length != 0) {
+            [alert addCancelButtonWithText:cancelText block:^(QMUIDialogViewController *alert) {
+            if (handler) {
+                handler(cancelText);
+            }
+        }];
+    }
+    if (submitText.length != 0) {
+        [alert addSubmitButtonWithText:submitText block:^(QMUIDialogViewController *alert) {
+            [alert hide];
+            if (handler) {
+                handler(submitText);
+            }
+        }];
+    }
+    [alert show];
 }
 
 #pragma mark - Class
@@ -75,9 +79,9 @@
     [prompt showToastLoading:title];
 }
 
-+ (void)showToastMessage:(NSString *)message {
++ (id)showToastMessage:(NSString *)message {
     JXPrompt *prompt = [[JXPrompt alloc] init];
-    [prompt showToastMessage:message];
+    return [prompt showToastMessage:message];
 }
 
 + (void)hideToast {
@@ -90,14 +94,9 @@
     [prompt showPopup:message];
 }
 
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-    destructiveButtonTitle:(NSString *)destructiveButtonTitle
-         otherButtonTitles:(NSArray *)otherButtonTitles
-                   handler:(JXVoidBlock_string)handler {
++ (void)showAlertWithTitle:(NSString *)title message:(NSString *)message cancelText:(NSString *)cancelText submitText:(NSString *)submitText handler:(JXVoidBlock_string)handler {
     JXPrompt *prompt = [[JXPrompt alloc] init];
-    [prompt showAlertWithTitle:title message:message cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:otherButtonTitles handler:handler];
+    [prompt showAlertWithTitle:title message:message cancelText:cancelText submitText:submitText handler:handler];
 }
 
 @end

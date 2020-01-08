@@ -9,6 +9,7 @@
 #import "JXFunction.h"
 
 @interface JXCollectionCell ()
+@property (nonatomic, strong, readwrite) JXCollectionItem *viewModel;;
 
 @end
 
@@ -27,8 +28,8 @@
     self.qmui_borderPosition = QMUIViewBorderPositionBottom;
 }
 
-- (void)setItem:(JXCollectionItem *)item {
-    _item = item;
+- (void)bindViewModel:(JXCollectionItem *)viewModel {
+    self.viewModel = viewModel;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

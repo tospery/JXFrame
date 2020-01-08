@@ -33,6 +33,7 @@
 #import "JXTableViewModel.h"
 #import "JXCollectionViewModel.h"
 #import "JXTabBarViewModel.h"
+#import "JXWebViewModel.h"
 #import "JXLoginViewModel.h"
 
 #pragma mark - Controller
@@ -41,6 +42,7 @@
 #import "JXTableViewController.h"
 #import "JXCollectionViewController.h"
 #import "JXTabBarViewController.h"
+#import "JXWebViewController.h"
 #import "JXLoginViewController.h"
 #import "JXNavigationController.h"
 
@@ -49,6 +51,7 @@
 #import "JXTableCell.h"
 #import "JXCollectionCell.h"
 #import "JXSupplementaryView.h"
+#import "JXWebProgressView.h"
 
 #pragma mark - Category
 #import "NSObject+JXFrame.h"
@@ -72,6 +75,7 @@
 
 #pragma mark - Vendor
 #import <ReactiveObjC/ReactiveObjC.h>
+#import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 #import <Mantle/Mantle.h>
 #import <PINCache/PINCache.h>
 #import <JLRoutes/JLRoutes.h>

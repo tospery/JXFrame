@@ -24,7 +24,7 @@
 #define kJXParamHideNavBar                          (@"hideNavBar")
 #define kJXParamHideNavBottomLine                   (@"hideNavBottomLine")
 #define kJXParamTitle                               (@"title")
-#define kJXParamURL                                 (@"url")
+#define kJXParamURLString                           (@"urlString")
 #define kJXParamBackgroundColor                     (@"backgroundColor")
 #define kJXParamProgressColor                       (@"progressColor")
 #define kJXParamCanCache                            (@"canCache")
