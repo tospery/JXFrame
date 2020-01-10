@@ -28,8 +28,8 @@
     self.qmui_borderPosition = QMUIViewBorderPositionBottom;
 }
 
-- (void)bindViewModel:(JXCollectionItem *)viewModel {
-    self.viewModel = viewModel;
+- (void)bindViewModel:(JXCollectionItem *)item {
+    self.viewModel = item;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

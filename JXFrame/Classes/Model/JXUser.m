@@ -9,8 +9,6 @@
 #import "JXConst.h"
 #import "JXFunction.h"
 
-//JXUser *gUser;
-
 @interface JXUser ()
 
 @end
@@ -29,24 +27,6 @@
     JXNotify(kJXUserWillLogoutNotification, self, nil);
     self.isLogined = NO;
     JXNotify(kJXUserDidLogoutNotification, self, nil);
-}
-
-+ (instancetype)current {
-    static id instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class cls = NSClassFromString(@"User");
-        SEL sel = NSSelectorFromString(@"cachedObject");
-        if (cls && sel && [cls respondsToSelector:sel]) {
-            instance = ((id (*)(id, SEL))[cls methodForSelector:sel])(cls, sel);
-            if (!instance) {
-                instance = [[cls alloc] init];
-            }
-        } else {
-            instance = [[self.class alloc] init];
-        }
-    });
-    return instance;
 }
 
 @end

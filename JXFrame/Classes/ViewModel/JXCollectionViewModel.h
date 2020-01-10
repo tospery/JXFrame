@@ -11,7 +11,7 @@
 
 @class JXCollectionViewModel;
 
-@protocol JXCollectionViewModelDataSource <UICollectionViewDataSource>
+@protocol JXCollectionViewModelDataSource <JXScrollViewModelDataSource, UICollectionViewDataSource>
 - (JXCollectionItem *)collectionViewModel:(JXCollectionViewModel *)viewModel itemAtIndexPath:(NSIndexPath *)indexPath;
 - (Class)collectionViewModel:(JXCollectionViewModel *)viewModel cellClassForItem:(JXCollectionItem *)item;
 - (Class)collectionViewModel:(JXCollectionViewModel *)viewModel headerClassForSection:(NSInteger)section;

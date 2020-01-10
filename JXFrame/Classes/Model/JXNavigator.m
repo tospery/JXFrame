@@ -45,24 +45,7 @@
     return _router;
 }
 
-#pragma mark - Private
-- (JXBaseViewController *)viewController:(JXBaseViewModel *)viewModel {
-    NSString *viewModelSuffix = @"ViewModel";
-    NSString *viewControllerSuffix = @"ViewController";
-    NSString *name = NSStringFromClass(viewModel.class);
-    NSParameterAssert([name hasSuffix:viewModelSuffix]);
-    name = [name stringByReplacingCharactersInRange:NSMakeRange(name.length - viewModelSuffix.length, viewModelSuffix.length) withString:viewControllerSuffix];
-    Class cls = NSClassFromString(name);
-    NSParameterAssert([cls isSubclassOfClass:[JXBaseViewController class]]);
-    NSParameterAssert([cls instancesRespondToSelector:@selector(initWithViewModel:)]);
-    return [[cls alloc] initWithViewModel:viewModel];
-}
-
 #pragma mark - Public
-- (BOOL)routeURL:(NSURL *)URL {
-    return [self.router routeURL:URL];
-}
-
 - (void)pushNavigationController:(UINavigationController *)navigationController {
     if ([self.navigationControllers containsObject:navigationController]) {
         return;
@@ -75,6 +58,22 @@
     UINavigationController *navigationController = self.topNavigationController;
     [self.navigationControllers removeLastObject];
     return navigationController;
+}
+
+- (JXBaseViewController *)viewController:(JXBaseViewModel *)viewModel {
+    NSString *viewModelSuffix = @"ViewModel";
+    NSString *viewControllerSuffix = @"ViewController";
+    NSString *name = NSStringFromClass(viewModel.class);
+    NSParameterAssert([name hasSuffix:viewModelSuffix]);
+    name = [name stringByReplacingCharactersInRange:NSMakeRange(name.length - viewModelSuffix.length, viewModelSuffix.length) withString:viewControllerSuffix];
+    Class cls = NSClassFromString(name);
+    NSParameterAssert([cls isSubclassOfClass:[JXBaseViewController class]]);
+    NSParameterAssert([cls instancesRespondToSelector:@selector(initWithViewModel:)]);
+    return [[cls alloc] initWithViewModel:viewModel];
+}
+
+- (BOOL)routeURL:(NSURL *)URL {
+    return [self.router routeURL:URL];
 }
 
 #pragma mark - Delegate

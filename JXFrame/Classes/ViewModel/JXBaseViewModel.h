@@ -15,12 +15,16 @@
 
 @class JXBaseViewController;
 
+@protocol JXBaseViewModelDataSource <NSObject>
+
+@end
+
 @protocol JXBaseViewModelDelegate <NSObject>
 - (void)reloadData;
 
 @end
 
-@interface JXBaseViewModel : NSObject
+@interface JXBaseViewModel : NSObject <JXBaseViewModelDataSource>
 @property (nonatomic, assign) BOOL hidesNavigationBar;
 @property (nonatomic, assign) BOOL hidesNavBottomLine;
 @property (nonatomic, assign) BOOL shouldFetchLocalData;

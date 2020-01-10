@@ -9,7 +9,6 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 #import "JXFunction.h"
-#import "JXPrompt.h"
 #import "JXWebViewModel.h"
 #import "JXWebProgressView.h"
 
@@ -121,9 +120,9 @@
 
 #pragma mark WKUIDelegate
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    [JXPrompt showAlertWithTitle:nil message:message cancelText:@"确定" submitText:nil handler:^(NSString *text) {
-        completionHandler();
-    }];
+//    [JXPrompt showAlertWithTitle:nil message:message cancelText:@"确定" submitText:nil handler:^(NSString *text) {
+//        completionHandler();
+//    }];
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler {

@@ -47,6 +47,9 @@
 #define JXStrWithFmt(fmt, ...)              ([NSString stringWithFormat:(fmt), ##__VA_ARGS__])
 #define JXURLWithStr(x)                     ([NSURL jx_urlWithString:(x)])
 
+#pragma mark - 便捷属性
+#define JXPageAutomaticDimension            (-1)
+#define JXAppWindow                         (UIApplication.sharedApplication.delegate.window)
 //// scale - 高宽比
 //func metric(scale: CGFloat) -> CGFloat {
 //    return flat(UIScreen.main.bounds.size.width * scale)

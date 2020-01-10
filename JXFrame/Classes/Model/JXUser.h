@@ -13,7 +13,5 @@
 - (void)login:(JXUser *)user;
 - (void)logout;
 
-+ (instancetype)current;
-
 @end
 

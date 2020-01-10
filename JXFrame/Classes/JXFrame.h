@@ -22,10 +22,9 @@
 #import "JXNavigator.h"
 #import "JXProvider.h"
 #import "JXUser.h"
-#import "JXPrompt.h"
-#import "JXBaseItem.h"
-#import "JXTableItem.h"
-#import "JXCollectionItem.h"
+#import "JXPageFactory.h"
+#import "JXPageMenuIndicatorModel.h"
+#import "JXPageMenuAnimator.h"
 
 #pragma mark - ViewModel
 #import "JXBaseViewModel.h"
@@ -33,8 +32,15 @@
 #import "JXTableViewModel.h"
 #import "JXCollectionViewModel.h"
 #import "JXTabBarViewModel.h"
+#import "JXPageViewModel.h"
 #import "JXWebViewModel.h"
 #import "JXLoginViewModel.h"
+#import "JXBaseItem.h"
+#import "JXTableItem.h"
+#import "JXCollectionItem.h"
+#import "JXPageMenuItem.h"
+#import "JXPageMenuIndicatorItem.h"
+#import "JXPageMenuTitleItem.h"
 
 #pragma mark - Controller
 #import "JXBaseViewController.h"
@@ -42,6 +48,7 @@
 #import "JXTableViewController.h"
 #import "JXCollectionViewController.h"
 #import "JXTabBarViewController.h"
+#import "JXPageViewController.h"
 #import "JXWebViewController.h"
 #import "JXLoginViewController.h"
 #import "JXNavigationController.h"
@@ -52,6 +59,15 @@
 #import "JXCollectionCell.h"
 #import "JXSupplementaryView.h"
 #import "JXWebProgressView.h"
+#import "JXPageMenuCollectionView.h"
+#import "JXPageContainerView.h"
+#import "JXPageMenuIndicatorCell.h"
+#import "JXPageMenuIndicatorView.h"
+#import "JXPageMenuIndicatorComponentView.h"
+#import "JXPageMenuIndicatorBackgroundView.h"
+#import "JXPageMenuIndicatorLineView.h"
+#import "JXPageMenuTitleCell.h"
+#import "JXPageMenuTitleView.h"
 
 #pragma mark - Category
 #import "NSObject+JXFrame.h"
@@ -67,11 +83,15 @@
 #import "UIApplication+JXFrame.h"
 #import "UIColor+JXFrame.h"
 #import "UIDevice+JXFrame.h"
+#import "UIViewController+JXFrame.h"
 
 #pragma mark - Protocol
 #import "JXReactiveView.h"
 #import "JXNavigationProtocol.h"
 #import "JXProvisionProtocol.h"
+#import "JXPageMenuIndicator.h"
+#import "JXPageContainerProtocol.h"
+#import "JXPageContentProtocol.h"
 
 #pragma mark - Vendor
 #import <ReactiveObjC/ReactiveObjC.h>

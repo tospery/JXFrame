@@ -9,7 +9,7 @@
 #import <JLRoutes/JLRoutes.h>
 #import "JXUser.h"
 
-//extern JXUser *gUser;
+JXUser *gUser;
 
 @interface JXAppDependency ()
 @property (nonatomic, strong, readwrite) UIWindow *window;
@@ -43,25 +43,16 @@
 }
 
 - (void)setupData {
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
-//    Class cls = NSClassFromString(@"User");
-//    gUser = [cls cachedObject];
-//    if (!gUser) {
-//        gUser = [[cls alloc] init];
-//    }
-//#pragma clang diagnostic pop
-//    Class cls = NSClassFromString(@"User");
-//    SEL sel = NSSelectorFromString(@"cachedObject");
-//    if (cls && sel && [cls respondsToSelector:sel]) {
-//        gUser = ((id (*)(id, SEL))[cls methodForSelector:sel])(cls, sel);
-//        if (!gUser) {
-//            gUser = [[cls alloc] init];
-//        }
-//    } else {
-//        gUser = [[JXUser alloc] init];
-//    }
-//    NSLog(@"");
+    Class cls = NSClassFromString(@"User");
+    SEL sel = NSSelectorFromString(@"cachedObject");
+    if (cls && sel && [cls respondsToSelector:sel]) {
+        gUser = ((id (*)(id, SEL))[cls methodForSelector:sel])(cls, sel);
+        if (!gUser) {
+            gUser = [[cls alloc] init];
+        }
+    } else {
+        gUser = [[JXUser alloc] init];
+    }
 }
 
 #pragma mark - Launch
@@ -79,7 +70,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [JXUser.current saveWithKey:nil];
+    [gUser saveWithKey:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -92,7 +83,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [JXUser.current saveWithKey:nil];
+    [gUser saveWithKey:nil];
 }
 
 #pragma mark - URL

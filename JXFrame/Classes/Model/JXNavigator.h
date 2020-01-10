@@ -8,12 +8,16 @@
 #import <UIKit/UIKit.h>
 #import "JXNavigationProtocol.h"
 
+@class JXBaseViewController;
+
 @interface JXNavigator : NSObject <JXNavigationProtocol>
 @property (nonatomic, strong, readonly) UINavigationController *topNavigationController;
 
-- (BOOL)routeURL:(NSURL *)URL;
 - (void)pushNavigationController:(UINavigationController *)navigationController;
 - (UINavigationController *)popNavigationController;
+
+- (JXBaseViewController *)viewController:(JXBaseViewModel *)viewModel;
+- (BOOL)routeURL:(NSURL *)URL;
 
 + (instancetype)share;
 

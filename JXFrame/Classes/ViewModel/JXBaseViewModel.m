@@ -9,7 +9,6 @@
 #import "JXBaseViewModel.h"
 #import "JXConst.h"
 #import "JXFunction.h"
-#import "JXPrompt.h"
 
 @interface JXBaseViewModel ()
 @property (nonatomic, copy, readwrite) NSDictionary *params;
@@ -101,11 +100,12 @@
     
     [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
         if (executing.boolValue) {
-            [JXPrompt showToastLoading:nil];
+            [QMUITips showLoading:nil inView:JXAppWindow];
         }
     }];
     [self.errors subscribeNext:^(NSError *error) {
-        [JXPrompt showToastMessage:error.localizedDescription];
+        [QMUITips hideAllTips];
+        [QMUITips showWithText:error.localizedDescription];
     }];
     
 //    [[[RACObserve(self, dataSource) skip:1] deliverOnMainThread] subscribeNext:^(id x) {

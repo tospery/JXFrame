@@ -62,6 +62,37 @@ typedef NS_ENUM(NSInteger, JXReturnType){
     JXReturnTypeClose
 };
 
+typedef NS_ENUM(NSInteger, JXPageComponentPosition){
+    JXPageComponentPositionBottom,
+    JXPageComponentPositionTop
+};
+
+typedef NS_ENUM(NSInteger, JXPageCellClickedPosition){
+    JXPageCellClickedPositionLeft,
+    JXPageCellClickedPositionRight
+};
+
+typedef NS_ENUM(NSUInteger, JXPageMenuCellState) {
+    JXPageMenuCellStateSelected,
+    JXPageMenuCellStateNormal,
+};
+
+typedef NS_ENUM(NSUInteger, JXPageMenuViewStyle) {
+    JXPageMenuViewStyleDefault,
+    JXPageMenuViewStyleLine,
+    JXPageMenuViewStyleTriangle,
+    JXPageMenuViewStyleFlood,
+    JXPageMenuViewStyleFloodHollow,
+    JXPageMenuViewStyleSegmented
+};
+
+typedef NS_ENUM(NSUInteger, JXPageMenuViewLayout) {
+    JXPageMenuViewLayoutScatter,
+    JXPageMenuViewLayoutLeft,
+    JXPageMenuViewLayoutRight,
+    JXPageMenuViewLayoutCenter
+};
+
 typedef NS_ENUM(NSInteger, JXErrorCode){
     JXErrorCodeNone = 200,
     JXErrorCodeSysOK = JXErrorCodeNone, // 2xx的状态码表示请求成功
@@ -129,6 +160,32 @@ typedef NS_ENUM(NSInteger, JXErrorCode){
     JXErrorCodeAppParseFailure,
     
     JXErrorCodeTotal
+};
+
+typedef void(^JXPageMenuCellSelectedAnimationBlock)(CGFloat percent);
+
+typedef NS_ENUM(NSUInteger, JXPageMenuComponentPosition) {
+    JXPageMenuComponentPositionBottom,
+    JXPageMenuComponentPositionTop,
+};
+
+// cell被选中的类型
+typedef NS_ENUM(NSUInteger, JXPageMenuCellSelectedType) {
+    JXPageMenuCellSelectedTypeUnknown,          //未知，不是选中（cellForRow方法里面、两个cell过渡时）
+    JXPageMenuCellSelectedTypeClick,            //点击选中
+    JXPageMenuCellSelectedTypeCode,             //调用方法`- (void)selectItemAtIndex:(NSInteger)index`选中
+    JXPageMenuCellSelectedTypeScroll            //通过滚动到某个cell选中
+};
+
+typedef NS_ENUM(NSUInteger, JXPageMenuTitleLabelAnchorPointStyle) {
+    JXPageMenuTitleLabelAnchorPointStyleCenter,
+    JXPageMenuTitleLabelAnchorPointStyleTop,
+    JXPageMenuTitleLabelAnchorPointStyleBottom,
+};
+
+typedef NS_ENUM(NSUInteger, JXPageMenuIndicatorScrollStyle) {
+    JXPageMenuIndicatorScrollStyleSimple,                   //简单滚动，即从当前位置过渡到目标位置
+    JXPageMenuIndicatorScrollStyleSameAsUserScroll,         //和用户左右滚动列表时的效果一样
 };
 
 

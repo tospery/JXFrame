@@ -9,13 +9,19 @@
 #import "JXBaseViewModel.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
+@class JXScrollViewModel;
+
+@protocol JXScrollViewModelDataSource <JXBaseViewModelDataSource, DZNEmptyDataSetSource>
+
+@end
+
 @protocol JXScrollViewModelDelegate <JXBaseViewModelDelegate>
 - (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths;
 - (void)preloadNextPage;
 
 @end
 
-@interface JXScrollViewModel : JXBaseViewModel <DZNEmptyDataSetSource>
+@interface JXScrollViewModel : JXBaseViewModel <JXScrollViewModelDataSource>
 @property (nonatomic, assign) BOOL shouldPullToRefresh;
 @property (nonatomic, assign) BOOL shouldLoadToMore;
 @property (nonatomic, assign) BOOL hasMoreData;
