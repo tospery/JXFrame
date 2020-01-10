@@ -23,9 +23,9 @@
 
 @interface JXScrollViewModel : JXBaseViewModel <JXScrollViewModelDataSource>
 @property (nonatomic, assign) BOOL shouldPullToRefresh;
-@property (nonatomic, assign) BOOL shouldLoadToMore;
+@property (nonatomic, assign) BOOL shouldScrollToMore;
 @property (nonatomic, assign) BOOL hasMoreData;
-@property (nonatomic, assign) NSInteger pageBegin;
+@property (nonatomic, assign) NSInteger pageStart;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) NSInteger pageSize;
 @property (nonatomic, strong) NSMutableArray *preloadPages;

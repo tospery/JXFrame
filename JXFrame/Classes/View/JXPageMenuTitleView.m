@@ -125,10 +125,11 @@
 
 - (CGFloat)preferredCellWidthAtIndex:(NSInteger)index {
     if (self.cellWidth == JXPageAutomaticDimension) {
+        NSString *title = [self.titles[index] description];
         if (self.titleDataSource && [self.titleDataSource respondsToSelector:@selector(categoryTitleView:widthForTitle:)]) {
-            return [self.titleDataSource categoryTitleView:self widthForTitle:self.titles[index]];
+            return [self.titleDataSource categoryTitleView:self widthForTitle:title];
         }else {
-            return ceilf([self.titles[index] boundingRectWithSize:CGSizeMake(MAXFLOAT, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.titleFont} context:nil].size.width);
+            return ceilf([title boundingRectWithSize:CGSizeMake(MAXFLOAT, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.titleFont} context:nil].size.width);
         }
     }else {
         return self.cellWidth;
@@ -139,7 +140,7 @@
     [super refreshItem:item index:index];
 
     JXPageMenuTitleItem *model = (JXPageMenuTitleItem *)item;
-    model.title = self.titles[index];
+    model.title = [self.titles[index] description];
     model.titleNumberOfLines = self.titleNumberOfLines;
     model.titleFont = self.titleFont;
     model.titleSelectedFont = self.titleSelectedFont;

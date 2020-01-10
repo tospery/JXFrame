@@ -107,7 +107,7 @@
     [self configureCell:cell atIndexPath:indexPath withItem:item];
     
 //    NSArray *items = (NSArray *)self.dataSource.lastObject;
-//    if (self.shouldLoadToMore &&
+//    if (self.shouldScrollToMore &&
 //        (items.count - indexPath.row) < self.pageSize &&
 //        ![self.preloadPages containsObject:@(items.count)]) {
 //        [self.preloadPages addObject:@(items.count)];

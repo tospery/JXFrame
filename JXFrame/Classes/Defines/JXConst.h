@@ -18,7 +18,7 @@
 #define kJXParamRequestRemote                       (@"requestRemote")
 #define kJXParamPullRefresh                         (@"pullRefresh")
 #define kJXParamLoadMore                            (@"loadMore")
-#define kJXParamPageBegin                           (@"pageBegin")
+#define kJXParamPageBegin                           (@"pageStart")
 #define kJXParamPageIndex                           (@"pageIndex")
 #define kJXParamPageSize                            (@"pageSize")
 #define kJXParamHideNavBar                          (@"hideNavBar")

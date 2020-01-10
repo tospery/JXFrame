@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, JXRequestMode) {
     JXRequestModeUpdate,
     JXRequestModeRefresh,
     JXRequestModeMore,
-    JXRequestModeHUD
+    JXRequestModeToast
 };
 
 typedef NS_ENUM(NSInteger, JXReturnType){

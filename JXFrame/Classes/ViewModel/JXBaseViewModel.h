@@ -34,7 +34,7 @@
 @property (nonatomic, copy) NSString *subtitle;
 //@property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, copy, readonly) NSDictionary *params;
-//@property (nonatomic, assign) TBRequestMode requestMode;
+@property (nonatomic, assign) JXRequestMode requestMode;
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, strong, readonly) NSArray *items;

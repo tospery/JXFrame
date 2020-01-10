@@ -38,6 +38,12 @@
     self.menuView.containerView = self.containerView;
     self.menuView.delegate = self;
     [self.view addSubview:self.menuView];
+    
+    if ([self.menuView isKindOfClass:JXPageMenuTitleView.class] &&
+        self.viewModel.dataSource) {
+        JXPageMenuTitleView *menuView = (JXPageMenuTitleView *)self.menuView;
+        menuView.titles = self.viewModel.dataSource;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -81,6 +87,11 @@
 }
 
 #pragma mark - Delegate
+#pragma mark JXPageViewModelDelegate
+- (void)reloadData {
+    [super reloadData];
+}
+
 #pragma mark JXPageMenuViewDelegate
 - (void)menuView:(JXPageMenuView *)menuView didSelectedItemAtIndex:(NSInteger)index {
     // self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);

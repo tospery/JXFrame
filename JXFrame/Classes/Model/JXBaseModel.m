@@ -59,7 +59,7 @@
 
 + (NSValueTransformer *)midJSONTransformer {
     return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
-        return [NSNumber jx_numberWithObject:value];
+        return [NSString jx_stringWithObject:value];
     } reverseBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
         return [NSString jx_stringWithObject:value];
     }];

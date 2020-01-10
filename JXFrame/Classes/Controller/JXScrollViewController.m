@@ -22,6 +22,20 @@
 @implementation JXScrollViewController
 @dynamic viewModel;
 
+#pragma mark - Init
+- (instancetype)initWithViewModel:(JXBaseViewModel *)viewModel {
+    if (self = [super initWithViewModel:viewModel]) {
+    }
+    return self;
+}
+
+- (void)dealloc {
+    _scrollView.delegate = nil;
+    _scrollView.emptyDataSetSource = nil;
+    _scrollView.emptyDataSetDelegate = nil;
+    _scrollView = nil;
+}
+
 #pragma mark - View
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +63,45 @@
     // self.scrollView.frame = CGRectMake(self.contentTop, 0, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom + PixelOne);
 }
 
-#pragma mark - Bind
+#pragma mark - Property
+//- (void)setScrollView:(UIScrollView *)scrollView {
+//    _scrollView = scrollView;
+//    _scrollView.emptyDataSetSource = self.viewModel;
+//    _scrollView.emptyDataSetDelegate = self;
+//    if (@available(iOS 11.0, *)) {
+//        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
+//}
+
+#pragma mark - Method
+#pragma mark super
+- (void)beginLoad {
+    [super beginLoad];
+    [self setupRefresh:NO];
+}
+
+- (void)triggerLoad {
+    [self beginLoad];
+    @weakify(self)
+    [[self.viewModel.requestRemoteDataCommand execute:@(self.viewModel.pageStart)].deliverOnMainThread subscribeNext:^(id data) {
+        @strongify(self)
+        self.viewModel.pageIndex = self.viewModel.pageStart;
+    } completed:^{
+        @strongify(self)
+        [self endLoad];
+    }];
+}
+
+- (void)endLoad {
+    [super endLoad];
+    if (self.viewModel.shouldPullToRefresh) {
+        [self setupRefresh:YES];
+    }
+    if (self.viewModel.shouldScrollToMore && !self.viewModel.hasMoreData) {
+        [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
+}
+
 - (void)bindViewModel {
     [super bindViewModel];
     
@@ -61,23 +113,13 @@
 //        [self setupRefresh:should.boolValue];
 //    }];
 //
-//    [[[RACObserve(self.viewModel, shouldLoadToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
+//    [[[RACObserve(self.viewModel, shouldScrollToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
 //        @strongify(self)
 //        [self setupMore:should.boolValue];
 //    }];
 }
 
-#pragma mark - Accessor
-//- (void)setScrollView:(UIScrollView *)scrollView {
-//    _scrollView = scrollView;
-//    _scrollView.emptyDataSetSource = self.viewModel;
-//    _scrollView.emptyDataSetDelegate = self;
-//    if (@available(iOS 11.0, *)) {
-//        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
-//}
-
-#pragma mark - refresh/more
+#pragma mark public
 - (void)setupRefresh:(BOOL)enable {
 //    if (enable) {
 //        self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(triggerRefresh)];
@@ -108,7 +150,7 @@
     //        self.viewModel.error = nil;
     //    }
     //
-    //    NSInteger pageIndex = self.viewModel.pageBegin;
+    //    NSInteger pageIndex = self.viewModel.pageStart;
     //
     //    @weakify(self)
     //    [[[self.viewModel.requestRemoteDataCommand execute:@(pageIndex)] deliverOnMainThread] subscribeNext:^(id x) {
@@ -118,7 +160,7 @@
     //        @strongify(self)
     //        self.viewModel.requestMode = TBRequestModeNone;
     //        [self.scrollView.mj_header endRefreshing];
-    //        if (self.viewModel.shouldLoadToMore && !self.viewModel.hasMoreData) {
+    //        if (self.viewModel.shouldScrollToMore && !self.viewModel.hasMoreData) {
     //            [self.scrollView.mj_footer endRefreshingWithNoMoreData];
     //        }
     //        [self endRefresh];
@@ -159,6 +201,8 @@
     
 }
 
+#pragma mark private
+
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetDelegate
 //- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -194,6 +238,7 @@
 
 #pragma mark JXScrollViewModelDelegate
 - (void)reloadData {
+    [super reloadData];
     [self.scrollView reloadEmptyDataSet];
 }
 
@@ -204,5 +249,8 @@
 - (void)preloadNextPage {
     
 }
+
+#pragma mark - Class
+
 
 @end

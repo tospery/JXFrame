@@ -87,6 +87,15 @@
 #pragma mark - Public
 - (void)didInitialize {
     @weakify(self)
+    [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
+        if (executing.boolValue) {
+            [QMUITips showLoading:nil inView:JXAppWindow];
+        }
+    }];
+    [self.errors subscribeNext:^(NSError *error) {
+        [QMUITips hideAllTips];
+        [QMUITips showWithText:error.localizedDescription];
+    }];
     
     self.backCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(NSNumber * _Nullable isBack) {
         @strongify(self)
@@ -98,32 +107,21 @@
         return RACSignal.empty;
     }];
     
-    [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
-        if (executing.boolValue) {
-            [QMUITips showLoading:nil inView:JXAppWindow];
-        }
-    }];
-    [self.errors subscribeNext:^(NSError *error) {
-        [QMUITips hideAllTips];
-        [QMUITips showWithText:error.localizedDescription];
-    }];
-    
 //    [[[RACObserve(self, dataSource) skip:1] deliverOnMainThread] subscribeNext:^(id x) {
 //        @strongify(self)
 //        self.items = nil;
 //    }];
-//
-//    self.requestRemoteDataCommand = [[RACCommand alloc] initWithSignalBlock:^(NSNumber *page) {
-//        @strongify(self)
-//        return [[self requestRemoteDataSignalWithPage:page.integerValue] takeUntil:self.rac_willDeallocSignal];
-//    }];
-//
-//    [[self.requestRemoteDataCommand.errors filter:[self requestRemoteDataErrorsFilter]] subscribe:self.errors];
-//
-    RACSignal *fetchLocalDataSignal = [RACSignal return:[self fetchLocalData]];
+    
+    self.requestRemoteDataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSNumber *page) {
+        @strongify(self)
+        return [[self requestRemoteDataSignalWithPage:page.integerValue] takeUntil:self.rac_willDeallocSignal];
+    }];
+    [[self.requestRemoteDataCommand.errors filter:self.requestRemoteDataErrorsFilter] subscribe:self.errors];
+    
+    // RACSignal *fetchLocalDataSignal = [RACSignal return:[self fetchLocalData]];
     RACSignal *requestRemoteDataSignal = self.requestRemoteDataCommand.executionSignals.switchToLatest;
     if (self.shouldFetchLocalData && !self.shouldRequestRemoteData) {
-        RAC(self, dataSource) = [fetchLocalDataSignal.deliverOnMainThread map:^id(id data) {
+        RAC(self, dataSource) = [[RACSignal return:[self fetchLocalData]].deliverOnMainThread map:^id(id data) {
             @strongify(self)
             return [self data2Source:data];
         }];
@@ -148,7 +146,7 @@
 }
 
 - (RACSignal *)requestRemoteDataSignalWithPage:(NSInteger)page {
-    return [RACSignal empty];
+    return RACSignal.empty;
 }
 
 - (BOOL (^)(NSError *error))requestRemoteDataErrorsFilter {

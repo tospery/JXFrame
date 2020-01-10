@@ -25,7 +25,5 @@
 - (void)triggerUpdate;
 - (void)endUpdate;
 
-//- (void)backItemPressed:(id)sender;
-
 @end
 

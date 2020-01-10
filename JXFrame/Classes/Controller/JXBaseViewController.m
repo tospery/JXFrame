@@ -23,16 +23,17 @@
         viewModel.viewController = self;
         viewModel.delegate = self;
         self.viewModel = viewModel;
-        
-//        @weakify(self)
-//        [[self rac_signalForSelector:@selector(bindViewModel)] subscribeNext:^(id x) {
-//            @strongify(self)
-//            if (viewModel.shouldRequestRemoteData) {
-//                viewModel.dataSource ? [self triggerUpdate] : [self triggerLoad];
-//            }else {
-//                // [self triggerLoad]; // YJX_TODO
-//            }
-//        }];
+        @weakify(self)
+        [[self rac_signalForSelector:@selector(bindViewModel)] subscribeNext:^(RACTuple *tuple) {
+            @strongify(self)
+            if (viewModel.shouldRequestRemoteData) {
+                if (!viewModel.dataSource) {
+                    [self triggerLoad];
+                }else {
+                    [self triggerUpdate];
+                }
+            }
+        }];
     }
     return self;
 }
@@ -171,7 +172,11 @@
 }
 
 - (void)beginLoad {
-    
+    self.viewModel.requestMode = JXRequestModeLoad;
+    if (self.viewModel.error || self.viewModel.dataSource) {
+        self.viewModel.error = nil;
+        self.viewModel.dataSource = nil;
+    }
 }
 
 - (void)triggerLoad {
@@ -186,7 +191,7 @@
 }
 
 - (void)endLoad {
-    
+    self.viewModel.requestMode = JXRequestModeNone;
 }
 
 - (void)beginUpdate {

@@ -19,10 +19,10 @@
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super initWithParams:params]) {
 //        self.shouldPullToRefresh = TBBoolMemberWithKeyAndDefault(params, kTBParamPullRefresh, NO);
-//        self.shouldLoadToMore = TBBoolMemberWithKeyAndDefault(params, kTBParamLoadMore, NO);
+//        self.shouldScrollToMore = TBBoolMemberWithKeyAndDefault(params, kTBParamLoadMore, NO);
 //        self.pageIndex = TBIntMemberWithKeyAndDefault(params, kTBParamPageIndex, [TBFrameManager sharedInstance].pageIndex);
 //        self.pageSize = TBIntMemberWithKeyAndDefault(params, kTBParamPageSize, [TBFrameManager sharedInstance].pageSize);
-//        self.pageBegin = TBIntMemberWithKeyAndDefault(params, kTBParamPageBegin, self.pageIndex);
+//        self.pageStart = TBIntMemberWithKeyAndDefault(params, kTBParamPageBegin, self.pageIndex);
     }
     return self;
 }
