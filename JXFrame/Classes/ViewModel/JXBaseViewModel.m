@@ -13,7 +13,7 @@
 #import "NSDictionary+JXFrame.h"
 
 @interface JXBaseViewModel ()
-@property (nonatomic, copy, readwrite) NSDictionary *params;
+@property (nonatomic, copy, readwrite) NSDictionary<NSString *,id> *parameters;;
 @property (nonatomic, strong, readwrite) JXBaseModel *model;
 @property (nonatomic, strong, readwrite) NSArray *items;
 @property (nonatomic, strong, readwrite) JXNavigator *navigator;
@@ -28,15 +28,15 @@
 
 @implementation JXBaseViewModel
 #pragma mark - Init
-- (instancetype)initWithParams:(NSDictionary *)params {
+- (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
     if (self = [super init]) {
-        self.params = JXObjWithDft(params, @{});
-        self.shouldFetchLocalData = [self.params jx_numberForKey:kJXParamFetchLocal withDefault:@(YES)].boolValue;
-        self.shouldRequestRemoteData = [self.params jx_numberForKey:kJXParamRequestRemote].boolValue;
-        self.hidesNavigationBar = [self.params jx_numberForKey:kJXParamHideNavBar].boolValue;
-        self.hidesNavBottomLine = [self.params jx_numberForKey:kJXParamHideNavBottomLine].boolValue;
-        self.title = [self.params jx_stringForKey:kJXParamTitle];
-        id modelObject = [self.params jx_stringForKey:kJXParamModel].jx_JSONObject;
+        self.parameters = [JXObjWithDft(parameters, @{}) copy];
+        self.shouldFetchLocalData = [self.parameters jx_numberForKey:kJXParamFetchLocal withDefault:@(YES)].boolValue;
+        self.shouldRequestRemoteData = [self.parameters jx_numberForKey:kJXParamRequestRemote].boolValue;
+        self.hidesNavigationBar = [self.parameters jx_numberForKey:kJXParamHideNavBar].boolValue;
+        self.hidesNavBottomLine = [self.parameters jx_numberForKey:kJXParamHideNavBottomLine].boolValue;
+        self.title = [self.parameters jx_stringForKey:kJXParamTitle];
+        id modelObject = [self.parameters jx_stringForKey:kJXParamModel].jx_JSONObject;
         if (modelObject && [modelObject isKindOfClass:NSDictionary.class]) {
             Class modelClass = NSClassFromString([NSStringFromClass(self.class) stringByReplacingOccurrencesOfString:kJXVMSuffix withString:@""]);
             if (modelClass) {
@@ -172,7 +172,7 @@
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     JXBaseViewModel *viewModel = [super allocWithZone:zone];
     @weakify(viewModel)
-    [[viewModel rac_signalForSelector:@selector(initWithParams:)] subscribeNext:^(id x) {
+    [[viewModel rac_signalForSelector:@selector(initWithRouteParameters:)] subscribeNext:^(id x) {
         @strongify(viewModel)
         [viewModel didInitialize];
     }];

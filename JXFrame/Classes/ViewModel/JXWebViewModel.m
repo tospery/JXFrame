@@ -6,6 +6,7 @@
 //
 
 #import "JXWebViewModel.h"
+#import <JLRoutes/JLRoutes.h>
 #import "JXConst.h"
 #import "JXFunction.h"
 #import "NSDictionary+JXFrame.h"
@@ -17,11 +18,15 @@
 @end
 
 @implementation JXWebViewModel
-- (instancetype)initWithParams:(NSDictionary *)params {
-    if (self = [super initWithParams:params]) {
+- (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
+    if (self = [super initWithRouteParameters:parameters]) {
         self.shouldFetchLocalData = NO;
         self.shouldRequestRemoteData = YES;
-        self.url = JXURLWithStr([self.params jx_stringForKey:kJXParamURLString]);
+        NSURL *url = [self.parameters jx_objectForKey:JLRouteURLKey withDefault:nil baseClass:NSURL.class];
+        if (!url) {
+            url = JXURLWithStr([self.parameters jx_stringForKey:kJXParamURLString]);
+        }
+        self.url = url;
         self.progressColor = JXObjWithDft(UIColorYellow, UIColorWhite);
     }
     return self;

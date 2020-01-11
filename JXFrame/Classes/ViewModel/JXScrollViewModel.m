@@ -23,12 +23,12 @@
 @dynamic delegate;
 
 #pragma mark - Init
-- (instancetype)initWithParams:(NSDictionary *)params {
-    if (self = [super initWithParams:params]) {
-        self.pageStart = [self.params jx_numberForKey:kJXParamPageStart withDefault:@(JXFrameManager.share.pageStart)].integerValue;
-        self.pageSize = [self.params jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.pageSize)].integerValue;
-        self.shouldPullToRefresh = [self.params jx_numberForKey:kJXParamPullRefresh].boolValue;
-        self.shouldScrollToMore = [self.params jx_numberForKey:kJXParamScrollMore].boolValue;
+- (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
+    if (self = [super initWithRouteParameters:parameters]) {
+        self.pageStart = [self.parameters jx_numberForKey:kJXParamPageStart withDefault:@(JXFrameManager.share.pageStart)].integerValue;
+        self.pageSize = [self.parameters jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.pageSize)].integerValue;
+        self.shouldPullToRefresh = [self.parameters jx_numberForKey:kJXParamPullRefresh].boolValue;
+        self.shouldScrollToMore = [self.parameters jx_numberForKey:kJXParamScrollMore].boolValue;
     }
     return self;
 }

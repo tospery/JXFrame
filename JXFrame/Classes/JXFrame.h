@@ -102,6 +102,7 @@
 #import <Mantle/Mantle.h>
 #import <PINCache/PINCache.h>
 #import <JLRoutes/JLRoutes.h>
+#import <JLRoutes/JLRRouteHandler.h>
 #import <JLRoutes/JLRRouteDefinition.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <OvercoatObjC/OvercoatObjC.h>

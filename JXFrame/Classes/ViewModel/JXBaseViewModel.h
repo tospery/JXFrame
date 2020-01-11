@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveObjC/ReactiveObjC.h>
+#import <JLRoutes/JLRRouteHandler.h>
 #import "JXType.h"
 #import "JXBaseModel.h"
 #import "JXNavigator.h"
@@ -15,7 +16,7 @@
 
 @class JXBaseViewController;
 
-@protocol JXBaseViewModelDataSource <NSObject>
+@protocol JXBaseViewModelDataSource <NSObject, JLRRouteHandlerTarget>
 
 @end
 
@@ -33,7 +34,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 //@property (nonatomic, strong) UIColor *backgroundColor;
-@property (nonatomic, copy, readonly) NSDictionary *params;
+@property (nonatomic, copy, readonly) NSDictionary<NSString *,id> *parameters;
 @property (nonatomic, strong, readonly) JXBaseModel *model;
 @property (nonatomic, assign) JXRequestMode requestMode;
 @property (nonatomic, strong) NSError *error;
@@ -49,8 +50,6 @@
 @property (nonatomic, strong, readonly) RACCommand *requestRemoteDataCommand;
 @property (nonatomic, weak) JXBaseViewController *viewController;
 @property (nonatomic, weak) id<JXBaseViewModelDelegate> delegate;
-
-- (instancetype)initWithParams:(NSDictionary *)params;
 
 - (void)didInitialize;
 - (NSArray *)data2Source:(id)data;

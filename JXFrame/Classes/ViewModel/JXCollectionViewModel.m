@@ -20,8 +20,8 @@
 @dynamic delegate;
 
 #pragma mark - Init
-- (instancetype)initWithParams:(NSDictionary *)params {
-    if (self = [super initWithParams:params]) {
+- (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
+    if (self = [super initWithRouteParameters:parameters]) {
     }
     return self;
 }
