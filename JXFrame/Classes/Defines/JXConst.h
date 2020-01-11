@@ -48,6 +48,10 @@
 #define kJXSchemeResource                           (@"resource")
 #define kJXSchemeDocuments                          (@"documents")
 
+#pragma mark - 便捷
+#define kJXVCSuffix                                 (@"ViewController")
+#define kJXVMSuffix                                 (@"ViewModel")
+
 //#pragma mark - 缓存
 //#define kJXCachePrevUserID                          (@"kJXCachePrevUserID")
 //

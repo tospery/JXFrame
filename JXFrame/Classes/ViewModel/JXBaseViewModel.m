@@ -9,6 +9,7 @@
 #import "JXBaseViewModel.h"
 #import "JXConst.h"
 #import "JXFunction.h"
+#import "NSObject+JXFrame.h"
 #import "NSDictionary+JXFrame.h"
 
 @interface JXBaseViewModel ()
@@ -35,7 +36,13 @@
         self.hidesNavigationBar = [self.params jx_numberForKey:kJXParamHideNavBar].boolValue;
         self.hidesNavBottomLine = [self.params jx_numberForKey:kJXParamHideNavBottomLine].boolValue;
         self.title = [self.params jx_stringForKey:kJXParamTitle];
-        self.model = [self.params jx_objectForKey:kJXParamModel];
+        id modelObject = [self.params jx_stringForKey:kJXParamModel].jx_JSONObject;
+        if (modelObject && [modelObject isKindOfClass:NSDictionary.class]) {
+            Class modelClass = NSClassFromString([NSStringFromClass(self.class) stringByReplacingOccurrencesOfString:kJXVMSuffix withString:@""]);
+            if (modelClass) {
+                self.model = [[modelClass alloc] initWithDictionary:(NSDictionary *)modelObject error:nil];
+            }
+        }
     }
     return self;
 }

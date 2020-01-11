@@ -7,6 +7,7 @@
 
 #import "JXNavigator.h"
 #import <JLRoutes/JLRoutes.h>
+#import "JXConst.h"
 #import "JXBaseViewController.h"
 #import "JXNavigationController.h"
 #import "JXTabBarViewController.h"
@@ -48,11 +49,9 @@
 }
 
 - (JXBaseViewController *)viewController:(JXBaseViewModel *)viewModel {
-    NSString *viewModelSuffix = @"ViewModel";
-    NSString *viewControllerSuffix = @"ViewController";
     NSString *name = NSStringFromClass(viewModel.class);
-    NSParameterAssert([name hasSuffix:viewModelSuffix]);
-    name = [name stringByReplacingCharactersInRange:NSMakeRange(name.length - viewModelSuffix.length, viewModelSuffix.length) withString:viewControllerSuffix];
+    NSParameterAssert([name hasSuffix:kJXVMSuffix]);
+    name = [name stringByReplacingCharactersInRange:NSMakeRange(name.length - kJXVMSuffix.length, kJXVMSuffix.length) withString:kJXVCSuffix];
     Class cls = NSClassFromString(name);
     NSParameterAssert([cls isSubclassOfClass:[JXBaseViewController class]]);
     NSParameterAssert([cls instancesRespondToSelector:@selector(initWithViewModel:)]);
@@ -60,7 +59,8 @@
 }
 
 - (BOOL)routeURL:(NSURL *)URL {
-    return [JLRoutes.globalRoutes routeURL:URL];
+    // NSURL *abc = [NSURL URLWithString:@"kujia://setting"];
+    return [JLRoutes routeURL:URL];
 }
 
 #pragma mark - Delegate
