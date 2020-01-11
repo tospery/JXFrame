@@ -38,12 +38,6 @@
     self.menuView.containerView = self.containerView;
     self.menuView.delegate = self;
     [self.view addSubview:self.menuView];
-    
-    if ([self.menuView isKindOfClass:JXPageMenuTitleView.class] &&
-        self.viewModel.dataSource) {
-        JXPageMenuTitleView *menuView = (JXPageMenuTitleView *)self.menuView;
-        menuView.titles = self.viewModel.dataSource;
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -70,6 +64,10 @@
 
 - (void)bindViewModel {
     [super bindViewModel];
+    if ([self.menuView isKindOfClass:JXPageMenuTitleView.class]) {
+        JXPageMenuTitleView *menuView = (JXPageMenuTitleView *)self.menuView;
+        RAC(menuView, titles) = RACObserve(self.viewModel, dataSource);
+    }
 }
 
 #pragma mark public

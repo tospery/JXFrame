@@ -43,8 +43,6 @@
     [super viewDidLoad];
     if (![self isKindOfClass:JXTableViewController.class] &&
         ![self isKindOfClass:JXCollectionViewController.class] &&
-        ![self isKindOfClass:JXTabBarViewController.class] &&
-        ![self isKindOfClass:JXPageViewController.class] &&
         ![self isKindOfClass:JXWebViewController.class]) {
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom)];
         scrollView.jx_contentView = [[UIView alloc] init];
@@ -59,6 +57,7 @@
         }
         [self.view addSubview:scrollView];
         self.scrollView = scrollView;
+        [self reloadData];
     }
 }
 
@@ -209,36 +208,35 @@
 
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetDelegate
-//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
-//    return (self.viewModel.shouldRequestRemoteData
-//            && self.viewModel.dataSource == nil);
-//}
-//
-//- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
-//    return YES;
-//}
-//
-//- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
-//    return YES;
-//}
-//
-//- (BOOL)emptyDataSetShouldAnimateImageView:(UIScrollView *)scrollView {
-//    return (self.viewModel.error == nil);
-//}
-//
-//- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
-//    //    if (TBErrorCodeAppLoginExpired == self.viewModel.error.code) {
-//    //        [(TBUser *)[TBUser current] openLoginIfNeed:^(BOOL isRelogin) {
-//    //            if (isRelogin) {
-//    //                [self triggerLoad];
-//    //            }
-//    //        } withError:self.viewModel.error];
-//    //    }else {
-//    //        [self triggerLoad];
-//    //    }
-//
-//    //[self triggerLoad];
-//}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return (self.viewModel.shouldRequestRemoteData && !self.viewModel.dataSource);
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAnimateImageView:(UIScrollView *)scrollView {
+    return !self.viewModel.error;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
+    //    if (TBErrorCodeAppLoginExpired == self.viewModel.error.code) {
+    //        [(TBUser *)[TBUser current] openLoginIfNeed:^(BOOL isRelogin) {
+    //            if (isRelogin) {
+    //                [self triggerLoad];
+    //            }
+    //        } withError:self.viewModel.error];
+    //    }else {
+    //        [self triggerLoad];
+    //    }
+
+    [self triggerLoad];
+}
 
 #pragma mark JXScrollViewModelDelegate
 - (void)reloadData {

@@ -21,7 +21,7 @@
     if (self = [super initWithParams:params]) {
         self.shouldFetchLocalData = NO;
         self.shouldRequestRemoteData = YES;
-        self.url = JXURLWithStr([params jx_stringForKey:kJXParamURLString]);
+        self.url = JXURLWithStr([self.params jx_stringForKey:kJXParamURLString]);
         self.progressColor = JXObjWithDft(UIColorYellow, UIColorWhite);
     }
     return self;

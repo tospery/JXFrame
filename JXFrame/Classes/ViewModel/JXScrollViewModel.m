@@ -7,11 +7,13 @@
 //
 
 #import "JXScrollViewModel.h"
+#import "JXConst.h"
 #import "JXFunction.h"
 #import "JXString.h"
 #import "JXFrameManager.h"
 #import "NSAttributedString+JXFrame.h"
 #import "NSError+JXFrame.h"
+#import "NSDictionary+JXFrame.h"
 
 @interface JXScrollViewModel ()
 
@@ -23,11 +25,10 @@
 #pragma mark - Init
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super initWithParams:params]) {
-//        self.shouldPullToRefresh = TBBoolMemberWithKeyAndDefault(params, kTBParamPullRefresh, NO);
-//        self.shouldScrollToMore = TBBoolMemberWithKeyAndDefault(params, kTBParamLoadMore, NO);
-//        self.pageIndex = TBIntMemberWithKeyAndDefault(params, kTBParamPageIndex, [TBFrameManager sharedInstance].pageIndex);
-//        self.pageSize = TBIntMemberWithKeyAndDefault(params, kTBParamPageSize, [TBFrameManager sharedInstance].pageSize);
-//        self.pageStart = TBIntMemberWithKeyAndDefault(params, kTBParamPageBegin, self.pageIndex);
+        self.pageStart = [self.params jx_numberForKey:kJXParamPageStart withDefault:@(JXFrameManager.share.pageStart)].integerValue;
+        self.pageSize = [self.params jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.pageSize)].integerValue;
+        self.shouldPullToRefresh = [self.params jx_numberForKey:kJXParamPullRefresh].boolValue;
+        self.shouldScrollToMore = [self.params jx_numberForKey:kJXParamScrollMore].boolValue;
     }
     return self;
 }
@@ -83,7 +84,10 @@
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-    return self.error ? [self.error jx_reasonImage] : JXFrameManager.share.loadingImage;
+    if (!self.error) {
+        return [JXFrameManager.share.loadingImage qmui_imageWithTintColor:JXFrameManager.share.primaryColor];
+    }
+    return [self.error jx_reasonImage];
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView {

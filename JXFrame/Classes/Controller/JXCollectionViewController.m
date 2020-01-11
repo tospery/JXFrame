@@ -10,6 +10,7 @@
 #import "JXFunction.h"
 #import "JXCollectionCell.h"
 #import "JXSupplementaryView.h"
+#import "UIViewController+JXFrame.h"
 
 @interface JXCollectionViewController ()
 @property (nonatomic, strong, readwrite) UICollectionView *collectionView;
@@ -28,8 +29,11 @@
 }
 
 - (void)dealloc {
-    self.collectionView.dataSource = nil;
-    self.collectionView.delegate = nil;
+    _collectionView.dataSource = nil;
+    _collectionView.delegate = nil;
+    _collectionView.emptyDataSetSource = nil;
+    _collectionView.emptyDataSetDelegate = nil;
+    _collectionView = nil;
 }
 
 #pragma mark - View
@@ -115,6 +119,13 @@
     }
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (self.jx_pageViewController) {
+        self.collectionView.frame = self.view.bounds;
+    }
+}
+
 #pragma mark - Method
 - (UICollectionViewLayout *)collectionViewLayout {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -127,6 +138,7 @@
 #pragma mark - Delegate
 #pragma mark JXCollectionViewModelDelegate
 - (void)reloadData {
+    [super reloadData];
     [self.collectionView reloadData];
 }
 

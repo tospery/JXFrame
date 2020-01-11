@@ -9,9 +9,11 @@
 #import "JXBaseViewModel.h"
 #import "JXConst.h"
 #import "JXFunction.h"
+#import "NSDictionary+JXFrame.h"
 
 @interface JXBaseViewModel ()
 @property (nonatomic, copy, readwrite) NSDictionary *params;
+@property (nonatomic, strong, readwrite) JXBaseModel *model;
 @property (nonatomic, strong, readwrite) NSArray *items;
 @property (nonatomic, strong, readwrite) JXNavigator *navigator;
 @property (nonatomic, strong, readwrite) JXProvider *provider;
@@ -27,9 +29,13 @@
 #pragma mark - Init
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super init]) {
-        self.shouldFetchLocalData = YES;
-        self.shouldRequestRemoteData = NO;
-        self.params = params;
+        self.params = JXObjWithDft(params, @{});
+        self.shouldFetchLocalData = [self.params jx_numberForKey:kJXParamFetchLocal withDefault:@(YES)].boolValue;
+        self.shouldRequestRemoteData = [self.params jx_numberForKey:kJXParamRequestRemote].boolValue;
+        self.hidesNavigationBar = [self.params jx_numberForKey:kJXParamHideNavBar].boolValue;
+        self.hidesNavBottomLine = [self.params jx_numberForKey:kJXParamHideNavBottomLine].boolValue;
+        self.title = [self.params jx_stringForKey:kJXParamTitle];
+        self.model = [self.params jx_objectForKey:kJXParamModel];
     }
     return self;
 }

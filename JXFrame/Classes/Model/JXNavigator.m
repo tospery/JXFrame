@@ -15,7 +15,6 @@
 @interface JXNavigator () <UINavigationControllerDelegate>
 @property (nonatomic, strong, readwrite) UINavigationController *topNavigationController;
 @property (nonatomic, strong) NSMutableArray *navigationControllers;
-@property (nonatomic, strong) JLRoutes *router;
 
 @end
 
@@ -31,18 +30,6 @@
         _navigationControllers = [NSMutableArray array];
     }
     return _navigationControllers;
-}
-
-- (JLRoutes *)router {
-    if (!_router) {
-        NSString *urlScheme = UIApplication.sharedApplication.jx_urlScheme;
-        if (urlScheme.length != 0) {
-            _router = [JLRoutes routesForScheme:urlScheme];
-        } else {
-            _router = [JLRoutes globalRoutes];
-        }
-    }
-    return _router;
 }
 
 #pragma mark - Public
@@ -73,7 +60,7 @@
 }
 
 - (BOOL)routeURL:(NSURL *)URL {
-    return [self.router routeURL:URL];
+    return [JLRoutes.globalRoutes routeURL:URL];
 }
 
 #pragma mark - Delegate

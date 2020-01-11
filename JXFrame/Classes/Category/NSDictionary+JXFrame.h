@@ -22,5 +22,6 @@
 
 - (id)jx_objectForKey:(NSString *)key;
 - (id)jx_objectForKey:(NSString *)key withDefault:(id)dft;
+- (id)jx_objectForKey:(NSString *)key withDefault:(id)dft baseClass:(Class)cls;
 
 @end

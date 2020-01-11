@@ -8,6 +8,8 @@
 #import "JXBaseViewController.h"
 #import "JXType.h"
 #import "JXFunction.h"
+#import "JXPageViewController.h"
+#import "UIViewController+JXFrame.h"
 
 @interface JXBaseViewController ()
 @property (nonatomic, assign, readwrite) CGFloat contentTop;
@@ -79,19 +81,23 @@
 
 #pragma mark - Property
 - (CGFloat)contentTop {
-    CGFloat value = 0;
-    if (self.navigationController.navigationBar != nil &&
-        self.navigationController.navigationBar.isHidden != YES) {
-        value += JXNavContentTopConstant;
+    CGFloat value = JXStatusBarHeightConstant;
+    UINavigationBar *navBar = self.navigationController.navigationBar;
+    if (navBar != nil && navBar.isHidden != YES) {
+        value += navBar.qmui_height;
+    }
+    JXPageMenuView *menuView = self.jx_pageViewController.menuView;
+    if (menuView != nil && menuView.isHidden != YES) {
+        value += menuView.qmui_height;
     }
     return value;
 }
 
 - (CGFloat)contentBottom {
     CGFloat value = JXSafeBottom;
-    if (self.tabBarController.tabBar != nil &&
-        self.tabBarController.tabBar.isHidden != YES) {
-        value += JXTabBarHeight;
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    if (tabBar != nil && tabBar.isHidden != YES) {
+        value += tabBar.qmui_height;
     }
     return value;
 }

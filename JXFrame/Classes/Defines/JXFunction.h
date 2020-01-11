@@ -27,7 +27,6 @@
 
 #pragma mark - 安全区域
 #define JXSafeArea                          SafeAreaInsetsConstantForDeviceWithNotch
-#define JXSafeTop                           JXSafeArea.top
 #define JXSafeBottom                        JXSafeArea.bottom
 
 #pragma mark - 颜色

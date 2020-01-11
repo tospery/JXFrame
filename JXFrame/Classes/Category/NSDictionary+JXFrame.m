@@ -93,12 +93,20 @@
 }
 
 - (id)jx_objectForKey:(NSString *)key withDefault:(id)dft {
+    return [self jx_objectForKey:key withDefault:dft baseClass:nil];
+}
+
+- (id)jx_objectForKey:(NSString *)key withDefault:(id)dft baseClass:(Class)cls {
     if (!key) {
         return dft;
     }
     
     id object = [self objectForKey:key];
-    if (!object || [object isKindOfClass:[NSNull class]]) {
+    if (!object) {
+        return dft;
+    }
+    
+    if (cls && ![object isKindOfClass:cls]) {
         return dft;
     }
     
