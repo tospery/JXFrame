@@ -12,15 +12,15 @@
 @implementation UIFont (JXFrame)
 
 + (UIFont *)jx_normal:(CGFloat)size {
-    return [UIFont systemFontOfSize:(size + JXFrameManager.sharedInstance.fontScale)];
+    return [UIFont systemFontOfSize:(size + JXFrameManager.share.fontScale)];
 }
 
 + (UIFont *)jx_bold:(CGFloat)size {
-    return [UIFont boldSystemFontOfSize:(size + JXFrameManager.sharedInstance.fontScale)];
+    return [UIFont boldSystemFontOfSize:(size + JXFrameManager.share.fontScale)];
 }
 
 + (UIFont *)jx_light:(CGFloat)size {
-    return [UIFont qmui_lightSystemFontOfSize:(size + JXFrameManager.sharedInstance.fontScale)];
+    return [UIFont qmui_lightSystemFontOfSize:(size + JXFrameManager.share.fontScale)];
 }
 
 @end

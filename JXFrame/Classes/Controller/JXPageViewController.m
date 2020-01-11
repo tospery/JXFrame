@@ -74,7 +74,7 @@
 
 #pragma mark public
 - (JXPageMenuView *)preferredMenuView {
-    JXPageMenuTitleView *menuView = [[JXPageMenuTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.qmui_width, JXMetric(50))];
+    JXPageMenuTitleView *menuView = [[JXPageMenuTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.qmui_width, JXMetric(40))];
     menuView.titleColorGradientEnabled = YES;
     JXPageMenuIndicatorLineView *lineView = [[JXPageMenuIndicatorLineView alloc] init];
     lineView.indicatorWidth = JXPageAutomaticDimension;
@@ -90,6 +90,7 @@
 #pragma mark JXPageViewModelDelegate
 - (void)reloadData {
     [super reloadData];
+    [self.menuView reloadData];
 }
 
 #pragma mark JXPageMenuViewDelegate

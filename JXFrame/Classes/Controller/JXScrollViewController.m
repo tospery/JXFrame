@@ -10,6 +10,8 @@
 #import "JXFunction.h"
 #import "JXTableViewController.h"
 #import "JXCollectionViewController.h"
+#import "JXTabBarViewController.h"
+#import "JXPageViewController.h"
 #import "JXWebViewController.h"
 #import "UIScrollView+JXFrame.h"
 
@@ -41,6 +43,8 @@
     [super viewDidLoad];
     if (![self isKindOfClass:JXTableViewController.class] &&
         ![self isKindOfClass:JXCollectionViewController.class] &&
+        ![self isKindOfClass:JXTabBarViewController.class] &&
+        ![self isKindOfClass:JXPageViewController.class] &&
         ![self isKindOfClass:JXWebViewController.class]) {
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom)];
         scrollView.jx_contentView = [[UIView alloc] init];

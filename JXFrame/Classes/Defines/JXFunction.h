@@ -12,6 +12,7 @@
 #import "NSURL+JXFrame.h"
 #import "UIColor+JXFrame.h"
 #import "UIFont+JXFrame.h"
+#import "UIImage+JXFrame.h"
 
 #pragma mark - 标准尺寸
 #define JXScreenWidth                       ScreenBoundsSize.width
@@ -46,10 +47,19 @@
 #define JXStrWithFlt(x)                     ([NSString stringWithFormat:@"%.2f", (x)])
 #define JXStrWithFmt(fmt, ...)              ([NSString stringWithFormat:(fmt), ##__VA_ARGS__])
 #define JXURLWithStr(x)                     ([NSURL jx_urlWithString:(x)])
+#define JXImageInBundle(x)                  ([UIImage jx_imageInBundle:JXStrWithFmt(@"JXFrame/%@", (x))])
 
 #pragma mark - 便捷属性
 #define JXPageAutomaticDimension            (-1)
 #define JXAppWindow                         (UIApplication.sharedApplication.delegate.window)
+
+#pragma mark - 本地化
+#ifdef JXEnableFuncLocalize
+#define JXT(local, display)                 (local)
+#else
+#define JXT(local, display)                 (display)
+#endif
+
 //// scale - 高宽比
 //func metric(scale: CGFloat) -> CGFloat {
 //    return flat(UIScreen.main.bounds.size.width * scale)

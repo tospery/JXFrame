@@ -15,6 +15,7 @@
 - (NSString *)jx_urlComponentDecoded;
 
 + (NSString *)jx_stringWithObject:(id)value;
++ (NSString *)jx_filePathInDocuments:(NSString *)fileName;
 
 @end
 

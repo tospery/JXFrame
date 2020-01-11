@@ -9,6 +9,12 @@
 
 @implementation NSString (JXFrame)
 
++ (NSString *)jx_filePathInDocuments:(NSString *)fileName {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [documentsPath stringByAppendingPathComponent:fileName];
+}
+
 + (NSString *)jx_stringWithObject:(id)value {
     if ([value isKindOfClass:NSString.class]) {
         return value;

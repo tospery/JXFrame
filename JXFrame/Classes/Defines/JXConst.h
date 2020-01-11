@@ -46,16 +46,19 @@
 #define kJXIdentifierCollectionHeader               (@"kJXIdentifierCollectionHeader")
 #define kJXIdentifierCollectionFooter               (@"kJXIdentifierCollectionFooter")
 
+#pragma mark - Scheme
+#define kJXSchemeHTTP                               (@"http")
+#define kJXSchemeAsset                              (@"asset")
+#define kJXSchemeBundle                             (@"bundle")
+#define kJXSchemeResource                           (@"resource")
+#define kJXSchemeDocuments                          (@"documents")
+
 //#pragma mark - 缓存
 //#define kJXCachePrevUserID                          (@"kJXCachePrevUserID")
 //
 //
 //#pragma mark - Scheme协议
-//#define kJXSchemeHTTP                               (@"http")
-//#define kJXSchemeAsset                              (@"asset")
-//#define kJXSchemeBundle                             (@"bundle")
-//#define kJXSchemeResource                           (@"resource")
-//#define kJXSchemeDocuments                          (@"documents")
+
 //
 //
 //

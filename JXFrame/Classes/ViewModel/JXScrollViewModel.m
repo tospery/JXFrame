@@ -7,6 +7,11 @@
 //
 
 #import "JXScrollViewModel.h"
+#import "JXFunction.h"
+#import "JXString.h"
+#import "JXFrameManager.h"
+#import "NSAttributedString+JXFrame.h"
+#import "NSError+JXFrame.h"
 
 @interface JXScrollViewModel ()
 
@@ -51,58 +56,49 @@
 
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetSource
-//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-//    return nil;
-//}
-//
-//- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-//    if (!self.error) {
-//        return nil;
-//    }
-//    
-//    NSString *title = TBStrWithDft(self.error.localizedDescription, kStringDataEmpty);
-//    return [NSMutableAttributedString tb_attributedStringWithString:title color:UIColorMakeWithHexValue(0x999999) font:TBFont(14.0f)];
-//}
-//
-//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-//    if (!self.error) {
-//        return nil;
-//    }
-//    
-//    NSString *title = TBStrWithDft([self.error tb_retryTitle], kStringReload);
-//    return [NSMutableAttributedString tb_attributedStringWithString:title color:(UIControlStateNormal == state ? [UIColor whiteColor] : [[UIColor whiteColor] colorWithAlphaComponent:0.8]) font:TBFont(15.0f)];
-//}
-//
-//- (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-////    UIImage *image = [UIImage tb_imageWithColor:TBObjWithDft([TBFrameManager sharedInstance].mainColor, [UIColor orangeColor])];
-////    image = [image tb_scaleWithWidth:TBScreen(120) height:TBScreen(30)];
-////    image = [image tb_makeRadius:2.0f];
-////    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, -120, 0, -120)];
-////    return (UIControlStateNormal == state ? image : nil);
-//    
-//    // YJX_TODO 颜色主题
-//    UIImage *image = [UIImage qmui_imageWithColor:TBObjWithDft([TBFrameManager sharedInstance].mainColor, [UIColor orangeColor]) size:CGSizeMake(120, 30) cornerRadius:2.0f];
-//    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, -120, 0, -120)];
-//    return (UIControlStateNormal == state ? image : nil);
-//}
-//
-//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-//    return self.error ? [self.error tb_reasonImage] : [TBFrameManager sharedInstance].loadingImage;
-//}
-//
-//- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView {
-//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
-//    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-//    animation.toValue = [NSValue valueWithCATransform3D: CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0) ];
-//    animation.duration = 0.25;
-//    animation.cumulative = YES;
-//    animation.repeatCount = MAXFLOAT;
-//    animation.removedOnCompletion = NO;
-//    return animation;
-//}
-//
-//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-//    return self.backgroundColor;
-//}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    return nil;
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    if (!self.error) {
+        return nil;
+    }
+    NSString *title = JXStrWithDft(self.error.localizedDescription, kStringDataEmpty);
+    return [NSAttributedString jx_attributedStringWithString:title color:UIColorGrayLighten font:JXFont(14.0f)];
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    if (!self.error) {
+        return nil;
+    }
+    NSString *title = JXStrWithDft([self.error jx_retryTitle], kStringReload);
+    return [NSAttributedString jx_attributedStringWithString:title color:(UIControlStateNormal == state ? UIColorWhite : [UIColorWhite colorWithAlphaComponent:0.8]) font:JXFont(15.0f)];
+}
+
+- (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    UIImage *image = [UIImage qmui_imageWithColor:JXFrameManager.share.primaryColor size:CGSizeMake(120, 30) cornerRadius:2.0f];
+    image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, -120, 0, -120)];
+    return (UIControlStateNormal == state ? image : nil);
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return self.error ? [self.error jx_reasonImage] : JXFrameManager.share.loadingImage;
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D: CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0) ];
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
+    return animation;
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return JXObjWithDft(UIColorForBackground, UIColorWhite);
+}
 
 @end
