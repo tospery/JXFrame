@@ -58,9 +58,19 @@
     return [[cls alloc] initWithViewModel:viewModel];
 }
 
+- (BOOL)canRouteURL:(NSURL *)URL {
+    return [JLRoutes canRouteURL:URL];
+}
+
 - (BOOL)routeURL:(NSURL *)URL {
-    // NSURL *abc = [NSURL URLWithString:@"kujia://setting"];
     return [JLRoutes routeURL:URL];
+}
+
+- (BOOL)routeNativeURL:(NSURL *)nativeURL withWebURL:(NSURL *)webURL {
+    if (nativeURL && [JLRoutes canRouteURL:nativeURL]) {
+        return [JLRoutes routeURL:nativeURL];
+    }
+    return [JLRoutes routeURL:webURL];
 }
 
 #pragma mark - Delegate

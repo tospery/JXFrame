@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, JXPageContainerType) {
 @end
 
 
-@interface JXPageContainerView : JXBaseView <JXPageContainerProtocol>
+@interface JXPageContainerView : UIView <JXPageContainerProtocol>
 
 @property (nonatomic, assign, readonly) JXPageContainerType containerType;
 @property (nonatomic, strong, readonly) UIScrollView *scrollView;

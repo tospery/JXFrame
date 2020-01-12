@@ -29,7 +29,7 @@
     [super layoutSubviews];
 
     for (UIView<JXPageMenuIndicator> *view in self.indicators) {
-        [self sendSubviewToBack:view];
+        [self bringSubviewToFront:view];
     }
 }
 

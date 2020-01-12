@@ -7,7 +7,7 @@
 
 #import "JXBaseView.h"
 
-@interface JXWebProgressView : JXBaseView
+@interface JXWebProgressView : UIView
 @property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, assign) NSTimeInterval barAnimationDuration;
 @property (nonatomic, assign) NSTimeInterval fadeAnimationDuration;

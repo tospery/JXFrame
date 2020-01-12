@@ -9,7 +9,7 @@
 #import "JXType.h"
 #import "JXPageMenuIndicator.h"
 
-@interface JXPageMenuIndicatorComponentView : JXBaseView <JXPageMenuIndicator>
+@interface JXPageMenuIndicatorComponentView : UIView <JXPageMenuIndicator>
 
 /**
  指示器的位置。底部或者顶部

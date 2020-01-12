@@ -44,6 +44,24 @@ struct DelegateFlags {
     [self.animator stop];
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self didInitialize];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self didInitialize];
+    }
+    return self;
+}
+
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
 
@@ -295,7 +313,6 @@ struct DelegateFlags {
 }
 
 - (void)didInitialize {
-    [super didInitialize];
     // Data
     _firstLayoutSubviews = YES;
     _dataSource = [NSMutableArray array];

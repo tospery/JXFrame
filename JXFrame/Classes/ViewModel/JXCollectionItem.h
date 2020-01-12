@@ -6,9 +6,11 @@
 //
 
 #import "JXBaseItem.h"
+#import <ReactiveObjC/ReactiveObjC.h>
 
 @interface JXCollectionItem : JXBaseItem
 @property (nonatomic, assign) CGSize cellSize;
+@property (nonatomic, strong) RACCommand *didSelectCommand;
 
 @end
 

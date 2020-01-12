@@ -12,22 +12,24 @@
 @end
 
 @implementation JXWebProgressView
-- (void)didInitialize {
-    [super didInitialize];
-    self.userInteractionEnabled = NO;
-    self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.progressBarView = [[UIView alloc] initWithFrame:self.bounds];
-    self.progressBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    UIColor *tintColor = [UIColor colorWithRed:22.f / 255.f green:126.f / 255.f blue:251.f / 255.f alpha:1.0];
-    if ([UIApplication.sharedApplication.delegate.window respondsToSelector:@selector(setTintColor:)] && UIApplication.sharedApplication.delegate.window.tintColor) {
-        tintColor = UIApplication.sharedApplication.delegate.window.tintColor;
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.userInteractionEnabled = NO;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.progressBarView = [[UIView alloc] initWithFrame:self.bounds];
+        self.progressBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        UIColor *tintColor = [UIColor colorWithRed:22.f / 255.f green:126.f / 255.f blue:251.f / 255.f alpha:1.0];
+        if ([UIApplication.sharedApplication.delegate.window respondsToSelector:@selector(setTintColor:)] && UIApplication.sharedApplication.delegate.window.tintColor) {
+            tintColor = UIApplication.sharedApplication.delegate.window.tintColor;
+        }
+        self.progressBarView.backgroundColor = tintColor;
+        [self addSubview:self.progressBarView];
+        
+        self.barAnimationDuration = 0.27f;
+        self.fadeAnimationDuration = 0.27f;
+        self.fadeOutDelay = 0.1f;
     }
-    self.progressBarView.backgroundColor = tintColor;
-    [self addSubview:self.progressBarView];
-    
-    self.barAnimationDuration = 0.27f;
-    self.fadeAnimationDuration = 0.27f;
-    self.fadeOutDelay = 0.1f;
+    return self;
 }
 
 - (void)setProgress:(CGFloat)progress {

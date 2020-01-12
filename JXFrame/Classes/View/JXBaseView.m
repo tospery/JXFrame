@@ -18,13 +18,9 @@
 @implementation JXBaseView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self didInitialize];
+        self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
     }
     return self;
-}
-
-- (void)didInitialize {
-    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
 }
 
 - (void)bindViewModel:(id)viewModel {

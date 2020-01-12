@@ -63,7 +63,7 @@
 
 @end
 
-@interface JXPageMenuView : JXBaseView
+@interface JXPageMenuView : UIView
 
 @property (nonatomic, strong, readonly) JXPageMenuCollectionView *collectionView;
 

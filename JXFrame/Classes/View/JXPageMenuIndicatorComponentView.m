@@ -10,18 +10,22 @@
 
 @implementation JXPageMenuIndicatorComponentView
 
-- (void)didInitialize {
-    [super didInitialize];
-    _componentPosition = JXPageMenuComponentPositionBottom;
-    _scrollEnabled = YES;
-    _verticalMargin = 0;
-    _scrollAnimationDuration = 0.25;
-    _indicatorWidth = JXPageAutomaticDimension;
-    _indicatorWidthIncrement = 0;
-    _indicatorHeight = 3;
-    _indicatorCornerRadius = JXPageAutomaticDimension;
-    _indicatorColor = [UIColor redColor];
-    _scrollStyle = JXPageMenuIndicatorScrollStyleSimple;
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _componentPosition = JXPageMenuComponentPositionBottom;
+        _scrollEnabled = YES;
+        _verticalMargin = 0;
+        _scrollAnimationDuration = 0.25;
+        _indicatorWidth = JXPageAutomaticDimension;
+        _indicatorWidthIncrement = 0;
+        _indicatorHeight = 3;
+        _indicatorCornerRadius = JXPageAutomaticDimension;
+        _indicatorColor = [UIColor redColor];
+        _scrollStyle = JXPageMenuIndicatorScrollStyleSimple;
+    }
+    return self;
 }
 
 - (CGFloat)indicatorWidthValue:(CGRect)cellFrame {
