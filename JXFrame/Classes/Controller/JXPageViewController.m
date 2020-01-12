@@ -93,12 +93,11 @@
 
 #pragma mark JXPageMenuViewDelegate
 - (void)menuView:(JXPageMenuView *)menuView didSelectedItemAtIndex:(NSInteger)index {
-    // self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    
 }
 
 - (void)menuView:(JXPageMenuView *)menuView didScrollSelectedItemAtIndex:(NSInteger)index {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    
 }
 
 @end

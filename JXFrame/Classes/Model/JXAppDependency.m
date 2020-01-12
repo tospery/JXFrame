@@ -7,6 +7,8 @@
 
 #import "JXAppDependency.h"
 #import <JLRoutes/JLRoutes.h>
+#import "JXConst.h"
+#import "JXFunction.h"
 #import "JXUser.h"
 
 JXUser *gUser;
@@ -78,8 +80,7 @@ JXUser *gUser;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // DDLogDebug(@"【TBFrame】disk = %@", NSHomeDirectory());
-    NSLog(@"【JXFrame】disk = %@", NSHomeDirectory()); // YJX_TODO
+    JXLog(kJXFrameName, @"disk = %@", NSHomeDirectory());
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

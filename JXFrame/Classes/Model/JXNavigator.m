@@ -65,38 +65,8 @@
 
 #pragma mark - Delegate
 #pragma mark JXNavigationProtocol
-- (void)pushViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated {
-    UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
-    [self.topNavigationController pushViewController:viewController animated:animated];
-}
-
-- (void)popViewModelAnimated:(BOOL)animated {
-    [self.topNavigationController popViewControllerAnimated:animated];
-}
-
-- (void)popToRootViewModelAnimated:(BOOL)animated {
-    [self.topNavigationController popToRootViewControllerAnimated:animated];
-}
-
-- (void)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(JXVoidBlock)completion {
-    UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
-    UINavigationController *presentingViewController = self.topNavigationController;
-    if (![viewController isKindOfClass:UINavigationController.class]) {
-        viewController = [[JXNavigationController alloc] initWithRootViewController:viewController];
-    }
-    [self pushNavigationController:(JXNavigationController *)viewController];
-    [presentingViewController presentViewController:viewController animated:animated completion:completion];
-}
-
-- (void)dismissViewModelAnimated:(BOOL)animated completion:(JXVoidBlock)completion {
-    UINavigationController *dismissingViewController = self.topNavigationController;
-    [self popNavigationController];
-    [dismissingViewController dismissViewControllerAnimated:animated completion:completion];
-}
-
-- (void)resetRootViewModel:(JXBaseViewModel *)viewModel {
+- (UIViewController *)resetRootViewModel:(JXBaseViewModel *)viewModel {
     [self.navigationControllers removeAllObjects];
-    
     UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
     if (![viewController isKindOfClass:[UINavigationController class]] &&
         ![viewController isKindOfClass:[UITabBarController class]] &&
@@ -107,6 +77,38 @@
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     window.rootViewController = viewController;
     [window makeKeyAndVisible];
+    return viewController;
+}
+
+- (UIViewController *)pushViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated {
+    UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
+    [self.topNavigationController pushViewController:viewController animated:animated];
+    return viewController;
+}
+
+- (UIViewController *)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(JXVoidBlock)completion {
+    UIViewController *viewController = (UIViewController *)[self viewController:viewModel];
+    UINavigationController *presentingViewController = self.topNavigationController;
+    if (![viewController isKindOfClass:UINavigationController.class]) {
+        viewController = [[JXNavigationController alloc] initWithRootViewController:viewController];
+    }
+    [self pushNavigationController:(JXNavigationController *)viewController];
+    [presentingViewController presentViewController:viewController animated:animated completion:completion];
+    return viewController;
+}
+
+- (void)popViewModelAnimated:(BOOL)animated {
+    [self.topNavigationController popViewControllerAnimated:animated];
+}
+
+- (void)popToRootViewModelAnimated:(BOOL)animated {
+    [self.topNavigationController popToRootViewControllerAnimated:animated];
+}
+
+- (void)dismissViewModelAnimated:(BOOL)animated completion:(JXVoidBlock)completion {
+    UINavigationController *dismissingViewController = self.topNavigationController;
+    [self popNavigationController];
+    [dismissingViewController dismissViewControllerAnimated:animated completion:completion];
 }
 
 #pragma mark - Class

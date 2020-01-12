@@ -16,16 +16,12 @@
 @implementation JXCollectionCell
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self didInitialize];
+        self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+//        self.qmui_borderWidth = PixelOne;
+//        self.qmui_borderColor = UIColorSeparator;
+//        self.qmui_borderPosition = QMUIViewBorderPositionBottom;
     }
     return self;
-}
-
-- (void)didInitialize {
-    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
-    self.qmui_borderWidth = PixelOne;
-    self.qmui_borderColor = UIColorSeparator;
-    self.qmui_borderPosition = QMUIViewBorderPositionBottom;
 }
 
 - (void)bindViewModel:(JXCollectionItem *)item {

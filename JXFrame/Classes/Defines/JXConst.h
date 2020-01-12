@@ -49,6 +49,7 @@
 #define kJXSchemeDocuments                          (@"documents")
 
 #pragma mark - 便捷
+#define kJXFrameName                                (@"JXFrame")
 #define kJXVCSuffix                                 (@"ViewController")
 #define kJXVMSuffix                                 (@"ViewModel")
 

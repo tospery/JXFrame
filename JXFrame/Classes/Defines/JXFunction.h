@@ -40,6 +40,11 @@
 #define JXFontBold(x)                       ([UIFont jx_bold:(x)])
 #define JXFontLight(x)                      ([UIFont jx_light:(x)])
 
+#pragma mark - 日志
+#define JXLog(name, fmt, ...)               QMUILog((name), fmt, ##__VA_ARGS__)
+#define JXLogInfo(name, fmt, ...)           QMUILogInfo((name), fmt, ##__VA_ARGS__)
+#define JXLogWarn(name, fmt, ...)           QMUILogWarn((name), fmt, ##__VA_ARGS__)
+
 #pragma mark - 便捷方法
 #define JXStrWithBool(x)                    ((x) ? @"YES" : @"NO")
 #define JXStrWithInt(x)                     ([NSString stringWithFormat:@"%llu", ((unsigned long long)x)])
@@ -47,6 +52,7 @@
 #define JXStrWithFmt(fmt, ...)              ([NSString stringWithFormat:(fmt), ##__VA_ARGS__])
 #define JXURLWithStr(x)                     ([NSURL jx_urlWithString:(x)])
 #define JXImageInBundle(x)                  ([UIImage jx_imageInBundle:JXStrWithFmt(@"JXFrame/%@", (x))])
+#define JXRandomNumber(x, y)                ((NSInteger)((x) + (arc4random() % ((y) - (x) + 1))))
 
 #pragma mark - 便捷属性
 #define JXPageAutomaticDimension            (-1)

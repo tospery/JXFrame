@@ -13,11 +13,19 @@
 #import "NSNumber+JXFrame.h"
 
 @interface JXBaseModel ()
+@property (nonatomic, copy, readwrite) NSString *mid;
 
 @end
 
 @implementation JXBaseModel
 #pragma mark - Init
+- (instancetype)initWithMid:(NSString *)mid {
+    if (self = [super init]) {
+        self.mid = mid;
+    }
+    return self;
+}
+
 #pragma mark - View
 #pragma mark - Property
 #pragma mark - Method
@@ -44,8 +52,10 @@
 
 #pragma mark private
 #pragma mark - Delegate
-#pragma mark UITableViewDataSource
-#pragma mark UITableViewDelegate
+#pragma mark JXIdentifiable
+- (void)updateMid:(NSString *)mid {
+    self.mid = mid;
+}
 
 #pragma mark - Class
 #pragma mark super

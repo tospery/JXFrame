@@ -13,8 +13,6 @@
 @interface JXCollectionCell : UICollectionViewCell <JXReactiveView>
 @property (nonatomic, strong, readonly) JXCollectionItem *viewModel;
 
-- (void)didInitialize;
-
 + (NSString *)identifier;
 
 @end

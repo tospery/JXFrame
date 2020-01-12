@@ -6,6 +6,7 @@
 //
 
 #import "NSError+JXFrame.h"
+#import "JXConst.h"
 #import "JXFunction.h"
 #import "JXString.h"
 #import "JXFrameManager.h"
@@ -61,9 +62,8 @@
 }
 
 + (NSError *)jx_errorWithCode:(NSInteger)code description:(NSString *)description {
-    NSString *domain = @"JXFrame";
     NSString *desc = JXStrWithDft(description, kStringUnknownError);
-    return [NSError errorWithDomain:domain code:code userInfo:@{NSLocalizedDescriptionKey: desc}];
+    return [NSError errorWithDomain:kJXFrameName code:code userInfo:@{NSLocalizedDescriptionKey: desc}];
 }
 
 @end

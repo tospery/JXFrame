@@ -16,6 +16,7 @@
 #import "JXString.h"
 
 #pragma mark - Model
+#import "JXObject.h"
 #import "JXBaseModel.h"
 #import "JXAppDependency.h"
 #import "JXFrameManager.h"
@@ -89,6 +90,7 @@
 #import "UIViewController+JXFrame.h"
 
 #pragma mark - Protocol
+#import "JXIdentifiable.h"
 #import "JXReactiveView.h"
 #import "JXNavigationProtocol.h"
 #import "JXProvisionProtocol.h"

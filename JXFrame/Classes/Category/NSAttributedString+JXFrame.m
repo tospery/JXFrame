@@ -8,6 +8,10 @@
 #import "NSAttributedString+JXFrame.h"
 
 @implementation NSAttributedString (JXFrame)
++ (NSAttributedString *)jx_attributedStringWithString:(NSString *)string {
+    return [self jx_attributedStringWithString:string color:nil font:nil];
+}
+
 + (NSAttributedString *)jx_attributedStringWithString:(NSString *)string color:(UIColor *)color font:(UIFont *)font {
     if (!string || ![string isKindOfClass:NSString.class]) {
         return nil;

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Mantle/Mantle.h>
+#import "JXIdentifiable.h"
 
-@interface JXBaseModel : MTLModel <MTLJSONSerializing>
-@property (nonatomic, copy) NSString *mid;
+@interface JXBaseModel : MTLModel <MTLJSONSerializing, JXIdentifiable>
+@property (nonatomic, copy, readonly) NSString *mid;
 
 - (void)save;
 - (void)saveWithKey:(NSString *)key;

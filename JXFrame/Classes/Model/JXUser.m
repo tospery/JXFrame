@@ -14,16 +14,16 @@
 @end
 
 @implementation JXUser
-
+// YJX_TODO 使用keyvalues的方式设置属性
 - (void)login:(JXUser *)user {
-    self.mid = user.mid;
+    [self updateMid:user.mid];
     JXNotify(kJXUserWillLoginNotification, self, nil);
     self.isLogined = YES;
     JXNotify(kJXUserDidLoginNotification, self, nil);
 }
 
 - (void)logout {
-    self.mid = nil;
+    [self updateMid:nil];
     JXNotify(kJXUserWillLogoutNotification, self, nil);
     self.isLogined = NO;
     JXNotify(kJXUserDidLogoutNotification, self, nil);

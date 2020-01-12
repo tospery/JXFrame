@@ -11,12 +11,12 @@
 @class JXBaseViewModel;
 
 @protocol JXNavigationProtocol <NSObject>
-- (void)pushViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated;
+- (UIViewController *)resetRootViewModel:(JXBaseViewModel *)viewModel;
+- (UIViewController *)pushViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated;
+- (UIViewController *)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(JXVoidBlock)completion;
 - (void)popViewModelAnimated:(BOOL)animated;
 - (void)popToRootViewModelAnimated:(BOOL)animated;
-- (void)presentViewModel:(JXBaseViewModel *)viewModel animated:(BOOL)animated completion:(JXVoidBlock)completion;
 - (void)dismissViewModelAnimated:(BOOL)animated completion:(JXVoidBlock)completion;
-- (void)resetRootViewModel:(JXBaseViewModel *)viewModel;
 
 @end
 
