@@ -9,6 +9,7 @@
 #import "JXType.h"
 #import "JXFunction.h"
 #import "JXPageViewController.h"
+#import "JXTabBarViewController.h"
 #import "UIViewController+JXFrame.h"
 
 @interface JXBaseViewController ()

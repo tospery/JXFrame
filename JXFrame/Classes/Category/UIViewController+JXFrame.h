@@ -8,13 +8,19 @@
 #import <UIKit/UIKit.h>
 
 @class JXPageViewController;
+@class JXTabBarViewController;
 
 @interface UIViewController (JXFrame)
 
 /**
- 获取控制器所在的WMPageController
+ 获取控制器所在的JXPageViewController
  */
 @property (nonatomic, strong, readonly) JXPageViewController *jx_pageViewController;
+
+/**
+ 获取控制器所在的JXTabBarViewController
+ */
+@property (nonatomic, strong, readonly) JXTabBarViewController *jx_tabBarViewController;
 
 @end
 
