@@ -66,13 +66,6 @@
     return [JLRoutes routeURL:URL];
 }
 
-- (BOOL)routeNativeURL:(NSURL *)nativeURL withWebURL:(NSURL *)webURL {
-    if (nativeURL && [JLRoutes canRouteURL:nativeURL]) {
-        return [JLRoutes routeURL:nativeURL];
-    }
-    return [JLRoutes routeURL:webURL];
-}
-
 #pragma mark - Delegate
 #pragma mark JXNavigationProtocol
 - (UIViewController *)resetRootViewModel:(JXBaseViewModel *)viewModel {

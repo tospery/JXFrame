@@ -20,7 +20,6 @@
 
 - (BOOL)canRouteURL:(NSURL *)URL;
 - (BOOL)routeURL:(NSURL *)URL;
-- (BOOL)routeNativeURL:(NSURL *)nativeURL withWebURL:(NSURL *)webURL;
 
 + (instancetype)share;
 

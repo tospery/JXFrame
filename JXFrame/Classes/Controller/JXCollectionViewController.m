@@ -186,6 +186,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if (!self.viewModel.canSelectCell) {
+        return;
+    }
     if (![collectionView.dataSource conformsToProtocol:@protocol(JXCollectionViewModelDataSource)]) {
         return;
     }

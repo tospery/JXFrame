@@ -24,6 +24,7 @@
 @end
 
 @interface JXCollectionViewModel : JXScrollViewModel <JXCollectionViewModelDataSource>
+@property (nonatomic, assign) BOOL canSelectCell;
 @property (nonatomic, strong) NSDictionary *itemCellMapping;
 @property (nonatomic, strong) NSDictionary *headerClassMapping;
 @property (nonatomic, strong) NSDictionary *footerClassMapping;
