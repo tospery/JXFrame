@@ -24,6 +24,13 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (!self.viewModel) {
+        return;
+    }
+}
+
 - (void)bindViewModel:(JXCollectionItem *)item {
     self.viewModel = item;
     [self setNeedsLayout];
