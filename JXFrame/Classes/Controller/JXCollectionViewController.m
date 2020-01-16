@@ -45,7 +45,7 @@
     collectionView.delegate = self;
     collectionView.emptyDataSetSource = self.viewModel;
     collectionView.emptyDataSetDelegate = self;
-    collectionView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+    collectionView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
     if (@available(iOS 11.0, *)) {
         collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }

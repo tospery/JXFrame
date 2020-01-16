@@ -46,13 +46,13 @@
 - (UIImage *)jx_reasonImage {
     UIImage *image = nil;
     if (JXErrorCodeAppNetworkException == self.code) {
-        image = JXFrameManager.share.networkErrorImage;
+        image = JXFrameManager.share.networkImage;
     }else if (JXErrorCodeAppServerException == self.code) {
-        image = JXFrameManager.share.serverErrorImage;
+        image = JXFrameManager.share.serverImage;
     }else if (JXErrorCodeAppLoginExpired == self.code) {
-        image = JXFrameManager.share.expiredErrorImage;
+        image = JXFrameManager.share.expireImage;
     }else {
-        image = JXFrameManager.share.emptyErrorImage;
+        image = JXFrameManager.share.emptyImage;
     }
     return image;
 }

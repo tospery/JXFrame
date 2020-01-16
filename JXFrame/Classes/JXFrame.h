@@ -115,6 +115,7 @@
 #import <SDWebImage/SDWebImage.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <TYAlertController/TYAlertController.h>
+#import <DKNightVersion/DKNightVersion.h>
 
 @interface JXFrame : NSObject
 

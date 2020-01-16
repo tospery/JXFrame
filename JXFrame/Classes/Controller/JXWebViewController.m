@@ -49,21 +49,21 @@
 - (WKWebView *)webView {
     if (!_webView) {
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
-        WKWebView *view = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
-        view.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
-        view.navigationDelegate = self;
-        view.UIDelegate = self;
-        _webView = view;
+        WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
+        webView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
+        webView.navigationDelegate = self;
+        webView.UIDelegate = self;
+        _webView = webView;
     }
     return _webView;
 }
 
 - (JXWebProgressView *)progressView {
     if (!_progressView) {
-        JXWebProgressView *view = [[JXWebProgressView alloc] initWithFrame:CGRectZero];
-        view.progressBarView.backgroundColor = JXObjWithDft(self.viewModel.progressColor, UIColorYellow);
-        view.progress = 0.0f;
-        _progressView = view;
+        JXWebProgressView *progressView = [[JXWebProgressView alloc] initWithFrame:CGRectZero];
+        progressView.progressBarView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
+        progressView.progress = 0.0f;
+        _progressView = progressView;
     }
     return _progressView;
 }

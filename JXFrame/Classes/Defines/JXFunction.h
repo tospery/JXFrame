@@ -9,6 +9,7 @@
 #define JXFunc_h
 
 #import <QMUIKit/QMUIKit.h>
+#import <DKNightVersion/DKNightVersion.h>
 #import "NSURL+JXFrame.h"
 #import "UIColor+JXFrame.h"
 #import "UIFont+JXFrame.h"
@@ -30,10 +31,16 @@
 #define JXSafeBottom                        JXSafeArea.bottom
 
 #pragma mark - 颜色
+#pragma mark 函数
 #define JXColorRGB(r, g, b)                 (UIColorMake((r), (g), (b)))
 #define JXColorRGBA(r, g, b, a)             (UIColorMakeWithRGBA((r), (g), (b), (a)))
 #define JXColorVal(hexValue)                ([UIColor jx_colorWithHex:(hexValue)])
 #define JXColorStr(hexString)               ([UIColor qmui_colorWithHexString:(hexString)])
+#define JXColorKey(t)                       (DKColorPickerWithKey(t)(self.dk_manager.themeVersion))
+#pragma mark 黑白
+#define JXColorClear                        (UIColorMakeWithRGBA(255, 255, 255, 0))
+#define JXColorWhite                        (UIColorMake(255, 255, 255))
+#define JXColorBlack                        (UIColorMake(0, 0, 0))
 
 #pragma mark - 字体
 #define JXFont(x)                           ([UIFont jx_normal:(x)])

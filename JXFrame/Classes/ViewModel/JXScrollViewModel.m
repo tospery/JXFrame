@@ -66,7 +66,7 @@
         return nil;
     }
     NSString *title = JXStrWithDft(self.error.localizedDescription, kStringDataEmpty);
-    return [NSAttributedString jx_attributedStringWithString:title color:UIColorGrayLighten font:JXFont(14.0f)];
+    return [NSAttributedString jx_attributedStringWithString:title color:JXColorKey(TEXT) font:JXFont(14.0f)];
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
@@ -74,18 +74,18 @@
         return nil;
     }
     NSString *title = JXStrWithDft([self.error jx_retryTitle], kStringReload);
-    return [NSAttributedString jx_attributedStringWithString:title color:(UIControlStateNormal == state ? UIColorWhite : [UIColorWhite colorWithAlphaComponent:0.8]) font:JXFont(15.0f)];
+    return [NSAttributedString jx_attributedStringWithString:title color:(UIControlStateNormal == state ? JXColorWhite : [JXColorWhite colorWithAlphaComponent:0.8]) font:JXFont(15.0f)];
 }
 
 - (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    UIImage *image = [UIImage qmui_imageWithColor:JXFrameManager.share.primaryColor size:CGSizeMake(120, 30) cornerRadius:2.0f];
+    UIImage *image = [UIImage qmui_imageWithColor:JXColorKey(TINT) size:CGSizeMake(120, 30) cornerRadius:2.0f];
     image = [image imageWithAlignmentRectInsets:UIEdgeInsetsMake(0, -120, 0, -120)];
     return (UIControlStateNormal == state ? image : nil);
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
     if (!self.error) {
-        return [JXFrameManager.share.loadingImage qmui_imageWithTintColor:JXFrameManager.share.primaryColor];
+        return [JXFrameManager.share.loadingImage qmui_imageWithTintColor:JXColorKey(TINT)];
     }
     return [self.error jx_reasonImage];
 }
@@ -102,7 +102,7 @@
 }
 
 - (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return JXObjWithDft(UIColorForBackground, UIColorWhite);
+    return JXColorKey(BG);
 }
 
 @end

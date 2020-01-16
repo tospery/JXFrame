@@ -46,9 +46,9 @@
         ![self isKindOfClass:JXWebViewController.class]) {
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.contentTop, self.view.qmui_width, self.view.qmui_height - self.contentTop - self.contentBottom)];
         scrollView.jx_contentView = [[UIView alloc] init];
-        scrollView.jx_contentView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+        scrollView.jx_contentView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
         scrollView.contentSize = CGSizeMake(scrollView.qmui_width, scrollView.qmui_height + PixelOne);
-        scrollView.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+        scrollView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
         scrollView.delegate = self;
         scrollView.emptyDataSetSource = self.viewModel;
         scrollView.emptyDataSetDelegate = self;

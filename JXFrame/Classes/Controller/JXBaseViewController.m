@@ -11,6 +11,7 @@
 #import "JXPageViewController.h"
 #import "JXTabBarViewController.h"
 #import "UIViewController+JXFrame.h"
+#import <DKNightVersion/DKNightVersion.h>
 
 @interface JXBaseViewController ()
 @property (nonatomic, assign, readwrite) CGFloat contentTop;
@@ -63,6 +64,8 @@
             self.navigationItem.leftBarButtonItem = nil;
         }
     }
+    
+    self.view.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -8,18 +8,27 @@
 #import <UIKit/UIKit.h>
 #import "JXType.h"
 
+@class JXFrameManager;
+
+#define JXImageLoading          (JXFrameManager.share.loadingImage)
+#define JXImageWaiting          (JXFrameManager.share.waitingImage)
+#define JXImageNetwork          (JXFrameManager.share.networkImage)
+#define JXImageServer           (JXFrameManager.share.serverImage)
+#define JXImageEmpty            (JXFrameManager.share.emptyImage)
+#define JXImageExpire           (JXFrameManager.share.expireImage)
+
 @interface JXFrameManager : NSObject
 @property (nonatomic, assign) CGFloat fontScale;
 @property (nonatomic, assign) NSInteger pageStart;
 @property (nonatomic, assign) NSInteger pageSize;
 @property (nonatomic, assign) JXPageStyle pageStyle;
-@property (nonatomic, strong) UIColor *primaryColor;
+//@property (nonatomic, strong) UIColor *primaryColor;
 @property (nonatomic, strong) UIImage *loadingImage;
 @property (nonatomic, strong) UIImage *waitingImage;
-@property (nonatomic, strong) UIImage *emptyErrorImage;
-@property (nonatomic, strong) UIImage *networkErrorImage;
-@property (nonatomic, strong) UIImage *serverErrorImage;
-@property (nonatomic, strong) UIImage *expiredErrorImage;
+@property (nonatomic, strong) UIImage *emptyImage;
+@property (nonatomic, strong) UIImage *networkImage;
+@property (nonatomic, strong) UIImage *serverImage;
+@property (nonatomic, strong) UIImage *expireImage;
 
 + (instancetype)share;
 

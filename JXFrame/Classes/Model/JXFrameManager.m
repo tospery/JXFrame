@@ -20,7 +20,7 @@
         self.pageStart = 0;
         self.pageSize = 20;
         self.pageStyle = JXPageStyleGroup;
-        self.primaryColor = UIColorYellow;
+        //self.primaryColor = UIColorYellow;
     }
     return self;
 }
@@ -39,32 +39,32 @@
     return _waitingImage;
 }
 
-- (UIImage *)emptyErrorImage {
-    if (!_emptyErrorImage) {
-        _emptyErrorImage = JXImageInBundle(@"jx_error_empty");
+- (UIImage *)emptyImage {
+    if (!_emptyImage) {
+        _emptyImage = JXImageInBundle(@"jx_error_empty");
     }
-    return _emptyErrorImage;
+    return _emptyImage;
 }
 
-- (UIImage *)networkErrorImage {
-    if (!_networkErrorImage) {
-        _networkErrorImage = JXImageInBundle(@"jx_error_network");
+- (UIImage *)networkImage {
+    if (!_networkImage) {
+        _networkImage = JXImageInBundle(@"jx_error_network");
     }
-    return _networkErrorImage;
+    return _networkImage;
 }
 
-- (UIImage *)serverErrorImage {
-    if (!_serverErrorImage) {
-        _serverErrorImage = JXImageInBundle(@"jx_error_server");
+- (UIImage *)serverImage {
+    if (!_serverImage) {
+        _serverImage = JXImageInBundle(@"jx_error_server");
     }
-    return _serverErrorImage;
+    return _serverImage;
 }
 
-- (UIImage *)expiredErrorImage {
-    if (!_expiredErrorImage) {
-        _expiredErrorImage = JXImageInBundle(@"jx_error_expired");
+- (UIImage *)expireImage {
+    if (!_expireImage) {
+        _expireImage = JXImageInBundle(@"jx_error_expired");
     }
-    return _expiredErrorImage;
+    return _expireImage;
 }
 
 + (instancetype)share {

@@ -27,7 +27,7 @@
             url = JXURLWithStr([self.parameters jx_stringForKey:kJXParamURLString]);
         }
         self.url = url;
-        self.progressColor = JXObjWithDft(UIColorYellow, UIColorWhite);
+        self.progressColor = JXColorKey(TINT);
     }
     return self;
 }

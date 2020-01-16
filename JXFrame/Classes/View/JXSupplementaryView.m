@@ -23,7 +23,7 @@
 }
 
 - (void)didInitialize {
-    self.backgroundColor = JXObjWithDft(UIColorForBackground, UIColorWhite);
+    self.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
 }
 
 - (void)bindViewModel:(id)viewModel {
