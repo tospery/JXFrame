@@ -48,7 +48,8 @@ Pod::Spec.new do |s|
   s.dependency 'GVUserDefaults', '1.0.2'
   s.dependency 'DZNEmptyDataSet', '1.8.1'
   s.dependency 'JLRoutes', '2.1'
-  s.dependency 'QMUIKit', '4.0.4'
+  s.dependency 'QMUIKit/QMUICore', '4.0.4'
+  s.dependency 'TYAlertController', '1.2.0'
+  s.dependency 'MBProgressHUD', '1.1.0'
   # s.dependency 'LTNavigationBar', '2.1.9'
-  # s.dependency 'MBProgressHUD', '1.1.0'
 end

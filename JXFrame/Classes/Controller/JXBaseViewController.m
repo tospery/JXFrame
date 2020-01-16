@@ -53,11 +53,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     if (self.navigationController.viewControllers.count > 1) {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem qmui_itemWithImage:NavBarBackIndicatorImage target:self action:@selector(backBarItemPressed:)];
-        // [UIBarButtonItem qmui_backItemWithTarget:self action:@selector(backBarItemPressed:)];
+        UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(32, 32) tintColor:UIColor.redColor];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(backBarItemPressed:)];
     } else {
         if (self.presentingViewController) {
-            self.navigationItem.leftBarButtonItem = [UIBarButtonItem qmui_closeItemWithTarget:self action:@selector(closeBarItemPressed:)];
+            UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(32, 32) tintColor:UIColor.greenColor];
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(backBarItemPressed:)];
         } else {
             self.navigationItem.leftBarButtonItem = nil;
         }
@@ -108,7 +109,7 @@
 #pragma mark - Public
 - (void)bindViewModel {
     // RAC(self.view, backgroundColor) = RACObserve(self.viewModel, backgroundColor);
-    RAC(self.titleView, title) = RACObserve(self.viewModel, title);
+    RAC(self.navigationItem, title) = RACObserve(self.viewModel, title);
     
     //    // Double title view
     //    TBDoubleTitleView *doubleTitleView = [[TBDoubleTitleView alloc] init];

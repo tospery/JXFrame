@@ -8,7 +8,7 @@
 #import "JXTabBarViewController.h"
 
 @interface JXTabBarViewController ()
-@property (nonatomic, strong, readwrite) QMUITabBarViewController *innerTabBarController;
+@property (nonatomic, strong, readwrite) UITabBarController *innerTabBarController;
 
 @end
 
@@ -16,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.innerTabBarController = [[QMUITabBarViewController alloc] init];
+    self.innerTabBarController = [[UITabBarController alloc] init];
     self.innerTabBarController.delegate = self;
     [self addChildViewController:self.innerTabBarController];
     [self.view addSubview:self.innerTabBarController.view];

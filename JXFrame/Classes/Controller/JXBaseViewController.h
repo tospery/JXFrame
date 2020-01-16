@@ -8,7 +8,7 @@
 #import <QMUIKit/QMUIKit.h>
 #import "JXBaseViewModel.h"
 
-@interface JXBaseViewController : QMUICommonViewController <JXBaseViewModelDelegate>
+@interface JXBaseViewController : UIViewController <JXBaseViewModelDelegate>
 @property (nonatomic, assign, readonly) CGFloat contentTop;
 @property (nonatomic, assign, readonly) CGFloat contentBottom;
 @property (nonatomic, strong, readonly) JXBaseViewModel *viewModel;

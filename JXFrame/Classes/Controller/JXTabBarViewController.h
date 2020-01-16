@@ -9,7 +9,7 @@
 #import <QMUIKit/QMUIKit.h>
 
 @interface JXTabBarViewController : JXScrollViewController <UITabBarControllerDelegate>
-@property (nonatomic, strong, readonly) QMUITabBarViewController *innerTabBarController;
+@property (nonatomic, strong, readonly) UITabBarController *innerTabBarController;
 
 @end
 

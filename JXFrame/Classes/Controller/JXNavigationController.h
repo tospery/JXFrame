@@ -5,9 +5,9 @@
 //  Created by 杨建祥 on 2019/12/30.
 //
 
-#import <QMUIKit/QMUIKit.h>
+#import <UIKit/UIKit.h>
 
-@interface JXNavigationController : QMUINavigationController
+@interface JXNavigationController : UINavigationController
 
 @end
 

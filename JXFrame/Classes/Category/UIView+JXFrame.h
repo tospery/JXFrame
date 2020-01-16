@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (JXFrame)
+@property (nonatomic, assign) CGFloat jx_borderWidth;
+@property (nonatomic, assign) CGFloat jx_cornerRadius;
+@property (nonatomic, strong) UIColor *jx_borderColor;
 
 @end
 

@@ -7,10 +7,12 @@
 //
 
 #import "JXBaseViewModel.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "JXConst.h"
 #import "JXFunction.h"
 #import "NSObject+JXFrame.h"
 #import "NSDictionary+JXFrame.h"
+#import "JXBaseViewController.h"
 
 @interface JXBaseViewModel ()
 @property (nonatomic, copy, readwrite) NSDictionary<NSString *,id> *parameters;;
@@ -101,13 +103,17 @@
 - (void)didInitialize {
     @weakify(self)
     [[self.executing skip:1] subscribeNext:^(NSNumber * _Nullable executing) {
+        @strongify(self)
         if (executing.boolValue) {
-            [QMUITips showLoading:nil inView:JXAppWindow];
+            [MBProgressHUD showHUDAddedTo:self.viewController.view animated:YES];
         }
     }];
     [self.errors subscribeNext:^(NSError *error) {
-        [QMUITips hideAllTips];
-        [QMUITips showWithText:error.localizedDescription];
+        @strongify(self)
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.viewController.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = error.localizedDescription;
+        [hud hideAnimated:YES afterDelay:3.f];
     }];
     
     self.backCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(NSNumber * _Nullable isBack) {

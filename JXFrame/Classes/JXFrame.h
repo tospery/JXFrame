@@ -69,6 +69,8 @@
 #import "JXPageMenuIndicatorLineView.h"
 #import "JXPageMenuTitleCell.h"
 #import "JXPageMenuTitleView.h"
+#import "JXLabel.h"
+#import "JXButton.h"
 
 #pragma mark - Category
 #import "NSObject+JXFrame.h"
@@ -111,6 +113,8 @@
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <FCUUID/FCUUID.h>
 #import <SDWebImage/SDWebImage.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <TYAlertController/TYAlertController.h>
 
 @interface JXFrame : NSObject
 

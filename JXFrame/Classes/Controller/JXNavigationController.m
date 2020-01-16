@@ -12,10 +12,11 @@
 @end
 
 @implementation JXNavigationController
-
-- (void)didInitialize {
-    [super didInitialize];
-    self.modalPresentationStyle = UIModalPresentationFullScreen;
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    if (self = [super initWithRootViewController:rootViewController]) {
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    return self;
 }
 
 @end
