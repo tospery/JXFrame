@@ -22,6 +22,8 @@
     if (self = [super initWithRouteParameters:parameters]) {
         self.shouldFetchLocalData = NO;
         self.shouldRequestRemoteData = YES;
+        self.nativeHandlers = [self.parameters jx_arrayForKey:kJXParamWebNativeHandlers];
+        self.jsHandlers = [self.parameters jx_arrayForKey:kJXParamWebJSHandlers];
         NSURL *url = [self.parameters jx_objectForKey:JLRouteURLKey withDefault:nil baseClass:NSURL.class];
         if (!url) {
             url = JXURLWithStr([self.parameters jx_stringForKey:kJXParamURLString]);

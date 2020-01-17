@@ -6,6 +6,7 @@
 //
 
 #import "JXNavigationController.h"
+#import "JXFunction.h"
 
 @interface JXNavigationController ()
 
@@ -14,6 +15,7 @@
 @implementation JXNavigationController
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
     if (self = [super initWithRootViewController:rootViewController]) {
+        self.navigationBar.tintColor = JXColorKey(BAR);
         self.modalPresentationStyle = UIModalPresentationFullScreen;
     }
     return self;

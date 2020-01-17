@@ -24,6 +24,8 @@
 #define kJXParamProgressColor                       (@"progressColor")
 #define kJXParamCanCache                            (@"canCache")
 #define kJXParamUseUIWebView                        (@"useUIWebView")
+#define kJXParamWebNativeHandlers                   (@"nativeHandlers")
+#define kJXParamWebJSHandlers                       (@"jsHandlers")
 
 #pragma mark - 通知标识
 #define kJXUserWillLoginNotification               (@"kJXUserWillLoginNotification")

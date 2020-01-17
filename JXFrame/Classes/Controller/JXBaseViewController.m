@@ -24,6 +24,7 @@
 #pragma mark - Init
 - (instancetype)initWithViewModel:(JXBaseViewModel *)viewModel {
     if (self = [super init]) {
+        self.hidesBottomBarWhenPushed = YES;
         viewModel.viewController = self;
         viewModel.delegate = self;
         self.viewModel = viewModel;
@@ -54,11 +55,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     if (self.navigationController.viewControllers.count > 1) {
-        UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(32, 32) tintColor:UIColor.redColor];
+        UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(10, 18) lineWidth:1.5 tintColor:JXColorKey(BAR)];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(backBarItemPressed:)];
     } else {
         if (self.presentingViewController) {
-            UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(32, 32) tintColor:UIColor.greenColor];
+            UIImage *image = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) lineWidth:1.5 tintColor:JXColorKey(BAR)];
             self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(backBarItemPressed:)];
         } else {
             self.navigationItem.leftBarButtonItem = nil;

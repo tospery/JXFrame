@@ -26,5 +26,21 @@
     return result;
 }
 
+- (NSArray *)jx_removeEquals {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
+    for (id obj1 in self) {
+        BOOL isEqual = NO;
+        for (id obj2 in arr) {
+            if ([obj1 isEqual:obj2]) {
+                isEqual = YES;
+                break;
+            }
+        }
+        if (!isEqual) {
+            [arr addObject:obj1];
+        }
+    }
+    return arr;
+}
 
 @end

@@ -12,5 +12,7 @@
 - (id)jx_objectAtIndex:(NSInteger)index;
 - (BOOL)jx_containsObject:(id)object;
 
+- (NSArray *)jx_removeEquals;
+
 @end
 

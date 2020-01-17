@@ -26,6 +26,7 @@
 #import "JXPageFactory.h"
 #import "JXPageMenuIndicatorModel.h"
 #import "JXPageMenuAnimator.h"
+#import "JXBaseCommand.h"
 
 #pragma mark - ViewModel
 #import "JXBaseViewModel.h"
@@ -116,6 +117,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <TYAlertController/TYAlertController.h>
 #import <DKNightVersion/DKNightVersion.h>
+#import <WebViewJavascriptBridge/WebViewJavascriptBridge.h>
 
 @interface JXFrame : NSObject
 

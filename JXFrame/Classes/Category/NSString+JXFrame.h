@@ -8,6 +8,12 @@
 #import <UIKit/UIKit.h>
 
 @interface NSString (JXFrame)
+@property (nonatomic, assign, readonly) BOOL jx_isPureInt;
+@property (nonatomic, copy, readonly) NSString *jx_underlineFromCamel;
+@property (nonatomic, copy, readonly) NSString *jx_camelFromUnderline;
+@property (nonatomic, copy, readonly) NSString *jx_firstCharLower;
+@property (nonatomic, copy, readonly) NSString *jx_firstCharUpper;
+@property (nonatomic, strong, readonly) NSURL *jx_url;
 
 - (NSString *)jx_urlEncoded;
 - (NSString *)jx_urlDecoded;
