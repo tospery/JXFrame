@@ -26,5 +26,10 @@
  */
 - (NSString *)jx_JSONString;
 
+/**
+ *  转换为JSON 字符串
+ */
+- (NSString *)jx_JSONStringPrettyPrinted;
+
 @end
 

@@ -53,7 +53,7 @@
             NSString *method = JXStrWithFmt(@"%@:callback:", handler.jx_camelFromUnderline);
             SEL selector = NSSelectorFromString(method);
             if ([self.viewModel respondsToSelector:selector]) {
-                ((void (*)(id, SEL, id, WVJBResponseCallback))[self.viewModel methodForSelector:selector])(self.viewModel, selector, data, responseCallback);
+                ((id(*)(id, SEL, id, WVJBResponseCallback))[self.viewModel methodForSelector:selector])(self.viewModel, selector, data, responseCallback);
             }else {
                 JXLogWarn(kJXFrameName, @"%@找不到！！！", method);
             }
