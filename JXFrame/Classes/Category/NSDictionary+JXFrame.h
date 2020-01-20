@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NSDictionary (JXFrame)
+@property (nonatomic, strong, readonly) NSDictionary *jx_underlineFromCamel;
 
 - (NSString *)jx_stringForKey:(NSString *)key;
 - (NSString *)jx_stringForKey:(NSString *)key withDefault:(NSString *)dft;

@@ -6,8 +6,24 @@
 //
 
 #import "NSDictionary+JXFrame.h"
+#import "NSString+JXFrame.h"
 
 @implementation NSDictionary (JXFrame)
+
+- (NSDictionary *)jx_underlineFromCamel {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:self.count];
+    for (NSString *key in self.allKeys) {
+        NSString *value = [self objectForKey:key];
+        if (![value isKindOfClass:NSString.class]) {
+            [dict setObject:value forKey:key];
+            continue;
+        }
+        value = value.jx_underlineFromCamel;
+        [dict setObject:value forKey:key];
+    }
+    return dict;
+}
+
 - (NSString *)jx_stringForKey:(NSString *)key {
     return [self jx_stringForKey:key withDefault:nil];
 }
