@@ -6,22 +6,23 @@
 //
 
 #import "NSDictionary+JXFrame.h"
+#import "NSObject+JXFrame.h"
 #import "NSString+JXFrame.h"
 
 @implementation NSDictionary (JXFrame)
 
-- (NSDictionary *)jx_underlineFromCamel {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:self.count];
+- (NSDictionary *)jx_dictionaryByUnderlineValuesFromCamel {
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:self.count];
     for (NSString *key in self.allKeys) {
         NSString *value = [self objectForKey:key];
         if (![value isKindOfClass:NSString.class]) {
-            [dict setObject:value forKey:key];
+            [result setObject:value forKey:key];
             continue;
         }
         value = value.jx_underlineFromCamel;
-        [dict setObject:value forKey:key];
+        [result setObject:value forKey:key];
     }
-    return dict;
+    return result;
 }
 
 - (NSString *)jx_stringForKey:(NSString *)key {
@@ -127,6 +128,15 @@
     }
     
     return object;
+}
+
++ (NSDictionary *)jx_dictionaryFromID:(id)data {
+    if (!data || ![data isKindOfClass:NSObject.class]) {
+        return nil;
+    }
+    
+    NSObject *obj = (NSObject *)data;
+    return [obj jx_JSONObject];
 }
 
 @end

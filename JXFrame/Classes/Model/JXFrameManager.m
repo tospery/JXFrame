@@ -17,12 +17,16 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.fontScale = IS_320WIDTH_SCREEN ? -2 : 0;
-        self.pageStart = 0;
-        self.pageSize = 20;
-        self.pageStyle = JXPageStyleGroup;
         //self.primaryColor = UIColorYellow;
     }
     return self;
+}
+
+- (JXPage *)page {
+    if (!_page) {
+        _page = [[JXPage alloc] init];
+    }
+    return _page;
 }
 
 - (UIImage *)loadingImage {

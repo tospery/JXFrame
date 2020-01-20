@@ -8,6 +8,7 @@
 
 #import "JXBaseViewModel.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+#import "JXPage.h"
 
 @class JXScrollViewModel;
 
@@ -25,9 +26,7 @@
 @property (nonatomic, assign) BOOL shouldPullToRefresh;
 @property (nonatomic, assign) BOOL shouldScrollToMore;
 @property (nonatomic, assign) BOOL hasMoreData;
-@property (nonatomic, assign) NSInteger pageStart;
-@property (nonatomic, assign) NSInteger pageIndex;
-@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, strong) JXPage *page;
 @property (nonatomic, strong) NSMutableArray *preloadPages;
 @property (nonatomic, strong) RACCommand *didSelectCommand;
 @property (nonatomic, weak) id<JXScrollViewModelDelegate> delegate;

@@ -8,7 +8,8 @@
 #import <UIKit/UIKit.h>
 
 @interface NSDictionary (JXFrame)
-@property (nonatomic, strong, readonly) NSDictionary *jx_underlineFromCamel;
+
+- (NSDictionary *)jx_dictionaryByUnderlineValuesFromCamel;
 
 - (NSString *)jx_stringForKey:(NSString *)key;
 - (NSString *)jx_stringForKey:(NSString *)key withDefault:(NSString *)dft;
@@ -25,5 +26,7 @@
 - (id)jx_objectForKey:(NSString *)key;
 - (id)jx_objectForKey:(NSString *)key withDefault:(id)dft;
 - (id)jx_objectForKey:(NSString *)key withDefault:(id)dft baseClass:(Class)cls;
+
++ (NSDictionary *)jx_dictionaryFromID:(id)data;
 
 @end

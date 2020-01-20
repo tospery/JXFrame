@@ -43,6 +43,7 @@
 #import "JXPageMenuItem.h"
 #import "JXPageMenuIndicatorItem.h"
 #import "JXPageMenuTitleItem.h"
+#import "JXPage.h"
 
 #pragma mark - Controller
 #import "JXBaseViewController.h"
@@ -83,6 +84,7 @@
 #import "NSAttributedString+JXFrame.h"
 #import "NSError+JXFrame.h"
 #import "NSBundle+JXFrame.h"
+#import "NSValueTransformer+JXFrame.h"
 #import "UIImage+JXFrame.h"
 #import "UIView+JXFrame.h"
 #import "UIScrollView+JXFrame.h"
@@ -91,6 +93,7 @@
 #import "UIColor+JXFrame.h"
 #import "UIDevice+JXFrame.h"
 #import "UIViewController+JXFrame.h"
+#import "MTLJSONAdapter+JXFrame.h"
 
 #pragma mark - Protocol
 #import "JXIdentifiable.h"

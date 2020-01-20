@@ -86,9 +86,9 @@
 - (void)triggerLoad {
     [self beginLoad];
     @weakify(self)
-    [[self.viewModel.requestRemoteDataCommand execute:@(self.viewModel.pageStart)].deliverOnMainThread subscribeNext:^(id data) {
+    [[self.viewModel.requestRemoteDataCommand execute:@(self.viewModel.page.start)].deliverOnMainThread subscribeNext:^(id data) {
         @strongify(self)
-        self.viewModel.pageIndex = self.viewModel.pageStart;
+        self.viewModel.page.index = self.viewModel.page.start;
     } completed:^{
         @strongify(self)
         [self endLoad];

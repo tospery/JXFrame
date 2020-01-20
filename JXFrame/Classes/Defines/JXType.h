@@ -43,11 +43,6 @@ typedef NS_ENUM(NSInteger, JXPageKey){
     JXPageKeyLogin                      // 登录页
 };
 
-typedef NS_ENUM(NSInteger, JXPageStyle){
-    JXPageStyleGroup,
-    JXPageStyleOffset
-};
-
 typedef NS_ENUM(NSInteger, JXRequestMode) {
     JXRequestModeNone,
     JXRequestModeLoad,

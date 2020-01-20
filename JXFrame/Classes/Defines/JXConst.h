@@ -15,7 +15,7 @@
 #define kJXParamHideNavBottomLine                   (@"hideNavBottomLine")
 #define kJXParamTitle                               (@"title")
 #define kJXParamModel                               (@"model")
-#define kJXParamPageStart                           (@"pageStart")
+#define kJXParamPage                                (@"page")
 #define kJXParamPageSize                            (@"pageSize")
 #define kJXParamPullRefresh                         (@"pullRefresh")
 #define kJXParamScrollMore                          (@"scrollMore")

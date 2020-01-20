@@ -25,10 +25,11 @@
 #pragma mark - Init
 - (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
     if (self = [super initWithRouteParameters:parameters]) {
-        self.pageStart = [self.parameters jx_numberForKey:kJXParamPageStart withDefault:@(JXFrameManager.share.pageStart)].integerValue;
-        self.pageSize = [self.parameters jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.pageSize)].integerValue;
         self.shouldPullToRefresh = [self.parameters jx_numberForKey:kJXParamPullRefresh].boolValue;
         self.shouldScrollToMore = [self.parameters jx_numberForKey:kJXParamScrollMore].boolValue;
+        self.page = [[JXPage alloc] init];
+        self.page.start = [self.parameters jx_numberForKey:kJXParamPage withDefault:@(JXFrameManager.share.page.start)].integerValue;
+        self.page.size = [self.parameters jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.page.size)].integerValue;
     }
     return self;
 }
@@ -48,11 +49,11 @@
 
 #pragma mark - Public
 - (NSUInteger)offsetForPage:(NSUInteger)page {
-    return (page - 1) * self.pageSize;
+    return (page - 1) * self.page.size;
 }
 
 - (NSInteger)nextPageIndex {
-    return self.pageIndex + 1;
+    return self.page.start + 1;
 }
 
 #pragma mark - Delegate

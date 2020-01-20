@@ -9,6 +9,8 @@
 
 @interface NSURL (JXFrame)
 
+- (NSURL *)jx_addQueries:(NSDictionary *)queries;
+
 + (NSURL *)jx_urlWithString:(NSString *)urlString;
 
 @end
