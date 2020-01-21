@@ -9,6 +9,7 @@
 #import <JLRoutes/JLRoutes.h>
 #import "JXConst.h"
 #import "JXFunction.h"
+#import "JXParam.h"
 #import "NSDictionary+JXFrame.h"
 
 @interface JXWebViewModel ()
@@ -22,13 +23,9 @@
     if (self = [super initWithRouteParameters:parameters]) {
         self.shouldFetchLocalData = NO;
         self.shouldRequestRemoteData = YES;
-        self.nativeHandlers = [self.parameters jx_arrayForKey:kJXParamWebNativeHandlers];
-        self.jsHandlers = [self.parameters jx_arrayForKey:kJXParamWebJSHandlers];
-        NSURL *url = [self.parameters jx_objectForKey:JLRouteURLKey withDefault:nil baseClass:NSURL.class];
-        if (!url) {
-            url = JXURLWithStr([self.parameters jx_stringForKey:kJXParamURLString]);
-        }
-        self.url = url;
+        self.nativeHandlers = JXArrMember(parameters, JXParam.nativeHandlers, nil);
+        self.jsHandlers = JXArrMember(parameters, JXParam.jsHandlers, nil);
+        self.url = JXObjWithDft(JXURLMember(parameters, JLRouteURLKey, nil), JXURLMember(parameters, JXParam.url, nil));
         self.progressColor = JXColorKey(TINT);
     }
     return self;

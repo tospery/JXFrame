@@ -31,42 +31,42 @@
 
 - (UIImage *)loadingImage {
     if (!_loadingImage) {
-        _loadingImage = JXImageInBundle(@"jx_loading");
+        _loadingImage = JXImageBundle(@"jx_loading");
     }
     return _loadingImage;
 }
 
 - (UIImage *)waitingImage {
     if (!_waitingImage) {
-        _waitingImage = JXImageInBundle(@"jx_waiting");
+        _waitingImage = JXImageBundle(@"jx_waiting");
     }
     return _waitingImage;
 }
 
 - (UIImage *)emptyImage {
     if (!_emptyImage) {
-        _emptyImage = JXImageInBundle(@"jx_error_empty");
+        _emptyImage = JXImageBundle(@"jx_error_empty");
     }
     return _emptyImage;
 }
 
 - (UIImage *)networkImage {
     if (!_networkImage) {
-        _networkImage = JXImageInBundle(@"jx_error_network");
+        _networkImage = JXImageBundle(@"jx_error_network");
     }
     return _networkImage;
 }
 
 - (UIImage *)serverImage {
     if (!_serverImage) {
-        _serverImage = JXImageInBundle(@"jx_error_server");
+        _serverImage = JXImageBundle(@"jx_error_server");
     }
     return _serverImage;
 }
 
 - (UIImage *)expireImage {
     if (!_expireImage) {
-        _expireImage = JXImageInBundle(@"jx_error_expired");
+        _expireImage = JXImageBundle(@"jx_error_expired");
     }
     return _expireImage;
 }

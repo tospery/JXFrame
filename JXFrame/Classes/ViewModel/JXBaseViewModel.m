@@ -10,6 +10,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "JXConst.h"
 #import "JXFunction.h"
+#import "JXParam.h"
 #import "NSObject+JXFrame.h"
 #import "NSDictionary+JXFrame.h"
 #import "JXBaseViewController.h"
@@ -32,13 +33,13 @@
 #pragma mark - Init
 - (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
     if (self = [super init]) {
-        self.parameters = [JXObjWithDft(parameters, @{}) copy];
-        self.shouldFetchLocalData = [self.parameters jx_numberForKey:kJXParamFetchLocal withDefault:@(YES)].boolValue;
-        self.shouldRequestRemoteData = [self.parameters jx_numberForKey:kJXParamRequestRemote].boolValue;
-        self.hidesNavigationBar = [self.parameters jx_numberForKey:kJXParamHideNavBar].boolValue;
-        self.hidesNavBottomLine = [self.parameters jx_numberForKey:kJXParamHideNavBottomLine].boolValue;
-        self.title = [self.parameters jx_stringForKey:kJXParamTitle];
-        id modelObject = [self.parameters jx_stringForKey:kJXParamModel].jx_JSONObject;
+        self.parameters = parameters;
+        self.shouldFetchLocalData = JXBoolMember(parameters, JXParam.fetchLocal, YES);
+        self.shouldRequestRemoteData = JXBoolMember(parameters, JXParam.requestRemote, NO);
+        self.hidesNavigationBar = JXBoolMember(parameters, JXParam.hideNavBar, NO);
+        self.hidesNavBottomLine = JXBoolMember(parameters, JXParam.hideNavBottomLine, NO);
+        self.title = JXStrMember(parameters, JXParam.title, nil);
+        id modelObject = JXStrMember(parameters, JXParam.model, nil).jx_JSONObject;
         if (modelObject && [modelObject isKindOfClass:NSDictionary.class]) {
             Class modelClass = NSClassFromString([NSStringFromClass(self.class) stringByReplacingOccurrencesOfString:kJXVMSuffix withString:@""]);
             if (modelClass) {

@@ -10,6 +10,7 @@
 #import "JXConst.h"
 #import "JXFunction.h"
 #import "JXString.h"
+#import "JXParam.h"
 #import "JXFrameManager.h"
 #import "NSAttributedString+JXFrame.h"
 #import "NSError+JXFrame.h"
@@ -25,11 +26,11 @@
 #pragma mark - Init
 - (instancetype)initWithRouteParameters:(NSDictionary<NSString *,id> *)parameters {
     if (self = [super initWithRouteParameters:parameters]) {
-        self.shouldPullToRefresh = [self.parameters jx_numberForKey:kJXParamPullRefresh].boolValue;
-        self.shouldScrollToMore = [self.parameters jx_numberForKey:kJXParamScrollMore].boolValue;
+        self.shouldPullToRefresh = JXBoolMember(parameters, JXParam.pullRefresh, NO);
+        self.shouldScrollToMore = JXBoolMember(parameters, JXParam.scrollMore, NO);
         self.page = [[JXPage alloc] init];
-        self.page.start = [self.parameters jx_numberForKey:kJXParamPage withDefault:@(JXFrameManager.share.page.start)].integerValue;
-        self.page.size = [self.parameters jx_numberForKey:kJXParamPageSize withDefault:@(JXFrameManager.share.page.size)].integerValue;
+        self.page.start = JXIntMember(parameters, JXParam.page, JXFrameManager.share.page.start);
+        self.page.size = JXIntMember(parameters, JXParam.pageSize, JXFrameManager.share.page.size);
     }
     return self;
 }

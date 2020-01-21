@@ -16,7 +16,6 @@ NSString * const JXColorValueTransformerName = @"JXColorValueTransformerName";
     @autoreleasepool {
         MTLValueTransformer *colorValueTransformer = [MTLValueTransformer transformerUsingForwardBlock:^id(NSString *str, BOOL *success, NSError *__autoreleasing *error) {
             if (str == nil) return nil;
-
             if (![str isKindOfClass:NSString.class]) {
                 if (error != NULL) {
                     NSDictionary *userInfo = @{
@@ -30,28 +29,9 @@ NSString * const JXColorValueTransformerName = @"JXColorValueTransformerName";
                 *success = NO;
                 return nil;
             }
-            
-            UIColor *result = JXColorStr(str);
-
-            if (result == nil) {
-                if (error != NULL) {
-                    NSDictionary *userInfo = @{
-                        NSLocalizedDescriptionKey: NSLocalizedString(@"Could not convert string to color", @""),
-                        NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Input color string %@ was hex format", @""), str],
-                        MTLTransformerErrorHandlingInputValueErrorKey : str
-                    };
-
-                    *error = [NSError errorWithDomain:MTLTransformerErrorHandlingErrorDomain code:MTLTransformerErrorHandlingErrorInvalidInput userInfo:userInfo];
-                }
-                *success = NO;
-                return nil;
-            }
-
-            return result;
-            
+            return JXColorStr(str);
         } reverseBlock:^id(UIColor *color, BOOL *success, NSError *__autoreleasing *error) {
             if (color == nil) return nil;
-
             if (![color isKindOfClass:UIColor.class]) {
                 if (error != NULL) {
                     NSDictionary *userInfo = @{

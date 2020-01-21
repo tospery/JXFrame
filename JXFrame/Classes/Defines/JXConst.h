@@ -8,24 +8,8 @@
 #ifndef JXConst_h
 #define JXConst_h
 
+// YJX_TODO 分在不同文件
 #pragma mark - 初始参数
-#define kJXParamFetchLocal                          (@"fetchLocal")
-#define kJXParamRequestRemote                       (@"requestRemote")
-#define kJXParamHideNavBar                          (@"hideNavBar")
-#define kJXParamHideNavBottomLine                   (@"hideNavBottomLine")
-#define kJXParamTitle                               (@"title")
-#define kJXParamModel                               (@"model")
-#define kJXParamPage                                (@"page")
-#define kJXParamPageSize                            (@"pageSize")
-#define kJXParamPullRefresh                         (@"pullRefresh")
-#define kJXParamScrollMore                          (@"scrollMore")
-#define kJXParamURLString                           (@"urlString")
-#define kJXParamBackgroundColor                     (@"backgroundColor")
-#define kJXParamProgressColor                       (@"progressColor")
-#define kJXParamCanCache                            (@"canCache")
-#define kJXParamUseUIWebView                        (@"useUIWebView")
-#define kJXParamWebNativeHandlers                   (@"nativeHandlers")
-#define kJXParamWebJSHandlers                       (@"jsHandlers")
 
 #pragma mark - 通知标识
 #define kJXUserWillLoginNotification               (@"kJXUserWillLoginNotification")

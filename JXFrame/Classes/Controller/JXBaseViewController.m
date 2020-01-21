@@ -101,8 +101,8 @@
 
 - (CGFloat)contentBottom {
     CGFloat value = JXSafeBottom;
-    UITabBar *tabBar = self.tabBarController.tabBar;
-    if (tabBar != nil && tabBar.isHidden != YES) {
+    UITabBar *tabBar = self.tabBarController.tabBar; // self.jx_tabBarViewController.innerTabBarController.tabBar;
+    if (!self.hidesBottomBarWhenPushed && tabBar != nil && tabBar.isHidden != YES) {
         value += tabBar.qmui_height;
     }
     return value;

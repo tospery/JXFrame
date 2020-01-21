@@ -14,6 +14,7 @@
 #import "UIColor+JXFrame.h"
 #import "UIFont+JXFrame.h"
 #import "UIImage+JXFrame.h"
+#import "NSDictionary+JXFrame.h"
 
 #pragma mark - 标准尺寸
 #define JXScreenWidth                       ScreenBoundsSize.width
@@ -58,7 +59,8 @@
 #define JXStrWithFlt(x)                     ([NSString stringWithFormat:@"%.2f", (x)])
 #define JXStrWithFmt(fmt, ...)              ([NSString stringWithFormat:(fmt), ##__VA_ARGS__])
 #define JXURLWithStr(x)                     ([NSURL jx_urlWithString:(x)])
-#define JXImageInBundle(x)                  ([UIImage jx_imageInBundle:JXStrWithFmt(@"JXFrame/%@", (x))])
+#define JXImageColor(x)                     ([UIImage qmui_imageWithColor:(x)])
+#define JXImageBundle(x)                    ([UIImage jx_imageInBundle:JXStrWithFmt(@"JXFrame/%@", (x))])
 #define JXRandomNumber(x, y)                ((NSInteger)((x) + (arc4random() % ((y) - (x) + 1))))
 
 #pragma mark - 便捷属性
@@ -161,6 +163,83 @@ JXArrWithDft(NSArray *value, NSArray *dft) {
     }
     
     return value;
+}
+
+#pragma mark - 成员
+CG_INLINE BOOL
+JXBoolMember(NSDictionary *dict, NSString *key, BOOL dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_numberForKey:key withDefault:@(dft)].boolValue;
+}
+
+CG_INLINE NSInteger
+JXIntMember(NSDictionary *dict, NSString *key, NSInteger dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_numberForKey:key withDefault:@(dft)].integerValue;
+}
+
+CG_INLINE NSString *
+JXStrMember(NSDictionary *dict, NSString *key, NSString *dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_stringForKey:key withDefault:dft];
+}
+
+CG_INLINE NSArray *
+JXArrMember(NSDictionary *dict, NSString *key, NSArray *dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_arrayForKey:key withDefault:dft];
+}
+
+CG_INLINE NSDictionary *
+JXDictMember(NSDictionary *dict, NSString *key, NSDictionary *dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_dictionaryForKey:key withDefault:dft];
+}
+
+CG_INLINE id
+JXObjMember(NSDictionary *dict, NSString *key, id dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    return [dict jx_objectForKey:key withDefault:dft];
+}
+
+CG_INLINE UIColor *
+JXColorMember(NSDictionary *dict, NSString *key, UIColor *dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    id value = JXObjMember(dict, key, dft);
+    if ([value isKindOfClass:UIColor.class]) {
+        return value;
+    }else if ([value isKindOfClass:NSString.class]) {
+        return JXObjWithDft(JXColorStr(value), dft);
+    }
+    return dft;
+}
+
+CG_INLINE NSURL *
+JXURLMember(NSDictionary *dict, NSString *key, NSURL *dft) {
+    if (!dict || ![dict isKindOfClass:NSDictionary.class] || !dict.count) {
+        return dft;
+    }
+    id value = JXObjMember(dict, key, dft);
+    if ([value isKindOfClass:NSURL.class]) {
+        return value;
+    }else if ([value isKindOfClass:NSString.class]) {
+        return JXObjWithDft(JXURLWithStr(value), dft);
+    }
+    return dft;
 }
 
 #pragma mark - 其他
