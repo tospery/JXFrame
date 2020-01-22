@@ -80,6 +80,7 @@
 - (void)beginLoad {
     [super beginLoad];
     [self setupRefresh:NO];
+    [self setupMore:NO];
 }
 
 - (void)triggerLoad {
@@ -99,26 +100,27 @@
     if (self.viewModel.shouldPullToRefresh) {
         [self setupRefresh:YES];
     }
-    if (self.viewModel.shouldScrollToMore && !self.viewModel.hasMoreData) {
-        [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+    if (self.viewModel.shouldScrollToMore) {
+        [self setupMore:YES];
+        if (!self.viewModel.hasMoreData) {
+            [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+        }
     }
 }
 
 - (void)bindViewModel {
     [super bindViewModel];
     
-    // RAC(self.scrollView, backgroundColor) = RACObserve(self.viewModel, backgroundColor);
-    
     @weakify(self)
     [[[RACObserve(self.viewModel, shouldPullToRefresh) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
         @strongify(self)
         [self setupRefresh:should.boolValue];
     }];
-//
-//    [[[RACObserve(self.viewModel, shouldScrollToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
-//        @strongify(self)
-//        [self setupMore:should.boolValue];
-//    }];
+
+    [[[RACObserve(self.viewModel, shouldScrollToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
+        @strongify(self)
+        [self setupMore:should.boolValue];
+    }];
 }
 
 #pragma mark public
@@ -132,12 +134,12 @@
 }
 
 - (void)setupMore:(BOOL)enable {
-//    if (enable) {
-//        self.scrollView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(triggerMore)];
-//    }else {
-//        [self.scrollView.mj_footer removeFromSuperview];
-//        self.scrollView.mj_footer = nil;
-//    }
+    if (enable) {
+        self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(triggerMore)];
+    }else {
+        [self.scrollView.mj_footer removeFromSuperview];
+        self.scrollView.mj_footer = nil;
+    }
 }
 
 - (void)beginRefresh {
@@ -168,33 +170,29 @@
 }
 
 - (void)beginMore {
-    
+    self.viewModel.requestMode = JXRequestModeMore;
 }
 
 - (void)triggerMore {
-    //    [self beginMore];
-    //
-    //    self.viewModel.requestMode = TBRequestModeMore;
-    //    NSInteger pageIndex = [self.viewModel nextPageIndex];
-    //
-    //    @weakify(self)
-    //    [[[self.viewModel.requestRemoteDataCommand execute:@(pageIndex)] deliverOnMainThread] subscribeNext:^(id x) {
-    //        @strongify(self)
-    //        self.viewModel.pageIndex = pageIndex;
-    //    } completed:^{
-    //        @strongify(self)
-    //        self.viewModel.requestMode = TBRequestModeNone;
-    //        if (self.viewModel.hasMoreData) {
-    //            [self.scrollView.mj_footer endRefreshing];
-    //        }else {
-    //            [self.scrollView.mj_footer endRefreshingWithNoMoreData];
-    //        }
-    //        [self endMore];
-    //    }];
+    [self beginMore];
+    @weakify(self)
+    NSInteger pageIndex = [self.viewModel nextPageIndex];
+    [[self.viewModel.requestRemoteDataCommand execute:@(pageIndex)].deliverOnMainThread subscribeNext:^(id data) {
+        @strongify(self)
+        self.viewModel.page.index = pageIndex;
+    } completed:^{
+        @strongify(self)
+        [self endMore];
+    }];
 }
 
 - (void)endMore {
-    
+    self.viewModel.requestMode = JXRequestModeNone;
+    if (self.viewModel.hasMoreData) {
+        [self.scrollView.mj_footer endRefreshing];
+    }else {
+        [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
 }
 
 #pragma mark private

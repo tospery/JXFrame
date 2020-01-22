@@ -14,5 +14,7 @@
 
 - (NSArray *)jx_removeEquals;
 
+- (NSArray *)jx_addObjects:(NSArray *)objects;
+
 @end
 

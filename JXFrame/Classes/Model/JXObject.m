@@ -20,6 +20,17 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object {
+    if (!object || ![object isKindOfClass:JXObject.class]) {
+        return NO;
+    }
+    if (self == object) {
+        return YES;
+    }
+    JXObject *obj = (JXObject *)object;
+    return [self.mid isEqualToString:obj.mid];
+}
+
 - (void)updateMid:(NSString *)mid {
     self.mid = mid;
 }

@@ -54,7 +54,7 @@
 }
 
 - (NSInteger)nextPageIndex {
-    return self.page.start + 1;
+    return self.page.index + 1;
 }
 
 #pragma mark - Delegate

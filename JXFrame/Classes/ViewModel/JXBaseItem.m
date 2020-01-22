@@ -25,17 +25,6 @@
     
 }
 
-- (BOOL)isEqual:(id)object {
-    if (!object || ![object isKindOfClass:JXBaseItem.class]) {
-        return NO;
-    }
-    if (self == object) {
-        return NO;
-    }
-    JXBaseItem *item = (JXBaseItem *)object;
-    return [self.model isEqual:item.model];
-}
-
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     JXBaseItem *item = [super allocWithZone:zone];
     @weakify(item)

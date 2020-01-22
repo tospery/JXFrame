@@ -43,4 +43,21 @@
     return arr;
 }
 
+- (NSArray *)jx_addObjects:(NSArray *)objects {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    for (id obj1 in objects) {
+        BOOL isUnique = YES;
+        for (id obj2 in array) {
+            if ([obj1 isEqual:obj2]) {
+                isUnique = NO;
+                break;
+            }
+        }
+        if (isUnique) {
+            [array addObject:obj1];
+        }
+    }
+    return array;
+}
+
 @end
