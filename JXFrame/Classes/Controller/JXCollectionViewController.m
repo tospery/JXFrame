@@ -126,6 +126,12 @@
     }
 }
 
+#pragma mark - Property
+- (void)setCollectionView:(UICollectionView *)collectionView {
+    _collectionView = collectionView;
+    self.scrollView = collectionView;
+}
+
 #pragma mark - Method
 - (UICollectionViewLayout *)collectionViewLayout {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -138,7 +144,7 @@
 #pragma mark - Delegate
 #pragma mark JXCollectionViewModelDelegate
 - (void)reloadData {
-    [super reloadData];
+    // [super reloadData];
     [self.collectionView reloadData];
 }
 

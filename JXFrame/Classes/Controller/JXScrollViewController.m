@@ -17,7 +17,6 @@
 
 @interface JXScrollViewController ()
 @property (nonatomic, strong, readwrite) JXScrollViewModel *viewModel;
-@property (nonatomic, strong, readwrite) UIScrollView *scrollView;
 
 @end
 
@@ -110,11 +109,11 @@
     
     // RAC(self.scrollView, backgroundColor) = RACObserve(self.viewModel, backgroundColor);
     
-//    @weakify(self)
-//    [[[RACObserve(self.viewModel, shouldPullToRefresh) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
-//        @strongify(self)
-//        [self setupRefresh:should.boolValue];
-//    }];
+    @weakify(self)
+    [[[RACObserve(self.viewModel, shouldPullToRefresh) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
+        @strongify(self)
+        [self setupRefresh:should.boolValue];
+    }];
 //
 //    [[[RACObserve(self.viewModel, shouldScrollToMore) distinctUntilChanged] deliverOnMainThread] subscribeNext:^(NSNumber *should) {
 //        @strongify(self)
@@ -124,12 +123,12 @@
 
 #pragma mark public
 - (void)setupRefresh:(BOOL)enable {
-//    if (enable) {
-//        self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(triggerRefresh)];
-//    }else {
-//        [self.scrollView.mj_header removeFromSuperview];
-//        self.scrollView.mj_header = nil;
-//    }
+    if (enable) {
+        self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(triggerRefresh)];
+    }else {
+        [self.scrollView.mj_header removeFromSuperview];
+        self.scrollView.mj_header = nil;
+    }
 }
 
 - (void)setupMore:(BOOL)enable {
@@ -142,36 +141,30 @@
 }
 
 - (void)beginRefresh {
-    
+    self.viewModel.requestMode = JXRequestModeRefresh;
+    if (self.viewModel.error) {
+        self.viewModel.error = nil;
+    }
 }
 
 - (void)triggerRefresh {
-    //    [self beginRefresh];
-    //
-    //    self.viewModel.requestMode = TBRequestModeRefresh;
-    //    if (self.viewModel.error) {
-    //        self.viewModel.error = nil;
-    //    }
-    //
-    //    NSInteger pageIndex = self.viewModel.pageStart;
-    //
-    //    @weakify(self)
-    //    [[[self.viewModel.requestRemoteDataCommand execute:@(pageIndex)] deliverOnMainThread] subscribeNext:^(id x) {
-    //        @strongify(self)
-    //        self.viewModel.pageIndex = pageIndex;
-    //    } completed:^{
-    //        @strongify(self)
-    //        self.viewModel.requestMode = TBRequestModeNone;
-    //        [self.scrollView.mj_header endRefreshing];
-    //        if (self.viewModel.shouldScrollToMore && !self.viewModel.hasMoreData) {
-    //            [self.scrollView.mj_footer endRefreshingWithNoMoreData];
-    //        }
-    //        [self endRefresh];
-    //    }];
+    [self beginRefresh];
+    @weakify(self)
+    [[self.viewModel.requestRemoteDataCommand execute:@(self.viewModel.page.start)].deliverOnMainThread subscribeNext:^(id data) {
+        @strongify(self)
+        self.viewModel.page.index = self.viewModel.page.start;
+    } completed:^{
+        @strongify(self)
+        [self endRefresh];
+    }];
 }
 
 - (void)endRefresh {
-    
+    self.viewModel.requestMode = JXRequestModeNone;
+    [self.scrollView.mj_header endRefreshing];
+    if (self.viewModel.shouldScrollToMore && !self.viewModel.hasMoreData) {
+        [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
 }
 
 - (void)beginMore {
@@ -240,7 +233,7 @@
 
 #pragma mark JXScrollViewModelDelegate
 - (void)reloadData {
-    [super reloadData];
+    // [super reloadData];
     [self.scrollView reloadEmptyDataSet];
 }
 

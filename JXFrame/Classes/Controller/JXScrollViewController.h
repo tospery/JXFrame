@@ -9,7 +9,7 @@
 #import "JXScrollViewModel.h"
 
 @interface JXScrollViewController : JXBaseViewController <JXScrollViewModelDelegate, DZNEmptyDataSetDelegate, UIScrollViewDelegate>
-@property (nonatomic, strong, readonly) UIScrollView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 - (void)setupRefresh:(BOOL)enable;
 - (void)setupMore:(BOOL)enable;
