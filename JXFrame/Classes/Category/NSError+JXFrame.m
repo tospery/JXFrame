@@ -10,6 +10,7 @@
 #import "JXFunction.h"
 #import "JXString.h"
 #import "JXFrameManager.h"
+#import "UIApplication+JXFrame.h"
 
 @implementation NSError (JXFrame)
 - (NSError *)jx_adaptError {
@@ -63,7 +64,7 @@
 
 + (NSError *)jx_errorWithCode:(NSInteger)code description:(NSString *)description {
     NSString *desc = JXStrWithDft(description, kStringUnknownError);
-    return [NSError errorWithDomain:kJXFrameName code:code userInfo:@{NSLocalizedDescriptionKey: desc}];
+    return [NSError errorWithDomain:UIApplication.sharedApplication.jx_bundleID code:code userInfo:@{NSLocalizedDescriptionKey: desc}];
 }
 
 @end

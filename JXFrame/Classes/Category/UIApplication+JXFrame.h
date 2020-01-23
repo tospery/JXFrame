@@ -8,10 +8,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UIApplication (JXFrame)
-@property (nonatomic, copy, readonly) NSString *jx_version;
-@property (nonatomic, copy, readonly) NSString *jx_urlScheme;
-@property (nonatomic, copy, readonly) NSString *jx_displayName;
-@property (nonatomic, copy, readonly) NSString *jx_teamID;
+@property (nonatomic, strong, readonly) NSString *jx_version;
+@property (nonatomic, strong, readonly) NSString *jx_urlScheme;
+@property (nonatomic, strong, readonly) NSString *jx_displayName;
+@property (nonatomic, strong, readonly) NSString *jx_teamID;
+@property (nonatomic, strong, readonly) NSString *jx_bundleID;
 
 @end
 

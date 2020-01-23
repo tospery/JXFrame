@@ -55,4 +55,8 @@
     return bundleSeedID;
 }
 
+- (NSString *)jx_bundleID {
+    return [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
+}
+
 @end
