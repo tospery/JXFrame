@@ -144,7 +144,7 @@
 #pragma mark - Delegate
 #pragma mark JXCollectionViewModelDelegate
 - (void)reloadData {
-    // [super reloadData];
+    [super reloadData];
     [self.collectionView reloadData];
 }
 

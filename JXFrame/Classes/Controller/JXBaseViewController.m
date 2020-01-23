@@ -31,6 +31,7 @@
         @weakify(self)
         [[self rac_signalForSelector:@selector(bindViewModel)] subscribeNext:^(RACTuple *tuple) {
             @strongify(self)
+            [self reloadData];
             if (viewModel.shouldRequestRemoteData) {
                 if (!viewModel.dataSource) {
                     [self triggerLoad];

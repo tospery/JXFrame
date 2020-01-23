@@ -231,8 +231,10 @@
 
 #pragma mark JXScrollViewModelDelegate
 - (void)reloadData {
-    // [super reloadData];
-    [self.scrollView reloadEmptyDataSet];
+    [super reloadData];
+    if ([self.scrollView isMemberOfClass:UIScrollView.class]) {
+        [self.scrollView reloadEmptyDataSet];
+    }
 }
 
 - (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths {
