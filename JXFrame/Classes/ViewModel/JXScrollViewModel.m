@@ -57,26 +57,98 @@
     return self.page.index + 1;
 }
 
+- (BOOL)filterError:(NSError *)error {
+//
+//    switch (self.requestMode) {
+//        case JXRequestModeLoad:
+//        case JXRequestModeUpdate: {
+//            break;
+//        }
+//        case JXRequestModeRefresh: {
+//            [self.scrollView.mj_header endRefreshing];
+//            break;
+//        }
+//        case JXRequestModeMore: {
+//            if (JXErrorCodeEmpty == error.code) {
+//                nedUpdate = NO;
+//                [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+//            }else {
+//                [self.scrollView.mj_footer endRefreshing];
+//            }
+//            break;
+//        }
+//        case JXRequestModeHUD: {
+//            [JXDialog hideHUD];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//
+//    if (JXErrorCodeExpired == error.code) {
+//        notFilter = NO;
+//
+//        [gUser checkLoginWithFinish:^(BOOL isRelogin) {
+//            if (isRelogin) {
+//                [self triggerLoad];
+//            }
+//        } error:error];
+//    }else if (JXErrorCodeEmpty == error.code) {
+//        notFilter = NO;
+//    }
+//
+//    self.error = error;
+//    self.requestMode = JXRequestModeNone;
+//    if (nedUpdate) {
+//        self.dataSource = nil;
+//    }
+//
+//    return notFilter;
+    
+    BOOL canFilter = YES;
+    BOOL needUpdate = YES;
+
+    //    JXRequestModeNone,
+    //    JXRequestModeLoad,
+    //    JXRequestModeUpdate,
+    //    JXRequestModeRefresh,
+    //    JXRequestModeMore,
+    //    JXRequestModeToast
+    
+    switch (self.requestMode) {
+        case JXRequestModeLoad:
+        case JXRequestModeRefresh: {
+            canFilter = NO;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return canFilter;
+}
+
 #pragma mark - Delegate
 #pragma mark DZNEmptyDataSetSource
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    return nil;
+    if (!self.error) {
+        return nil;
+    }
+    return [NSAttributedString jx_attributedStringWithString:self.error.jx_displayTitle color:JXColorKey(TEXT) font:JXFont(16.0f)];
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
     if (!self.error) {
         return nil;
     }
-    NSString *title = JXStrWithDft(self.error.localizedDescription, kStringDataEmpty);
-    return [NSAttributedString jx_attributedStringWithString:title color:JXColorKey(TEXT) font:JXFont(14.0f)];
+    return [NSAttributedString jx_attributedStringWithString:self.error.jx_displayMessage color:JXColorKey(PLACEHOLDER) font:JXFont(14.0f)];
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
     if (!self.error) {
         return nil;
     }
-    NSString *title = JXStrWithDft([self.error jx_retryTitle], kStringReload);
-    return [NSAttributedString jx_attributedStringWithString:title color:(UIControlStateNormal == state ? JXColorWhite : [JXColorWhite colorWithAlphaComponent:0.8]) font:JXFont(15.0f)];
+    return [NSAttributedString jx_attributedStringWithString:self.error.jx_retryTitle color:(UIControlStateNormal == state ? JXColorWhite : [JXColorWhite colorWithAlphaComponent:0.8]) font:JXFont(15.0f)];
 }
 
 - (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
@@ -89,7 +161,7 @@
     if (!self.error) {
         return [JXFrameManager.share.loadingImage qmui_imageWithTintColor:JXColorKey(TINT)];
     }
-    return [self.error jx_reasonImage];
+    return self.error.jx_displayImage;
 }
 
 - (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView {

@@ -170,10 +170,28 @@
 }
 
 - (BOOL (^)(NSError *error))requestRemoteDataErrorsFilter {
+    @weakify(self)
     return ^(NSError *error) {
-        return YES;
+        @strongify(self)
+        self.error = error;
+        BOOL canFilter = [self filterError:error];
+        // self.error = canFilter ? nil : error;
+        if (!canFilter) {
+            [self.delegate handleError:error];
+            self.requestMode = JXRequestModeNone;
+            self.dataSource = nil;
+        }
+        return canFilter;
     };
 }
+
+- (BOOL)filterError:(NSError *)error {
+    return YES;
+}
+
+//- (void)handleError:(NSError *)error {
+//    
+//}
 
 #pragma mark - Class
 + (instancetype)allocWithZone:(struct _NSZone *)zone {

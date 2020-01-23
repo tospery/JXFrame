@@ -43,34 +43,6 @@
     return _waitingImage;
 }
 
-- (UIImage *)emptyImage {
-    if (!_emptyImage) {
-        _emptyImage = JXImageBundle(@"jx_error_empty");
-    }
-    return _emptyImage;
-}
-
-- (UIImage *)networkImage {
-    if (!_networkImage) {
-        _networkImage = JXImageBundle(@"jx_error_network");
-    }
-    return _networkImage;
-}
-
-- (UIImage *)serverImage {
-    if (!_serverImage) {
-        _serverImage = JXImageBundle(@"jx_error_server");
-    }
-    return _serverImage;
-}
-
-- (UIImage *)expireImage {
-    if (!_expireImage) {
-        _expireImage = JXImageBundle(@"jx_error_expired");
-    }
-    return _expireImage;
-}
-
 + (instancetype)share {
     static id instance;
     static dispatch_once_t onceToken;

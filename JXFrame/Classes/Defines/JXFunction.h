@@ -48,6 +48,10 @@
 #define JXFontBold(x)                       ([UIFont jx_bold:(x)])
 #define JXFontLight(x)                      ([UIFont jx_light:(x)])
 
+#pragma mark - 字体
+#define JXImageLoading          (JXFrameManager.share.loadingImage)
+#define JXImageWaiting          (JXFrameManager.share.waitingImage)
+
 #pragma mark - 日志
 #define JXLog(name, fmt, ...)               QMUILog((name), fmt, ##__VA_ARGS__)
 #define JXLogInfo(name, fmt, ...)           QMUILogInfo((name), fmt, ##__VA_ARGS__)

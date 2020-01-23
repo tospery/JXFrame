@@ -10,23 +10,16 @@
 
 @class JXFrameManager;
 
-#define JXImageLoading          (JXFrameManager.share.loadingImage)
-#define JXImageWaiting          (JXFrameManager.share.waitingImage)
-#define JXImageNetwork          (JXFrameManager.share.networkImage)
-#define JXImageServer           (JXFrameManager.share.serverImage)
-#define JXImageEmpty            (JXFrameManager.share.emptyImage)
-#define JXImageExpire           (JXFrameManager.share.expireImage)
-
 @interface JXFrameManager : NSObject
 @property (nonatomic, assign) CGFloat fontScale;
 @property (nonatomic, strong) JXPage *page;
 //@property (nonatomic, strong) UIColor *primaryColor;
-@property (nonatomic, strong) UIImage *loadingImage;
+@property (nonatomic, strong) UIImage *loadingImage; // YJX_TODO 换到UIImage分类中，通过运行时修改
 @property (nonatomic, strong) UIImage *waitingImage;
-@property (nonatomic, strong) UIImage *emptyImage;
-@property (nonatomic, strong) UIImage *networkImage;
-@property (nonatomic, strong) UIImage *serverImage;
-@property (nonatomic, strong) UIImage *expireImage;
+//@property (nonatomic, strong) UIImage *emptyImage;
+//@property (nonatomic, strong) UIImage *networkImage;
+//@property (nonatomic, strong) UIImage *serverImage;
+//@property (nonatomic, strong) UIImage *expireImage;
 
 + (instancetype)share;
 

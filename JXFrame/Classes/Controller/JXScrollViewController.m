@@ -197,6 +197,68 @@
 #pragma mark private
 
 #pragma mark - Delegate
+#pragma mark JXScrollViewModelDelegate
+- (void)reloadData {
+    [super reloadData];
+    if ([self.scrollView isMemberOfClass:UIScrollView.class]) {
+        [self.scrollView reloadEmptyDataSet];
+    }
+}
+
+- (void)handleError:(NSError *)error {
+    [super handleError:error];
+    
+//    BOOL canFilter = YES;
+//    BOOL needReload = YES;
+    switch (self.viewModel.requestMode) {
+        case JXRequestModeRefresh: {
+            [self.scrollView.mj_header endRefreshing];
+            break;
+        }
+            //        case JXRequestModeMore: {
+            //            if (JXErrorCodeEmpty == error.code) {
+            //                nedUpdate = NO;
+            //                [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+            //            }else {
+            //                [self.scrollView.mj_footer endRefreshing];
+            //            }
+            //            break;
+            //        }
+            //        case JXRequestModeHUD: {
+            //            [JXDialog hideHUD];
+            //            break;
+            //        }
+        default:
+            break;
+    }
+    
+    //    if (JXErrorCodeExpired == error.code) {
+    //        notFilter = NO;
+    //
+    //        [gUser checkLoginWithFinish:^(BOOL isRelogin) {
+    //            if (isRelogin) {
+    //                [self triggerLoad];
+    //            }
+    //        } error:error];
+    //    }else if (JXErrorCodeEmpty == error.code) {
+    //        notFilter = NO;
+    //    }
+    //
+    //    self.error = error;
+    //    self.requestMode = JXRequestModeNone;
+    //    if (nedUpdate) {
+    //        self.dataSource = nil;
+    //    }
+}
+
+- (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths {
+    
+}
+
+- (void)preloadNextPage {
+    
+}
+
 #pragma mark DZNEmptyDataSetDelegate
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
     return (self.viewModel.shouldRequestRemoteData && !self.viewModel.dataSource);
@@ -226,22 +288,6 @@
     //    }
 
     [self triggerLoad];
-}
-
-#pragma mark JXScrollViewModelDelegate
-- (void)reloadData {
-    [super reloadData];
-    if ([self.scrollView isMemberOfClass:UIScrollView.class]) {
-        [self.scrollView reloadEmptyDataSet];
-    }
-}
-
-- (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths {
-    
-}
-
-- (void)preloadNextPage {
-    
 }
 
 #pragma mark - Class

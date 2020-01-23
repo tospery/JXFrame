@@ -22,6 +22,7 @@
 
 @protocol JXBaseViewModelDelegate <NSObject>
 - (void)reloadData;
+- (void)handleError:(NSError *)error;
 
 @end
 
@@ -56,6 +57,8 @@
 - (id)fetchLocalData;
 - (RACSignal *)requestRemoteDataSignalWithPage:(NSInteger)page;
 - (BOOL (^)(NSError *error))requestRemoteDataErrorsFilter;
+- (BOOL)filterError:(NSError *)error;
+// - (void)handleError:(NSError *)error;
 
 @end
 

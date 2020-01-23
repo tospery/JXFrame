@@ -45,6 +45,8 @@
 #import "JXPageMenuTitleItem.h"
 #import "JXPage.h"
 #import "JXParam.h"
+#import "JXBaseResponse.h"
+#import "JXBaseSessionManager.h"
 
 #pragma mark - Controller
 #import "JXBaseViewController.h"

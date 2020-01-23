@@ -242,6 +242,10 @@
     
 }
 
+- (void)handleError:(NSError *)error {
+    
+}
+
 #pragma mark QMUICustomNavigationBarTransitionDelegate
 - (BOOL)shouldCustomizeNavigationBarTransitionIfHideable {
     return YES;
