@@ -56,7 +56,6 @@
         }
         [self.view addSubview:scrollView];
         self.scrollView = scrollView;
-        [self reloadData];
     }
 }
 
